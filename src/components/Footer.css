@@ -1,0 +1,120 @@
+/* src/components/Footer.css */
+
+.cf-footer {
+    background-color: #05040e;
+    /* similar al body */
+    border-top: 1px solid rgba(249, 244, 244, 0.06);
+    padding: 2.5rem 8%;
+    color: #F9F4F4;
+    margin-top: 3rem;
+}
+
+.cf-footer-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+/* Logo + descripción */
+.cf-footer-brand {
+    max-width: 320px;
+}
+
+.cf-footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+}
+
+.cf-footer-logo-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+/* Usa la clase global .logo (Iceberg + naranja).
+   Aquí solo ajustamos el tamaño en footer. */
+.cf-footer-logo-text {
+    font-size: 1.2rem;
+}
+
+.cf-footer-description {
+    font-family: 'PT Sans', system-ui, sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #dcd5d5;
+}
+
+/* Columnas de enlaces */
+.cf-footer-links {
+    display: flex;
+    flex: 1 1 0;
+    gap: 2.5rem;
+}
+
+.cf-footer-column {
+    width: 30%;
+}
+
+.cf-footer-column-title {
+    font-family: 'Montserrat Alternates', system-ui, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #F9F4F4;
+}
+
+.cf-footer-column-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cf-footer-link {
+    font-family: 'PT Sans', system-ui, sans-serif;
+    font-size: 0.9rem;
+    color: #cfc7c7;
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.15rem 0;
+    transition: color 0.15s ease, transform 0.1s ease;
+}
+
+.cf-footer-link:hover {
+    color: #E78F41;
+    transform: translateX(1px);
+}
+
+/* Línea inferior */
+.cf-footer-bottom {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(249, 244, 244, 0.06);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-family: 'PT Sans', system-ui, sans-serif;
+    font-size: 0.8rem;
+    color: #a59c9c;
+}
+
+.cf-footer-note {
+    color: #8f8787;
+}
+
+@media (max-width: 768px) {
+    .cf-footer {
+        padding: 2rem 1.5rem;
+    }
+
+    .cf-footer-inner {
+        flex-direction: column;
+    }
+
+    .cf-footer-links {
+        gap: 1.5rem;
+    }
+}

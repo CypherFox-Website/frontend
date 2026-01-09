@@ -1,0 +1,48 @@
+/* 1. Imports de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Iceberg&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+SC:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&display=swap');
+
+/* 2. Paleta CypherFox */
+:root {
+  --cf-bg: #06040E;         /* Fondo principal */
+  --cf-orange: #E78F41;     /* Naranja para logo y H1 */
+  --cf-green: #138245;      /* Detalles de fondo / decoraciones */
+  --cf-text: #F9F4F4;       /* Color de texto principal */
+}
+
+body {
+  background-color: var(--cf-bg);
+}
+
+/* Logo CypherFox */
+.logo {
+  font-family: 'Iceberg', cursive;
+  color: var(--cf-orange);
+}
+
+/* H1 – WDXL Lubrifont SC en naranja */
+h1 {
+  font-family: 'WDXL Lubrifont SC', 'Montserrat Alternates', system-ui, sans-serif;
+  color: var(--cf-orange);
+}
+
+/* H2 / H3 – Montserrat Alternates en blanco */
+h2, h3 {
+  font-family: 'Montserrat Alternates', system-ui, sans-serif;
+  color: var(--cf-text);
+}
+
+/* Texto general – PT Sans en blanco */
+p, li, span, div, input, textarea {
+  font-family: 'PT Sans', system-ui, sans-serif;
+  color: var(--cf-text);
+}
+
+/* Código – Source Code Pro en blanco */
+code, pre {
+  font-family: 'Source Code Pro', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  color: var(--cf-text);
+}
