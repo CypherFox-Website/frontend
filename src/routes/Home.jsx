@@ -95,8 +95,8 @@ const Home = () => {
                     </thead>
                     <tbody>
                         {fakeRanking.map((row, idx) => (
-                            <tr key={row.usuario} className={idx%2 === 0 ? 'cf-ranking-row--top' : 'cf-ranking-row--bot'}>
-                                <td className="cf-ranking-pos">{idx=== 0 ? '🥇' : idx=== 1 ? '🥈' : idx=== 2 ? '🥉' : idx===3 ? '🏅' : idx===4 ? '🎖️':''} #{idx+1}</td>
+                            <tr key={row.usuario} className={idx % 2 === 0 ? 'cf-ranking-row--top' : 'cf-ranking-row--bot'}>
+                                <td className="cf-ranking-pos">{idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : idx === 3 ? '🏅' : idx === 4 ? '🎖️' : ''} #{idx + 1}</td>
                                 <td className="cf-ranking-user">{row.usuario}</td>
                                 <td className="cf-ranking-points">{row.puntos}</td>
                             </tr>
