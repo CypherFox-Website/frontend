@@ -7,10 +7,14 @@
 
 /* 2. Paleta CypherFox */
 :root {
-  --cf-bg: #06040E;         /* Fondo principal */
-  --cf-orange: #E78F41;     /* Naranja para logo y H1 */
-  --cf-green: #138245;      /* Detalles de fondo / decoraciones */
-  --cf-text: #F9F4F4;       /* Color de texto principal */
+  --cf-bg: #06040E;
+  /* Fondo principal */
+  --cf-orange: #E78F41;
+  /* Naranja para logo y H1 */
+  --cf-green: #138245;
+  /* Detalles de fondo / decoraciones */
+  --cf-text: #F9F4F4;
+  /* Color de texto principal */
 }
 
 body {
@@ -30,19 +34,26 @@ h1 {
 }
 
 /* H2 / H3 – Montserrat Alternates en blanco */
-h2, h3 {
+h2,
+h3 {
   font-family: 'Montserrat Alternates', system-ui, sans-serif;
   color: var(--cf-text);
 }
 
 /* Texto general – PT Sans en blanco */
-p, li, span, div, input, textarea {
+p,
+li,
+span,
+div,
+input,
+textarea {
   font-family: 'PT Sans', system-ui, sans-serif;
   color: var(--cf-text);
 }
 
 /* Código – Source Code Pro en blanco */
-code, pre {
+code,
+pre {
   font-family: 'Source Code Pro', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   color: var(--cf-text);
 }

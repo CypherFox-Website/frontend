@@ -1,11 +1,22 @@
+// App.jsx
+import Navbar from './components/Navbar.jsx';
+import Footer from './components/Footer.jsx';
+import Home from './routes/Home.jsx';
+
+import './App.css';
+
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 function App() {
   return (
-    <div className="min-vh-100 d-flex flex-column">
-      <div style={{ height: '200vh', backgroundColor: '#06040E' }}>
-        {/* Contenido adicional para hacer scroll */}
-      </div>
-    </div>
-  )
+    <>
+      <Navbar />
+      <main className="main-layout">
+        <Home />
+      </main>
+      <Footer />
+    </>
+  );
 }
 
-export default App
+export default App;

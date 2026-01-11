@@ -5,13 +5,14 @@
     transform: translateX(-50%);
     width: 90%;
     box-sizing: border-box;
+    z-index: 100;
 }
 
 .card-nav {
     display: block;
     height: 60px;
     padding: 0;
-    background-color: #06040E;
+    background-color: #06040e67;
     border: 0.5px solid rgba(249, 244, 244, 0.08);
     border-radius: 0.75rem;
     box-shadow: 0px 0px 15px 2px rgba(19, 130, 69, 0.25);

@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../assets/logo.svg';
-import { items } from '../components/Navbar.jsx';
+import { items } from '../util/index.js';
 import './Footer.css';
 
 const Footer = () => {
