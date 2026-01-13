@@ -6,6 +6,8 @@ import Footer from './components/Footer.jsx';
 
 import Home from './routes/Home.jsx';
 
+import NotFoundPage from './routes/Others/NotFound.jsx';
+
 import './App.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -16,7 +18,7 @@ function App() {
       <main className="main-layout">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="*" element={<div>NOT FOUND</div>} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
       <Footer />

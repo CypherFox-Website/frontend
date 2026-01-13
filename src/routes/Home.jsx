@@ -1,10 +1,14 @@
 // src/components/Hero.jsx
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import Orb from '../components/Orb.jsx';
+import DecryptedText from '../components/DecryptedText.jsx';
+import TextType from '../components/TextType.jsx';
+import CountUp from '../components/CountUp.jsx';
+
 import logo from '../assets/logo.svg';
 import './Home.css';
 import { Methods_Short, More_Short } from '../components/Methods.jsx';
@@ -14,16 +18,16 @@ gsap.registerPlugin(ScrollTrigger);
 const positionEmojis = ['🥇', '🥈', '🥉', '🏅', '🎖️'];
 
 const fakeRanking = [
-    { usuario: 'MaestroEncriptación', puntos: '8,247' },
-    { usuario: 'CódigoSeguro', puntos: '7,156' },
-    { usuario: 'CazadorHash', puntos: '6,923' },
-    { usuario: 'SabioCifrado', puntos: '5,687' },
-    { usuario: 'RompeClaves', puntos: '5,445' },
-    { usuario: 'AlgoritmoAs', puntos: '4,892' },
-    { usuario: 'CryptoNinja', puntos: '4,234' },
-    { usuario: 'DescifraMax', puntos: '3,876' },
-    { usuario: 'HashMaster', puntos: '3,567' },
-    { usuario: 'CifradoPro', puntos: '3,234' }
+    { usuario: 'MaestroEncriptación', puntos: 8247 },
+    { usuario: 'CódigoSeguro', puntos: 7156 },
+    { usuario: 'CazadorHash', puntos: 6923 },
+    { usuario: 'SabioCifrado', puntos: 5687 },
+    { usuario: 'RompeClaves', puntos: 5445 },
+    { usuario: 'AlgoritmoAs', puntos: 4892 },
+    { usuario: 'CryptoNinja', puntos: 4234 },
+    { usuario: 'DescifraMax', puntos: 3876 },
+    { usuario: 'HashMaster', puntos: 3567 },
+    { usuario: 'CifradoPro', puntos: 3234 },
 ];
 
 const Home = () => {
@@ -31,20 +35,30 @@ const Home = () => {
     const metodosRef = useRef(null);
     const rankingRef = useRef(null);
 
+    // Claves para forzar re-montaje y reinicio de animaciones
+    const [heroTitleKey, setHeroTitleKey] = useState(0);
+    const [heroTypingKey, setHeroTypingKey] = useState(0);
+    const [metodosTypingKey, setMetodosTypingKey] = useState(0);
+    const [rankingTitleKey, setRankingTitleKey] = useState(0);
+    const [rankingRowsKey, setRankingRowsKey] = useState(0);
+
+    // ======================
     // HERO
+    // ======================
     useEffect(() => {
         if (!heroRef.current) return;
 
         const ctx = gsap.context(() => {
             const section = heroRef.current;
+
             const orb = section.querySelector('.cf-hero-orb-layer');
-            const logo = section.querySelector('.cf-hero-logo');
+            const logoEl = section.querySelector('.cf-hero-logo');
             const text = section.querySelector('.cf-hero-subtitle');
             const buttons = section.querySelectorAll('.cf-hero-actions .cf-hero-btn');
 
             // Estado inicial
             gsap.set(orb, { opacity: 0, scale: 1.1 });
-            gsap.set(logo, { opacity: 0, y: 30 });
+            gsap.set(logoEl, { opacity: 0, y: 30 });
             gsap.set(text, { opacity: 0, y: 20 });
             gsap.set(buttons, { opacity: 0, y: 15 });
 
@@ -54,6 +68,16 @@ const Home = () => {
                     start: 'top 80%',
                     end: 'bottom 40%',
                     toggleActions: 'play none none reverse',
+                    // Se ejecuta al entrar por primera vez
+                    onEnter: () => {
+                        setHeroTitleKey((k) => k + 1);
+                        setHeroTypingKey((k) => k + 1);
+                    },
+                    // Se ejecuta al volver a entrar desde abajo (scroll hacia arriba)
+                    onEnterBack: () => {
+                        setHeroTitleKey((k) => k + 1);
+                        setHeroTypingKey((k) => k + 1);
+                    },
                 },
             });
 
@@ -64,7 +88,7 @@ const Home = () => {
                 ease: 'power2.out',
             })
                 .to(
-                    logo,
+                    logoEl,
                     {
                         opacity: 1,
                         y: 0,
@@ -99,12 +123,15 @@ const Home = () => {
         return () => ctx.revert();
     }, []);
 
+    // ======================
     // MÉTODOS
+    // ======================
     useEffect(() => {
         if (!metodosRef.current) return;
 
         const ctx = gsap.context(() => {
             const section = metodosRef.current;
+
             const header = section.querySelector('.cf-metodos-header');
             const cards = section.querySelectorAll('.cf-metodos-slide-wrapper');
 
@@ -119,6 +146,10 @@ const Home = () => {
                     start: 'top 70%',
                     end: 'bottom 40%',
                     toggleActions: 'play none none reverse',
+                    // Reinicia el typing del subtítulo de métodos
+                    onEnter: () => {
+                        setMetodosTypingKey((k) => k + 1);
+                    },
                 },
             });
 
@@ -143,12 +174,15 @@ const Home = () => {
         return () => ctx.revert();
     }, []);
 
+    // ======================
     // RANKING
+    // ======================
     useEffect(() => {
         if (!rankingRef.current) return;
 
         const ctx = gsap.context(() => {
             const section = rankingRef.current;
+
             const header = section.querySelector('.cf-ranking-header');
             const wrapper = section.querySelector('.cf-ranking-table-wrapper');
             const rows = section.querySelectorAll('.cf-ranking-table tbody tr');
@@ -163,6 +197,13 @@ const Home = () => {
                     start: 'top 70%',
                     end: 'bottom 40%',
                     toggleActions: 'play none none reverse',
+                    // Cuando entra el ranking:
+                    // - reiniciamos el DecryptedText del subtítulo
+                    // - re-montamos los CountUp de puntos
+                    onEnter: () => {
+                        setRankingTitleKey((k) => k + 1);
+                        setRankingRowsKey((k) => k + 1);
+                    },
                 },
             });
 
@@ -210,19 +251,41 @@ const Home = () => {
                 <div className="cf-hero-content">
                     <div className="cf-hero-logo">
                         <img src={logo} alt="CypherFox logo" className="cf-hero-logo-img" />
-                        <h1 className="logo cf-hero-logo-text">CypherFox</h1>
+
+                        <h1 className="logo cf-hero-logo-text">
+                            <DecryptedText
+                                key={heroTitleKey}
+                                text="CypherFox"
+                                className="logo cf-hero-logo-text"
+                                encryptedClassName="logo cf-hero-logo-text--encrypted"
+                                speed={120}
+                                maxIterations={60}
+                                sequential={true}
+                                revealDirection="start"
+                                useOriginalCharsOnly={false}
+                                animateOn="both"
+                            />
+                        </h1>
                     </div>
 
                     <p className="cf-hero-subtitle">
-                        Domina el arte de la criptografía aprende los fundamentos de la criptografía
-                        a través de simulaciones interactivas, visualizaciones claras y desafíos
-                        prácticos evaluados automáticamente.
+                        <TextType
+                            key={heroTypingKey}
+                            text="Domina el arte de la criptografía aprende los fundamentos de la criptografía a través de simulaciones interactivas, visualizaciones claras y desafíos prácticos evaluados automáticamente."
+                            as="span"
+                            className="cf-hero-subtitle"
+                            typingSpeed={65}
+                            loop={false}
+                            showCursor={true}
+                            cursorCharacter="|"
+                        />
                     </p>
 
                     <div className="cf-hero-actions">
                         <Link to="/metodos" className="cf-hero-btn cf-hero-btn-primary">
                             Explorar Métodos
                         </Link>
+
                         <Link to="/ranking" className="cf-hero-btn cf-hero-btn-secondary">
                             Ver Ranking
                         </Link>
@@ -234,9 +297,17 @@ const Home = () => {
             <section className="cf-metodos" ref={metodosRef}>
                 <div className="cf-metodos-header">
                     <h2 className="cf-metodos-title">Métodos Criptográficos</h2>
-                    <p className="cf-metodos-subtitle">
-                        Explora diversas técnicas y algoritmos criptográficos
-                    </p>
+
+                    <TextType
+                        key={metodosTypingKey}
+                        text="Explora diversas técnicas y algoritmos criptográficos."
+                        as="span"
+                        className="cf-metodos-subtitle"
+                        typingSpeed={65}
+                        loop={false}
+                        showCursor={true}
+                        cursorCharacter="|"
+                    />
                 </div>
 
                 <div className="cf-metodos-list">
@@ -262,7 +333,21 @@ const Home = () => {
                     <p className="cf-ranking-subtitle">
                         Los mejores estudiantes en nuestros desafíos de criptografía
                     </p>
-                    <h3 className="cf-ranking-period">TOP USUARIOS DEL SEMESTRE</h3>
+
+                    <h3 className="cf-ranking-period">
+                        <DecryptedText
+                            key={rankingTitleKey} // se reinicia en cada onEnter de la sección ranking
+                            text="TOP USUARIOS DEL SEMESTRE"
+                            className="cf-ranking-period"
+                            encryptedClassName="cf-ranking-period--encrypted"
+                            speed={80}
+                            maxIterations={60}
+                            sequential={true}
+                            revealDirection="start"
+                            useOriginalCharsOnly={false}
+                            animateOn="both"
+                        />
+                    </h3>
                 </div>
 
                 <div className="cf-ranking-table-wrapper">
@@ -278,13 +363,39 @@ const Home = () => {
                             {fakeRanking.map((row, idx) => (
                                 <tr
                                     key={row.usuario}
-                                    className={idx % 2 === 0 ? 'cf-ranking-row--top' : 'cf-ranking-row--bot'}
+                                    className={
+                                        idx % 2 === 0 ? 'cf-ranking-row--top' : 'cf-ranking-row--bot'
+                                    }
                                 >
                                     <td className="cf-ranking-pos">
                                         {positionEmojis[idx] || ''} #{idx + 1}
                                     </td>
-                                    <td className="cf-ranking-user">{row.usuario}</td>
-                                    <td className="cf-ranking-points">{row.puntos}</td>
+
+                                    <td className="cf-ranking-user">
+                                        <DecryptedText
+                                            key={`${rankingRowsKey}-${row.usuario}`}
+                                            text={row.usuario}
+                                            className="cf-ranking-user"
+                                            encryptedClassName="cf-ranking-user--encrypted"
+                                            speed={175}
+                                            maxIterations={60}
+                                            sequential={true}
+                                            revealDirection="start"
+                                            useOriginalCharsOnly={false}
+                                            animateOn="both"
+                                        />
+                                    </td>
+
+                                    <td className="cf-ranking-points">
+                                        <CountUp
+                                            key={`${rankingRowsKey}-${row.usuario}`} // reinicia conteo cuando rankingRowsKey cambia
+                                            to={row.puntos}
+                                            from={0}
+                                            duration={1}
+                                            className="cf-ranking-points"
+                                            separator=","
+                                        />
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

@@ -45,6 +45,11 @@
     font-size: 3rem;
 }
 
+.cf-hero-logo-text--encrypted {
+    font-size: 3rem;
+    color: var(--cf-green) !important;
+}
+
 /* Subtítulo */
 .cf-hero-subtitle {
     font-family: 'PT Sans', system-ui, sans-serif;
@@ -291,6 +296,10 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #E78F41;
+}
+
+.cf-ranking-period--encrypted {
+    color: var(--cf-green) !important;
 }
 
 /* Contenedor de la tabla */

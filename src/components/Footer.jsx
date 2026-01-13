@@ -32,7 +32,7 @@ const Footer = () => {
                     trigger: section,
                     start: 'top 90%',
                     end: 'bottom 70%',
-                    toggleActions: 'play none none reverse',
+                    toggleActions: 'play none none',
                 },
             });
 

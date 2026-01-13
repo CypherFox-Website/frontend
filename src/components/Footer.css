@@ -122,14 +122,41 @@
 
 @media (max-width: 768px) {
     .cf-footer {
-        padding: 2rem 1.5rem;
+        padding: 2rem;
     }
 
     .cf-footer-inner {
         flex-direction: column;
     }
 
+    .cf-footer-brand {
+        margin-bottom: -1rem;
+    }
+
     .cf-footer-links {
-        gap: 1.5rem;
+        flex-direction: column;
+        width: 100%;
+        gap: rem;
+    }
+
+    /* Cada columna ocupa el 100 % en móvil */
+    .cf-footer-column {
+        width: 100%;
+    }
+
+    /* Aseguramos que los links sean claramente de “lista” */
+    .cf-footer-column-list li {
+        margin-bottom: 0.1rem;
+    }
+
+    .cf-footer-link {
+        display: block;              /* forzamos cada enlace en su propia línea */
+        padding: 0.05rem 0;
+    }
+
+    /* Parte inferior del footer en columna para móvil */
+    .cf-footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
