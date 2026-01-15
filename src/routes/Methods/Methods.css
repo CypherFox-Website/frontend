@@ -1,0 +1,53 @@
+.cf-methods-page {
+    background-color: var(--cf-bg);
+    min-height: 100vh;
+}
+
+.cf-methods-bg {
+    position: fixed;
+    z-index: 0;
+}
+
+.cf-methods-content {
+    position: relative;
+    z-index: 1;
+    padding: 3rem 1.5rem 4rem;
+}
+
+.cf-methods-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    background-color: hsla(252, 56%, 4%, 0.85);
+    box-shadow: 0 0 12px 15px hsla(252, 56%, 4%, 0.83);
+    padding: 1rem;
+}
+
+.cf-methods-header-title {
+    font-family: 'WDXL Lubrifont SC', 'Montserrat Alternates', system-ui, sans-serif;
+    font-size: 2.5rem;
+    color: var(--cf-orange);
+    margin-bottom: 1rem;
+}
+
+.cf-methods-header-description {
+    max-width: 780px;
+    margin: 0 auto;
+    font-family: 'PT Sans', system-ui, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(249, 244, 244, 0.86);
+}
+
+.cf-methods-list {
+    padding: 1rem 0 3rem;
+}
+
+.cf-method-card-full {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.cf-method-card-full-link-container {
+    margin-top: auto;
+}

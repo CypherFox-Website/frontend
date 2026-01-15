@@ -206,7 +206,7 @@
     display: none !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .card-nav-container {
         width: 90%;
         top: 1.2em;

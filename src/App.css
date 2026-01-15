@@ -1,3 +1,7 @@
 .main-layout {
     padding-top: 80px;
 }
+
+.cf-footer {
+  position: relative;
+}
