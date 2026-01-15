@@ -206,7 +206,33 @@
     display: none !important;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 992px) {
+    .card-nav-top {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        justify-content: space-between;
+        gap: 0.75rem;
+    }
+
+    .hamburger-menu {
+        flex: 0 0 auto;
+    }
+
+    .logo-container {
+        position: static;
+        transform: none;
+        flex: 0 0 auto;
+    }
+
+    .card-nav-cta-button--top {
+        display: inline-flex;
+        flex: 0 0 auto;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
     .card-nav-container {
         width: 90%;
         top: 1.2em;
