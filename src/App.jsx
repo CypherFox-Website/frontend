@@ -1,5 +1,6 @@
 // App.jsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 import Navbar from './components/others/Navbar.jsx';
 import Footer from './components/others/Footer.jsx';
@@ -29,6 +30,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <SpeedInsights />
     </BrowserRouter>
   );
 }
