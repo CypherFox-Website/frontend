@@ -4,8 +4,8 @@ import { gsap } from 'gsap';
 
 import logo from '../../assets/logo.svg';
 import './NotFound.css';
-import TextType from '../../components/TextType';
-import ScrambledText from '../../components/ScrambleText';
+import TextType from '../../components/text/TextType';
+import ScrambledText from '../../components/text/ScrambleText';
 
 const NotFoundPage = () => {
     const navigate = useNavigate();

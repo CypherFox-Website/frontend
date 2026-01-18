@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import logo from '../assets/logo.svg';
-import { items } from '../util/index.js';
+import logo from '../../assets/logo.svg';
+import { items } from '../../util/index.js';
 import './Footer.css';
 
 gsap.registerPlugin(ScrollTrigger);

@@ -4,10 +4,10 @@ import './Creditos.css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import ReflectiveCard from '../../components/ReflectiveCard';
-import Stack, { BookCard } from '../../components/Stack';
-import Aurora from '../../components/Aurora';
-import DecryptedText from '../../components/DecryptedText';
+import ReflectiveCard from '../../components/cards/ReflectiveCard';
+import Stack, { BookCard } from '../../components/cards/Stack';
+import Aurora from '../../components/bg/Aurora';
+import DecryptedText from '../../components/text/DecryptedText';
 
 gsap.registerPlugin(ScrollTrigger);
 

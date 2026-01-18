@@ -5,8 +5,8 @@ import { gsap } from 'gsap';
 import { GoArrowUpRight } from 'react-icons/go';
 
 import './Navbar.css';
-import { items, buttons } from '../util/index.js';
-import logo from '../assets/logo.svg';
+import { items, buttons } from '../../util/index.js';
+import logo from '../../assets/logo.svg';
 
 const CardNav = ({
     logo = logo,

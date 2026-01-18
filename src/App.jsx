@@ -1,8 +1,8 @@
 // App.jsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Navbar from './components/Navbar.jsx';
-import Footer from './components/Footer.jsx';
+import Navbar from './components/others/Navbar.jsx';
+import Footer from './components/others/Footer.jsx';
 
 import Home from './routes/Home.jsx';
 

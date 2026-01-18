@@ -1,11 +1,11 @@
 // src/components/Methods.jsx
 
 import { Link } from 'react-router-dom';
-import { metodos } from '../util/metodos.js';
+import { metodos } from '../../util/metodos.js';
 import './Methods.css';
 
-import DecyptedText from '../components/DecryptedText.jsx';
-import TextType from '../components/TextType.jsx';
+import DecyptedText from '../text/DecryptedText.jsx';
+import TextType from '../text/TextType.jsx';
 
 export const Methods_Short = () => {
     return metodos.map((metodo) => (

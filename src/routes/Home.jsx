@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import Orb from '../components/Orb.jsx';
-import DecryptedText from '../components/DecryptedText.jsx';
-import TextType from '../components/TextType.jsx';
-import CountUp from '../components/CountUp.jsx';
+import Orb from '../components/bg/Orb.jsx';
+import DecryptedText from '../components/text/DecryptedText.jsx';
+import TextType from '../components/text/TextType.jsx';
+import CountUp from '../components/text/CountUp.jsx';
 
 import logo from '../assets/logo.svg';
 import './Home.css';
-import { Methods_Short, More_Short } from '../components/Methods.jsx';
+import { Methods_Short, More_Short } from '../components/cards/Methods.jsx';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,7 +48,6 @@ const Home = () => {
 
     // Claves para forzar re-montaje y reinicio de animaciones
     const [heroTitleKey, setHeroTitleKey] = useState(0);
-    const [heroTypingKey, setHeroTypingKey] = useState(0);
     const [metodosTypingKey, setMetodosTypingKey] = useState(0);
     const [rankingTitleKey, setRankingTitleKey] = useState(0);
     const [rankingRowsKey, setRankingRowsKey] = useState(0);
@@ -82,12 +81,10 @@ const Home = () => {
                     // Se ejecuta al entrar por primera vez
                     onEnter: () => {
                         setHeroTitleKey((k) => k + 1);
-                        setHeroTypingKey((k) => k + 1);
                     },
                     // Se ejecuta al volver a entrar desde abajo (scroll hacia arriba)
                     onEnterBack: () => {
                         setHeroTitleKey((k) => k + 1);
-                        setHeroTypingKey((k) => k + 1);
                     },
                 },
             });
@@ -281,11 +278,10 @@ const Home = () => {
 
                     <p>
                         <TextType
-                            key={heroTypingKey}
                             text="Domina el arte de la criptografía aprende los fundamentos de la criptografía a través de simulaciones interactivas, visualizaciones claras y desafíos prácticos evaluados automáticamente."
                             as="span"
                             className="cf-hero-subtitle"
-                            typingSpeed={65}
+                            typingSpeed={35}
                             loop={false}
                             showCursor={true}
                             cursorCharacter="|"
@@ -314,7 +310,7 @@ const Home = () => {
                         text="Explora diversas técnicas y algoritmos criptográficos."
                         as="span"
                         className="cf-metodos-subtitle"
-                        typingSpeed={65}
+                        typingSpeed={40}
                         loop={false}
                         showCursor={true}
                         cursorCharacter="|"

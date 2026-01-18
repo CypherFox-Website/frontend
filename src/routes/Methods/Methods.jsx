@@ -1,10 +1,10 @@
 // src/routes/Methods/Methods.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import './Methods.css';
-import { Methods_Full } from '../../components/Methods';
-import FloatingLines from '../../components/FloatingLines';
-import DecryptedText from '../../components/DecryptedText';
-import TextType from '../../components/TextType';
+import { Methods_Full } from '../../components/cards/Methods';
+import FloatingLines from '../../components/bg/FloatingLines';
+import DecryptedText from '../../components/text/DecryptedText';
+import TextType from '../../components/text/TextType';
 
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
