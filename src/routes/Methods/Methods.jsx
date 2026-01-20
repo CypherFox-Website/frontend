@@ -1,7 +1,11 @@
 // src/routes/Methods/Methods.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import './Methods.css';
+
 import { Methods_Full } from '../../components/cards/Methods';
+
+import Study from '../../assets/study.gif'
+
 import FloatingLines from '../../components/bg/FloatingLines';
 import DecryptedText from '../../components/text/DecryptedText';
 import TextType from '../../components/text/TextType';
@@ -89,6 +93,15 @@ const Methods = () => {
         />
       </div>
 
+      {/* Mascota flotante tipo pop-up que acompaña al usuario */}
+      <div className="cf-methods-mascot-floating">
+        <img
+          src={Study}
+          alt="CypherFox estudiando criptografía"
+          className="cf-methods-mascot-floating-img"
+        />
+      </div>
+
       <div className="cf-methods-content">
         <section className="cf-methods-header" ref={headerRef}>
           <h1 className="cf-methods-header-title">
@@ -120,10 +133,7 @@ const Methods = () => {
         <section className="cf-methods-list container-lg">
           <div className="row g-4" ref={cardsContainerRef}>
             {metodoCards.map((card) => (
-              <div
-                key={card.key}
-                className="col-12 col-md-6 col-xl-4 d-flex"
-              >
+              <div key={card.key} className="col-12 col-md-6 col-xl-4 d-flex">
                 <div className="flex-grow-1">
                   {card}
                 </div>

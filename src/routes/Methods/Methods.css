@@ -66,3 +66,42 @@
 .cf-method-card-full-link-container {
     margin-top: auto;
 }
+
+/* Mascota flotante tipo pop-up */
+.cf-methods-mascot-floating {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 10;
+    pointer-events: none;
+    background-color: rgb(6, 4, 14, 0.25);
+    border-radius: 2rem;
+}
+
+/* Imagen de la mascota */
+.cf-methods-mascot-floating-img {
+    width: min(28vw, 220px);
+    height: auto;
+    object-fit: contain;
+    filter:
+        drop-shadow(0 0 7px rgba(231, 143, 65, 0.5)) drop-shadow(0 0 30px rgba(19, 130, 69, 0.6));
+    transform-origin: center;
+}
+
+/* En pantallas muy pequeñas, que no tape demasiado contenido */
+@media (max-width: 768px) {
+
+    .cf-methods-mascot-floating {
+        background-color: rgb(6, 4, 14, 0.15);
+    }
+
+    .cf-methods-mascot-floating {
+        right: 0.5rem;
+        bottom: 0.5rem;
+    }
+
+    .cf-methods-mascot-floating-img {
+        width: min(40vw, 125px);
+        opacity: 0.9;
+    }
+}

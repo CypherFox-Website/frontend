@@ -14,12 +14,24 @@
 
 /* Logo de CypherFox en la página 404 */
 .cf-not-found-logo {
-    width: 96px;
-    height: 96px;
+    width: 15vw;
+    height: auto;
     margin-bottom: 1.75rem;
     object-fit: contain;
     filter:
         drop-shadow(0 0 10px rgba(231, 143, 65, 0.7)) drop-shadow(0 0 22px rgba(19, 130, 69, 0.6));
+}
+
+@media (max-width: 992px) {
+    .cf-not-found-logo {
+        width: 20vw;
+    }
+}
+
+@media (max-width: 576px) {
+    .cf-not-found-logo {
+        width: 25vw;
+    }
 }
 
 /* Texto “Error 404” */
@@ -39,11 +51,12 @@
     font-size: 2.1rem;
     font-weight: 700;
     line-height: 1.2;
-
-    /* H1 ya está en WDXL Lubrifont SC y naranja via estilos globales,
-     aquí solo afinamos por si se usa fuera del scope global */
     font-family: 'WDXL Lubrifont SC', 'Montserrat Alternates', system-ui, sans-serif;
     color: var(--cf-orange);
+}
+
+.cf-not-found-title--encrypted {
+    color: var(--cf-green);
 }
 
 /* Párrafo descriptivo */
@@ -52,7 +65,6 @@
     max-width: 480px;
     font-size: 0.98rem;
     line-height: 1.6;
-
     font-family: 'Fira Code';
     color: var(--cf-text);
 }
@@ -82,14 +94,12 @@
         box-shadow 0.18s ease,
         transform 0.12s ease;
     text-decoration: none;
-
     font-family: 'PT Sans', system-ui, sans-serif;
 }
 
 /* Botón “Volver a la página anterior” (estilo secundario) */
 .cf-not-found-button-back {
     border: 1px solid rgba(249, 244, 244, 0.35);
-    /* cf-text con algo de transparencia */
     background-color: transparent;
     color: var(--cf-text);
 }
@@ -108,7 +118,6 @@
     box-shadow:
         0 0 12px rgba(231, 143, 65, 0.7),
         0 0 26px rgba(0, 0, 0, 0.8);
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -129,7 +138,7 @@
     outline-offset: 3px;
 }
 
-/* Responsivo */
+/* Responsivo adicional para tipografía */
 @media (min-width: 576px) {
     .cf-not-found {
         padding: 4rem 2rem;
@@ -141,11 +150,6 @@
 
     .cf-not-found-title {
         font-size: 2.4rem;
-    }
-
-    .cf-not-found-logo {
-        width: 110px;
-        height: 110px;
     }
 }
 
@@ -159,6 +163,7 @@
     }
 }
 
+/* Preparado para animaciones GSAP */
 .cf-not-found-logo,
 .cf-not-found-error,
 .cf-not-found-title,
@@ -166,5 +171,5 @@
 .cf-not-found-actions,
 .cf-not-found-button-back,
 .cf-not-found-button-home {
-  will-change: transform, opacity, filter;
+    will-change: transform, opacity, filter;
 }

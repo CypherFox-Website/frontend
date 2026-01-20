@@ -2,10 +2,12 @@ import React, { useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 
-import logo from '../../assets/logo.svg';
+import Error from '../../assets/error.gif';
 import './NotFound.css';
+
 import TextType from '../../components/text/TextType';
 import ScrambledText from '../../components/text/ScrambleText';
+import DecryptedText from '../../components/text/DecryptedText';
 
 const NotFoundPage = () => {
     const navigate = useNavigate();
@@ -150,7 +152,7 @@ const NotFoundPage = () => {
         <>
             <section className="cf-not-found" ref={sectionRef}>
                 {/* Content */}
-                <img src={logo} alt="CypherFox Logo" className="cf-not-found-logo" />
+                <img src={Error} alt="CypherFox Logo" className="cf-not-found-logo" />
 
                 <TextType
                     text="error 404"
@@ -165,7 +167,19 @@ const NotFoundPage = () => {
                     textColors={['var(--cf-green)']}
                 />
 
-                <h1 className="cf-not-found-title">Página no encontrada</h1>
+                <h1 className="cf-not-found-title">
+                    <DecryptedText
+                        text="Página no encontrada"
+                        className="cf-not-found-title"
+                        encryptedClassName="cf-not-found-title--encrypted"
+                        speed={120}
+                        maxIterations={60}
+                        sequential={true}
+                        revealDirection="start"
+                        useOriginalCharsOnly={false}
+                        animateOn="both"
+                    />
+                </h1>
 
                 <ScrambledText
                     radius={60}

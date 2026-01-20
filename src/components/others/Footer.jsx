@@ -11,65 +11,10 @@ import './Footer.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
-    const footerRef = useRef(null);
 
-    useEffect(() => {
-        if (!footerRef.current) return;
-
-        const ctx = gsap.context(() => {
-            const section = footerRef.current;
-            const brand = section.querySelector('.cf-footer-brand');
-            const columns = section.querySelectorAll('.cf-footer-column');
-            const bottom = section.querySelector('.cf-footer-bottom');
-
-            // Estado inicial
-            gsap.set(brand, { opacity: 0, y: 30 });
-            gsap.set(columns, { opacity: 0, y: 30 });
-            gsap.set(bottom, { opacity: 0, y: 20 });
-
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top 90%',
-                    end: 'bottom 70%',
-                    toggleActions: 'play none none',
-                },
-            });
-
-            tl.to(brand, {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: 'power2.out',
-            })
-                .to(
-                    columns,
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.5,
-                        ease: 'power2.out',
-                        stagger: 0.1,
-                    },
-                    '-=0.25'
-                )
-                .to(
-                    bottom,
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.4,
-                        ease: 'power2.out',
-                    },
-                    '-=0.2'
-                );
-        }, footerRef);
-
-        return () => ctx.revert();
-    }, []);
 
     return (
-        <footer className="cf-footer" ref={footerRef}>
+        <footer className="cf-footer">
             <div className="cf-footer-inner">
                 {/* Marca y descripción */}
                 <div className="cf-footer-brand">

@@ -9,7 +9,7 @@ import DecryptedText from '../components/text/DecryptedText.jsx';
 import TextType from '../components/text/TextType.jsx';
 import CountUp from '../components/text/CountUp.jsx';
 
-import logo from '../assets/logo.svg';
+import Welcome from '../assets/welcome.gif';
 import './Home.css';
 import { Methods_Short, More_Short } from '../components/cards/Methods.jsx';
 
@@ -258,7 +258,7 @@ const Home = () => {
 
                 <div className="cf-hero-content">
                     <div className="cf-hero-logo">
-                        <img src={logo} alt="CypherFox logo" className="cf-hero-logo-img" />
+                        <img src={Welcome} alt="CypherFox logo" className="cf-hero-logo-img" />
 
                         <h1 className="logo cf-hero-logo-text">
                             <DecryptedText
