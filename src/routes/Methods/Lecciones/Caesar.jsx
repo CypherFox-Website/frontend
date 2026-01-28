@@ -7,11 +7,11 @@ import { BlockMath, InlineMath } from "react-katex";
 import "./Caesar.css";
 
 import Disk from "../../../assets/caesar-disk.png";
-import Welcome from "../../../assets/Welcome.gif";
-import Study from "../../../assets/Study.gif";
-import Help from "../../../assets/Help.gif";
-import Happy from "../../../assets/Happy.gif";
-import Sad from "../../../assets/Sad.gif";
+import Welcome from "../../../assets/welcome.gif";
+import Study from "../../../assets/study.gif";
+import Help from "../../../assets/help.gif";
+import Happy from "../../../assets/happy.gif";
+import Sad from "../../../assets/sad.gif";
 
 import { missions_caesar as missions } from "../../../util/missions";
 
