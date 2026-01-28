@@ -1,6 +1,6 @@
 // src/routes/Methods/Methods.jsx
 import React, { useState, useEffect, useRef } from 'react';
-import './Methods.css';
+import './ListaMetodos.css';
 
 import { Methods_Full } from '../../components/cards/Methods';
 
@@ -15,7 +15,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Methods = () => {
+const ListaMetodos = () => {
   const [labsUsuario, setLabsUsuario] = useState({ 'One-Time Pad': true, 'Caesar': true, 'Vigenère': false, 'Hill': true }); // Para pruebas
 
   const metodoCards = Methods_Full({ labs_usuario: labsUsuario });
@@ -146,4 +146,4 @@ const Methods = () => {
   );
 };
 
-export default Methods;
+export default ListaMetodos;

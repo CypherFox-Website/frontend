@@ -1,0 +1,106 @@
+.cf-lesson-page {
+  background-color: var(--cf-bg);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* FONDO FIJO CON HYPERSPEED */
+.cf-lesson-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* El canvas de Hyperspeed rellena todo */
+.cf-lesson-bg>#lights {
+  width: 100%;
+  height: 100%;
+}
+
+/* VELO OSCURO ENCIMA DEL HYPERSPEED */
+.cf-lesson-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: #06040E;
+  opacity: 0.75;
+  /* aquí controlas qué tan oscuro se ve */
+}
+
+.cf-lesson-content {
+  position: relative;
+  z-index: 1;
+  padding: 3rem 1.5rem 4rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* <- centra horizontalmente los hijos inline/block */
+  gap: 2rem;           /* separación entre contenido y botón */
+}
+
+.cf-lesson-link-lab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  background: rgba(19, 130, 69, 0.4);
+  color: var(--cf-text);
+  border: 1px solid rgba(19, 130, 69, 0.75);
+
+  font-family: 'PT Sans', system-ui, sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+
+  text-shadow: 0 0 6px rgba(249, 244, 244, 0.45);
+
+  box-shadow:
+    0 0 12px rgba(19, 130, 69, 0.35),
+    0 0 24px rgba(6, 4, 14, 0.9);
+
+  cursor: pointer;
+
+  transition:
+    background 0.18s ease-out,
+    color 0.18s ease-out,
+    box-shadow 0.18s ease-out,
+    transform 0.18s ease-out,
+    border-color 0.18s ease-out,
+    text-shadow 0.18s ease-out;
+}
+
+/* Icono dentro del botón */
+.cf-lesson-link-lab i {
+  font-size: 0.95rem;
+  color: var(--cf-orange);
+}
+
+/* Hover: un poco más brillante y “elevado” */
+.cf-lesson-link-lab:hover {
+  background: rgba(19, 130, 69, 0.32);
+  border-color: var(--cf-green);
+  transform: translateY(-1px) scale(1.02);
+
+  box-shadow:
+    0 0 16px rgba(19, 130, 69, 0.6),
+    0 0 32px rgba(231, 143, 65, 0.4);
+
+  text-shadow: 0 0 8px rgba(249, 244, 244, 0.75);
+}
+
+/* Focus accesible (teclado) */
+.cf-lesson-link-lab:focus-visible {
+  outline: 2px solid var(--cf-orange);
+  outline-offset: 3px;
+}
+
+/* Active: sensación de click */
+.cf-lesson-link-lab:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow:
+    0 0 8px rgba(19, 130, 69, 0.5),
+    0 0 18px rgba(6, 4, 14, 0.9);
+}
