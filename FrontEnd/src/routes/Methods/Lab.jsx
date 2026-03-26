@@ -11,6 +11,8 @@ import LabEditor from "../../components/cards/LabEditor.jsx";
 import TextType from "../../components/text/TextType.jsx";
 import DecryptedText from "../../components/text/DecryptedText.jsx";
 
+import { api } from "../../util/api.js"
+
 import Welcome from "../../assets/welcome.gif";
 import Waiting from "../../assets/waiting.gif";
 import Help from "../../assets/help.gif";
@@ -126,13 +128,14 @@ export default function Lab() {
         return () => observer.disconnect();
     }, []);
 
-    const handleConfirmSend = () => {
+    const handleConfirmSend = async () => {
         setConfirmOpen(false);
         setWaitingOpen(true);
 
-        setTimeout(() => {
-            const random = Math.floor(Math.random() * 5) + 1;
-            const passed = random >= 3;
+        try {
+            const result = await api.getScore(userCode, metodo);
+
+            const passed = result.score >= 3;
             const message = passed
                 ? "¡Has aprobado el laboratorio! Buen trabajo, puedes seguir con el siguiente módulo."
                 : "Has perdido la nota de este intento. Revisa tu código y vuelve a intentarlo.";
@@ -140,11 +143,24 @@ export default function Lab() {
             setWaitingOpen(false);
             setResultData({
                 passed,
-                score: random,
+                score: result.score,
                 message,
+                encrypt: result.encrypt,  // { passed, total, results }
+                decrypt: result.decrypt,  // { passed, total, results }
             });
             setResultOpen(true);
-        }, 5000);
+
+        } catch (error) {
+            setWaitingOpen(false);
+            setResultData({
+                passed: false,
+                score: 0,
+                message: error.message ?? "Ocurrió un error al calificar tu código. Intenta de nuevo.",
+                encrypt: null,
+                decrypt: null,
+            });
+            setResultOpen(true);
+        }
     };
 
     const handleCloseResult = () => {
@@ -396,8 +412,17 @@ export default function Lab() {
                         </h2>
                         <p className="cf-modal-text">{resultData.message}</p>
                         <p className="cf-modal-score">
-                            Resultado simulado: {resultData.score} / 5
+                            Resultado: {resultData.score} / 5
                         </p>
+
+                        {/* Desglose por cifrado/descifrado */}
+                        {resultData.encrypt && resultData.decrypt && (
+                            <div className="cf-modal-breakdown">
+                                <p>Cifrado: {resultData.encrypt.passed}/{resultData.encrypt.total} casos correctos</p>
+                                <p>Descifrado: {resultData.decrypt.passed}/{resultData.decrypt.total} casos correctos</p>
+                            </div>
+                        )}
+
                         <div className="cf-modal-actions">
                             <button
                                 type="button"

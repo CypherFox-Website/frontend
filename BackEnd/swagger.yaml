@@ -1,0 +1,128 @@
+openapi: 3.0.3
+info:
+  title: CypherFox Backend API
+  description: API for evaluating cryptographic algorithm implementations in Python using Pyodide.
+  version: 1.0.0
+servers:
+  - url: http://localhost:4000/api
+    description: Servidor de Desarrollo
+  - url: https://cypherfox.onrender.com/api
+    description: Servidor de Producción
+
+paths:
+  /:
+    get:
+      summary: API Discovery
+      description: Returns information about the service and available endpoints.
+      responses:
+        '200':
+          description: Successful discovery
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service: { type: string, example: "CypherFox Backend" }
+                  basePath: { type: string, example: "/api" }
+                  availableCalls: { type: object }
+
+  /health:
+    get:
+      summary: Health Check
+      description: Returns the status of the service and the current server timestamp.
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok: { type: boolean, example: true }
+                  timestamp: { type: string, format: date-time }
+
+  /heartbeat:
+    get:
+      summary: Heartbeat
+      description: Simple endpoint to verify the server is responding.
+      responses:
+        '200':
+          description: Server is alive
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok: { type: boolean, example: true }
+                  timestamp: { type: string, format: date-time }
+                  response: { type: string, example: "thump-thump" }
+
+  /evaluate:
+    post:
+      summary: Evaluate Python Code
+      description: Executes Python code containing encryption/decryption functions and tests them against pre-defined test cases.
+      parameters:
+        - name: method
+          in: query
+          required: true
+          description: The cipher method to test.
+          schema:
+            type: string
+            enum: [caesar, vigenere, one-time-pad, playfair, hill]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [code]
+              properties:
+                code:
+                  type: string
+                  description: The Python code containing the implementation.
+      responses:
+        '200':
+          description: Evaluation results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationResult'
+        '400':
+          description: Missing parameters or execution error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    EvaluationResult:
+      type: object
+      properties:
+        method: { type: string }
+        score: { type: integer, description: "Score from 0 to 5" }
+        passed: { type: integer }
+        total: { type: integer }
+        encrypt:
+          $ref: '#/components/schemas/TestSummary'
+        decrypt:
+          $ref: '#/components/schemas/TestSummary'
+
+    TestSummary:
+      type: object
+      properties:
+        passed: { type: integer }
+        total: { type: integer }
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              passed: { type: boolean }
+              feedback: { type: string }
+
+    ErrorResponse:
+      type: object
+      properties:
+        message: { type: string }
+        hint: { type: string }
