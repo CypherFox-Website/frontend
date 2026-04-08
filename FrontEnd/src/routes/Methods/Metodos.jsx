@@ -9,6 +9,7 @@ import Playfair from "../Methods/Lecciones/Playfair";
 import Caesar from "../Methods/Lecciones/Caesar";
 import Vigenere from "../Methods/Lecciones/Vigenere";
 import Hill from "../Methods/Lecciones/Hill";
+import Homophonic from "../Methods/Lecciones/Homophonic";
 
 import DecryptedText from "../../components/text/DecryptedText";
 import TextType from "../../components/text/TextType";
@@ -25,7 +26,8 @@ const lessonsMap = {
     caesar: Caesar,
     vigenere: Vigenere,
     playfair: Playfair,
-    hill: Hill,    
+    hill: Hill,
+    homophonic: Homophonic
 };
 
 const HYPERSPEED_OPTIONS = {

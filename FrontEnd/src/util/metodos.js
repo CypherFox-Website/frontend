@@ -192,10 +192,75 @@ export const metodos = {
     },
     'homophonic': {
         nombre: 'Homophonic',
+        clave: 'homophonic',
         descripcion_corta: 'Cifrado que sustituye letras por símbolos para ocultar frecuencias.',
         descripcion: 'Cifrado de sustitución que asigna varios símbolos posibles a cada letra, según su frecuencia en el idioma. Busca aplanar la distribución estadística del texto cifrado y dificultar el análisis de frecuencia. Se utilizó en servicios de inteligencia.',
         href: '/metodos/homophonic',
-        icono: 'fa-solid fa-arrow-down-a-z'
+        icono: 'fa-solid fa-arrow-down-a-z',
+        config: `import random
+# Alfabeto homofonico: cada letra tiene un pool de números asignados
+# segun su frecuencia en inglés. Los pools son DISJUNTOS (0-99).
+alfabeto = {
+    'A': [9, 12, 33, 47, 53, 67, 78, 92],
+    'B': [48, 81],
+    'C': [13, 41, 62],
+    'D': [1, 3, 45, 79],
+    'E': [14, 16, 24, 44, 46, 55, 57, 64, 74, 82, 87, 98],
+    'F': [10, 31],
+    'G': [6, 25],
+    'H': [23, 39, 50, 56, 65, 68],
+    'I': [32, 70, 73, 83, 88, 93],
+    'J': [15],
+    'K': [4],
+    'L': [26, 37, 51, 84],
+    'M': [22, 27],
+    'N': [18, 58, 59, 66, 71, 91],
+    'O': [0, 5, 7, 54, 72, 90, 99],
+    'P': [38, 95],
+    'Q': [94],
+    'R': [29, 35, 40, 42, 77, 80],
+    'S': [11, 19, 36, 76, 86, 96],
+    'T': [17, 20, 30, 43, 49, 69, 75, 85, 97],
+    'U': [8, 61, 63],
+    'V': [34],
+    'W': [60, 89],
+    'X': [28],
+    'Y': [21, 52],
+    'Z': [2],
+}
+# Semilla fija para reproducibilidad en la evaluacion automatica
+random.seed(2153)
+`,
+        lab_cifrado: {
+            descripcion: "Dado un mensaje y el diccionario de homófonos (clave), cifra el mensaje eligiendo aleatoriamente un número del pool de cada letra. Usa random.seed(2153) antes de llamar a la función.",
+            parametros: [
+                ["mensaje", "str"],
+                ["clave", "dict"],
+            ],
+            salida: "list",
+            ejemplos: [
+                { parametros: ["CRYPTOISFUN", "alfabeto"], resultados: [13, 29, 21, 38, 17, 0, 19, 10, 8, 18] },
+                { parametros: ["HELLO", "alfabeto"], resultados: [65, 14, 26, 26, 99] },
+                { parametros: ["FOX", "alfabeto"], resultados: [31, 99, 28] },
+                { parametros: ["SECRET", "alfabeto"], resultados: [19, 16, 13, 29, 16, 20] },
+                { parametros: ["KEY", "alfabeto"], resultados: [4, 14, 52] },
+            ]
+        },
+        lab_descifrado: {
+            descripcion: "Dado un mensaje cifrado como lista de enteros y el mismo diccionario (clave), recupera el texto original usando el mapa inverso.",
+            parametros: [
+                ["cifrado", "list"],
+                ["clave", "dict"],
+            ],
+            salida: "str",
+            ejemplos: [
+                { parametros: [[13, 29, 21, 38, 17, 0, 19, 10, 8, 18], "alfabeto"], resultados: "CRYPTOISFUN" },
+                { parametros: [[65, 14, 26, 26, 99], "alfabeto"], resultados: "HELLO" },
+                { parametros: [[31, 99, 28], "alfabeto"], resultados: "FOX" },
+                { parametros: [[19, 16, 13, 29, 16, 20], "alfabeto"], resultados: "SECRET" },
+                { parametros: [[4, 14, 52], "alfabeto"], resultados: "KEY" },
+            ]
+        },
     },
     'turning-grille': {
         nombre: 'Turning Grille',

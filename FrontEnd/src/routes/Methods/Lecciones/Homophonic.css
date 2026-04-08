@@ -1,0 +1,412 @@
+/* ==================== PAGE / SHELL ==================== */
+.homophonic-page,
+.homo-page {
+    padding: 3rem 0 0;
+    background: var(--cf-bg);
+    color: var(--cf-text);
+}
+
+.homophonic-shell,
+.homo-shell {
+    position: relative;
+}
+
+/* ==================== HERO (específico de Homophonic) ==================== */
+.homophonic-hero,
+.homo-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 3rem;
+    background-color: rgba(6, 4, 14, 0.95);
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: 0 0 10px 15px rgba(6, 4, 14, 0.9);
+}
+
+/* ==================== BANDA GENERAL ==================== */
+.homo-band,
+.homophonic-band {
+    margin-bottom: 3rem;
+}
+
+/* lab-core z-index */
+.lab-core {
+    position: relative;
+    z-index: 3;
+}
+
+/* ==================== LAB HEADER ==================== */
+.lab-header-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.lab-subtitle {
+    font-size: 1rem;
+    opacity: .9;
+    margin-top: .25rem;
+}
+
+/* ==================== TABLA + LISTA EN FILA ==================== */
+.lab-table-cipher-row {
+    display: flex;
+    gap: 1.6rem;
+    align-items: flex-start;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    /* colapsa a columna en pantallas pequeñas */
+}
+
+/* Tabla ocupa la mayor parte */
+.homophones-table-wrapper,
+.homo-table-wrapper {
+    flex: 1 1 320px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Panel lista: tamaño fijo, scroll si es muy largo */
+.cipher-list-panel {
+    flex: 0 0 200px;
+    background-color: rgba(6, 4, 14, 0.7);
+    border: 1px solid rgba(231, 143, 65, 0.25);
+    border-radius: 1.2rem;
+    padding: .9rem 1rem 1.1rem;
+    max-height: 480px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(231, 143, 65, 0.35) transparent;
+}
+
+.cipher-list-panel::-webkit-scrollbar {
+    width: 5px;
+}
+
+.cipher-list-panel::-webkit-scrollbar-thumb {
+    background-color: rgba(231, 143, 65, 0.35);
+    border-radius: 999px;
+}
+
+.cipher-list-title {
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: rgba(231, 143, 65, 0.85);
+    margin-bottom: .7rem;
+}
+
+.cipher-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+}
+
+.cipher-list-item {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    font-family: "Fira Code", ui-monospace, monospace;
+    font-size: .85rem;
+}
+
+.cl-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    padding: .18rem .4rem;
+    border-radius: .4rem;
+    background: rgba(231, 143, 65, 0.12);
+    border: 1px solid rgba(231, 143, 65, 0.4);
+    color: var(--cf-orange);
+    font-weight: 700;
+}
+
+.cl-arrow {
+    color: rgba(249, 244, 244, 0.4);
+    font-size: .8rem;
+}
+
+.cl-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    padding: .22rem .5rem;
+    border-radius: .45rem;
+    background: linear-gradient(180deg, rgba(14, 86, 50, 0.95), rgba(19, 140, 76, 0.85));
+    color: #ecfff0;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: .82rem;
+}
+
+/* ==================== HOMOPHONES TABLE ==================== */
+.homophones-table,
+.homo-table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: separate;
+    border-spacing: 6px;
+    font-family: "Fira Code", ui-monospace, monospace;
+    color: var(--cf-text);
+}
+
+.homophones-table th,
+.homophones-table td,
+.homo-table th,
+.homo-table td {
+    vertical-align: middle;
+    padding: .5rem .6rem;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.homophones-table th,
+.homo-th,
+.ht-header {
+    text-align: left;
+    color: rgba(231, 143, 65, 0.9);
+    font-weight: 700;
+}
+
+/* Fila activa (letra coincide con primer carácter del mensaje) */
+.ht-row-active {
+    background-color: rgba(231, 143, 65, 0.08);
+    border-radius: .5rem;
+}
+
+.ht-row-active .ht-letter {
+    color: var(--cf-orange);
+}
+
+.ht-letter,
+.homo-td-letter {
+    font-weight: 700;
+    width: 48px;
+}
+
+.ht-pool,
+.homo-td-nums {
+    max-width: 44ch;
+    overflow-wrap: anywhere;
+}
+
+/* chips de números en la tabla */
+.homo-num-chip,
+.homophone-chip,
+.homophones-table .num-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    padding: .18rem .45rem;
+    border-radius: .45rem;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(231, 143, 65, 0.12);
+    font-family: "Fira Code", ui-monospace, monospace;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    color: var(--cf-text);
+}
+
+/* ==================== FREQUENCY BARS ==================== */
+.homo-freq-section,
+.homophones-freq {
+    margin-top: 1rem;
+}
+
+.homo-freq-bars {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.homo-freq-bar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.homo-freq-bar-track {
+    width: 24px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.homo-freq-bar-fill {
+    width: 100%;
+    background: linear-gradient(180deg, rgba(231, 143, 65, 0.9), rgba(231, 143, 65, 0.6));
+}
+
+/* ==================== STEP / MAPPING DISPLAY ==================== */
+.homo-step-row,
+.homo-mapping-display,
+.homo-mapping {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.homo-step-pair,
+.homo-map-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: .1rem 0;
+}
+
+.homo-map-plain,
+.homo-map-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    padding: .28rem .5rem;
+    border-radius: .45rem;
+    background: rgba(6, 4, 14, 0.45);
+    border: 1px solid rgba(231, 143, 65, 0.35);
+    color: var(--cf-orange);
+    font-family: "Fira Code", ui-monospace, monospace;
+    white-space: nowrap;
+}
+
+.homo-map-num,
+.homo-map-number {
+    min-width: 44px;
+    text-align: center;
+    padding: .35rem .6rem;
+    border-radius: .5rem;
+    background: linear-gradient(180deg, rgba(14, 86, 50, 0.98), rgba(19, 140, 76, 0.88));
+    color: #ecfff0;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    font-family: "Fira Code", ui-monospace, monospace;
+    white-space: nowrap;
+}
+
+.homo-map-arrow,
+.digraph-arrow {
+    color: rgba(249, 244, 244, 0.6);
+    font-size: 1rem;
+}
+
+/* ==================== CONTROLS / TOGGLES ==================== */
+.homo-mode-toggle,
+.homophonic-mode-toggle {
+    display: flex;
+    gap: .5rem;
+    margin: .8rem 0 .6rem;
+}
+
+.toggle-btn {
+    flex: 1;
+    border: 1px solid rgba(231, 143, 65, 0.5);
+    background: transparent;
+    color: var(--cf-text);
+    border-radius: 999px;
+    padding: .3rem .7rem;
+    cursor: pointer;
+    transition: background-color .15s ease, color .15s ease, box-shadow .15s ease;
+}
+
+.toggle-btn.active {
+    background: var(--cf-orange);
+    color: #06040e;
+    border-color: var(--cf-orange);
+    box-shadow: 0 0 .4rem .1rem rgba(231, 143, 65, 0.45);
+}
+
+.toggle-btn:not(.active):hover {
+    background-color: rgba(231, 143, 65, 0.1);
+}
+
+/* Botón reencriptar */
+.homo-reencrypt-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin-top: .8rem;
+    background: linear-gradient(180deg, var(--cf-orange), rgba(231, 143, 65, 0.85));
+    color: #06040e;
+    border: none;
+    padding: .45rem .8rem;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(231, 143, 65, 0.12);
+    transition: transform .15s ease;
+}
+
+.homo-reencrypt-btn:hover {
+    transform: translateY(-3px);
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+.toggle-btn:focus,
+.homo-reencrypt-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 .18rem rgba(231, 143, 65, 0.35);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1199px) {
+    .lab-table-cipher-row {
+        flex-direction: column;
+    }
+
+    .cipher-list-panel {
+        flex: 1 1 100%;
+        max-height: 260px;
+    }
+
+    .homophones-table-wrapper {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .homophonic-hero,
+    .homo-hero {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero-visual {
+        order: 1;
+    }
+}
+
+@media (max-width: 576px) {
+    .homophonic-page {
+        padding: 2.4rem 0 3rem;
+    }
+
+    .homo-num-chip,
+    .homophone-chip {
+        font-size: .8rem;
+        padding: .12rem .3rem;
+        min-width: 30px;
+    }
+
+    .ht-pool {
+        max-width: 60vw;
+    }
+
+    .cipher-list-panel {
+        flex: 1 1 100%;
+    }
+}

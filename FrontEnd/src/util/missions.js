@@ -283,6 +283,63 @@ const missions_hill = [
     }
 ];
 
+const missions_homophonic = [
+    {
+        id: 1,
+        title: "Misión 1 · ¿Cuántos homófonos tiene la E?",
+        description:
+            "En el sistema de CypherFox, la letra E tiene asignados varios homófonos del 0 al 99. Según la tabla de la lección, ¿cuántos valores tiene el pool de la E?",
+        answer: "12",
+        hint:
+            "Revisa la tabla de homófonos de la lección y cuenta los valores listados en la fila de la E. Recuerda que el tamaño del pool es proporcional a la frecuencia de la letra en inglés (~12.7%)."
+    },
+    {
+        id: 2,
+        title: "Misión 2 · Descifra el número",
+        description:
+            "Recibes el símbolo cifrado 14. Usando el mapa inverso del sistema de la lección, ¿a qué letra del alfabeto corresponde?",
+        answer: "E",
+        hint:
+            "Busca el número 14 dentro de los pools de la tabla. Recuerda que los pools son disjuntos: cada número pertenece a exactamente una letra."
+    },
+    {
+        id: 3,
+        title: "Misión 3 · ¿Determinístico o probabilístico?",
+        description:
+            "En el cifrado homofonico, si cifras la letra A dos veces con la misma clave, ¿obtendrás siempre el mismo número? Responde SI o NO.",
+        answer: "NO",
+        hint:
+            "Recuerda cómo funciona el cifrado: E(mᵢ) = random(f(mᵢ)). ¿Qué implica esa aleatoriedad para cada nueva ejecución?"
+    },
+    {
+        id: 4,
+        title: "Misión 4 · Pools disjuntos",
+        description:
+            "Una propiedad clave del cifrado homofonico es que los pools de cada letra son disjuntos. ¿Cuántas letras distintas puede representar el número 48?",
+        answer: "1",
+        hint:
+            "Si los pools son disjuntos (∀ a ≠ b, f(a) ∩ f(b) = ∅), cada número solo puede pertenecer a un pool. Busca el 48 en la tabla."
+    },
+    {
+        id: 5,
+        title: "Misión 5 · El tamaño del alfabeto cifrado",
+        description:
+            "El sistema de CypherFox usa números del 0 al 99 como alfabeto cifrado. ¿Cuántos símbolos tiene en total este alfabeto cifrado |C|?",
+        answer: "100",
+        hint:
+            "Cuenta cuántos números enteros hay desde el 0 hasta el 99 inclusive."
+    },
+    {
+        id: 6,
+        title: "Misión 6 · ¿Por qué falla el análisis de frecuencias?",
+        description:
+            "El análisis de frecuencias clásico falla con el cifrado homofonico porque la distribución de símbolos en el criptograma es aproximadamente uniforme. Si el pool de cada letra tiene tamaño proporcional a su frecuencia, ¿cuál es la probabilidad aproximada de que aparezca cualquier símbolo en el criptograma?",
+        answer: "1%",
+        hint:
+            "Si el alfabeto cifrado tiene 100 símbolos y la distribución es uniforme, P(cⱼ) ≈ 1/100. ¿Cuánto es eso en porcentaje?"
+    }
+];
+
 export const methodMissionsConfig = {
     "one-time-pad": {
         missions: missions_one_time_pad,
@@ -308,5 +365,11 @@ export const methodMissionsConfig = {
         missions: missions_hill,
         title: "Misiones · Cifrado Hill",
         description: "Pon a prueba tu dominio del primer cifrado criptográfico basado en álgebra lineal. Desde la conversión de letras a matrices hasta la multiplicación modular y la invertibilidad de claves, estas misiones te llevarán por todos los engranajes matemáticos que Lester Hill diseñó en 1929."
+    },
+    "homophonic": {
+        missions: missions_homophonic,
+        title: "Misiones · Cifrado Homofonico",
+        description:
+            "Pon a prueba tu comprensión del cifrado homofonico: desde contar homófonos y descifrar símbolos hasta entender por qué la aleatoriedad derrota el análisis de frecuencias. Demuestra que dominas el primer cifrado que venció a Al-Kindi."
     },
 };
