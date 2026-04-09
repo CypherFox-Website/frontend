@@ -2,8 +2,6 @@
 .homophonic-page,
 .homo-page {
     padding: 3rem 0 0;
-    background: var(--cf-bg);
-    color: var(--cf-text);
 }
 
 .homophonic-shell,
@@ -190,7 +188,7 @@
 .ht-letter,
 .homo-td-letter {
     font-weight: 700;
-    width: 48px;
+    width: 72px;
 }
 
 .ht-pool,

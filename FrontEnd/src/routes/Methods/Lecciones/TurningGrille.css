@@ -1,0 +1,1040 @@
+/* =========================================================
+   routes/Methods/Lecciones/TurningGrille.css
+   CypherFox – Rejilla Girante
+   Misma arquitectura visual que Caesar / Vigenere / Playfair / Hill
+========================================================= */
+
+/* =========================================================
+   PÁGINA
+========================================================= */
+.tg-page {
+    padding: 3rem 0 0;
+}
+
+.tg-shell {
+    position: relative;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+.tg-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 3rem;
+    background-color: rgba(6, 4, 14, 0.95);
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: 0 0 10px 15px rgba(6, 4, 14, 0.9);
+}
+
+.hero-copy-tittle {
+    font-size: 2.6rem;
+    line-height: 1.15;
+}
+
+.text-encrypted {
+    color: var(--cf-green) !important;
+}
+
+.hero-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background-color: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(231, 143, 65, 0.7);
+    margin-bottom: 0.65rem;
+}
+
+/* Hero visual */
+.hero-visual {
+    position: relative;
+    min-height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-mascot {
+    position: absolute;
+    right: 55%;
+    bottom: 10px;
+    max-width: 17.5vh;
+    pointer-events: none;
+    z-index: 1;
+    animation: mascotFloat 4s ease-in-out infinite;
+}
+
+.hero-circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.hero-circle-main {
+    width: 185px;
+    height: 185px;
+    background: radial-gradient(circle at 25% 20%, #e78f41, #06040e);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: heroPulse 3s ease-in-out infinite;
+}
+
+.hero-circle-main::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border-radius: 50%;
+    border: 1px dashed rgba(6, 4, 14, 0.7);
+}
+
+.hero-circle-inner {
+    text-align: center;
+}
+
+.k-label {
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.k-value {
+    font-size: 2.4rem;
+    font-family: "Fira Code", ui-monospace, monospace;
+}
+
+.hero-circle-small {
+    width: 70px;
+    height: 70px;
+    border: 2px solid rgba(231, 143, 65, 0.7);
+}
+
+.hero-circle-1 {
+    right: 0;
+    top: 10%;
+    animation: heroOrbit1 14s linear infinite;
+}
+
+.hero-circle-2 {
+    left: 5%;
+    bottom: 3%;
+    border-color: rgba(19, 130, 69, 0.8);
+    animation: heroOrbit2 18s linear infinite;
+}
+
+/* =========================================================
+   ANIMACIONES HERO
+========================================================= */
+@keyframes heroPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    }
+
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
+    }
+}
+
+@keyframes heroOrbit1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(6px, 4px) rotate(10deg);
+    }
+}
+
+@keyframes heroOrbit2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(4px, 6px) rotate(8deg);
+    }
+}
+
+@keyframes mascotFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(6px);
+    }
+}
+
+/* =========================================================
+   FRANJAS GENERALES
+========================================================= */
+.tg-band {
+    margin-bottom: 3rem;
+}
+
+/* =========================================================
+   BANDA 1 – LABORATORIO + HISTORIA FLOTANTE
+========================================================= */
+.band-lab .band-lab-inner {
+    position: relative;
+    background-color: rgba(6, 4, 14, 0.98);
+    border-radius: 1.8rem;
+    padding: 1.6rem 1.4rem 2.6rem;
+    box-shadow: 0 0 10px 15px rgba(6, 4, 14, 0.9);
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.7s ease-out forwards;
+    animation-delay: 0.1s;
+}
+
+.band-lab .band-lab-inner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(circle at top left, rgba(19, 130, 69, 0.4), rgba(19, 130, 69, 0) 70%);
+    z-index: 0;
+}
+
+.band-lab .band-lab-inner> :not(.history-floating) {
+    position: relative;
+    z-index: 1;
+}
+
+.lab-core {
+    position: relative;
+    z-index: 3;
+}
+
+.lab-header-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 0.9rem;
+}
+
+.lab-subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-top: 0.25rem;
+}
+
+/* =========================================================
+   TOGGLE DIRECCIÓN (horario / antihorario)
+========================================================= */
+.tg-direction-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: flex-end;
+}
+
+.tg-toggle-group {
+    display: flex;
+    gap: 0.4rem;
+}
+
+/* =========================================================
+   CONSTRUCTOR DE GRILLA
+========================================================= */
+.tg-lab-grid-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-top: 1rem;
+}
+
+.tg-builder-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.tg-grid-caption {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(231, 143, 65, 0.7);
+    margin-bottom: 0.2rem;
+}
+
+.tg-grid-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+/* Grilla principal N×N */
+.tg-grid {
+    display: grid;
+    gap: 6px;
+}
+
+.tg-grid.tg-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.tg-grid.tg-grid-6 {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.tg-cell {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-family: "Fira Code", ui-monospace, monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: background-color 0.18s ease, transform 0.14s ease, box-shadow 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    user-select: none;
+}
+
+.tg-cell-interactive {
+    cursor: pointer;
+}
+
+/* Celda sólida (cartón cerrado) */
+.tg-cell-solid {
+    background-color: rgba(231, 143, 65, 0.12);
+    border: 2px solid rgba(231, 143, 65, 0.25);
+    color: rgba(231, 143, 65, 0.5);
+}
+
+.tg-cell-interactive.tg-cell-solid:hover {
+    background-color: rgba(231, 143, 65, 0.2);
+    border-color: rgba(231, 143, 65, 0.55);
+    transform: scale(1.06);
+    box-shadow: 0 0 0.5rem 0.1rem rgba(231, 143, 65, 0.3);
+}
+
+/* Celda agujero (transparente) */
+.tg-cell-hole {
+    background-color: rgba(6, 4, 14, 0.7);
+    border: 2px dashed rgba(62, 207, 128, 0.6);
+    color: rgba(62, 207, 128, 0.8);
+    box-shadow: inset 0 0 8px rgba(62, 207, 128, 0.12);
+}
+
+.tg-cell-interactive.tg-cell-hole:hover {
+    background-color: rgba(19, 130, 69, 0.15);
+    border-color: rgba(62, 207, 128, 0.9);
+    transform: scale(1.08);
+    box-shadow: 0 0 0.6rem 0.15rem rgba(62, 207, 128, 0.35), inset 0 0 8px rgba(62, 207, 128, 0.15);
+}
+
+/* Letras ya colocadas en pasos anteriores */
+.tg-cell-filled {
+    background-color: rgba(62, 207, 128, 0.08);
+    border: 2px solid rgba(62, 207, 128, 0.3);
+    color: rgba(62, 207, 128, 0.85);
+}
+
+/* Celda del paso actual (visible por el agujero ahora) */
+.tg-cell-active {
+    background-color: rgba(231, 143, 65, 0.25) !important;
+    border: 2px solid var(--cf-orange) !important;
+    color: var(--cf-orange) !important;
+    transform: scale(1.1);
+    box-shadow: 0 0 0.7rem 0.2rem rgba(231, 143, 65, 0.45);
+    z-index: 2;
+    position: relative;
+}
+
+/* =========================================================
+   BADGE DE VALIDACIÓN
+========================================================= */
+.tg-validation-badge {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.55rem 0.85rem;
+    border-radius: 0.9rem;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    max-width: 280px;
+    text-align: left;
+}
+
+.tg-badge-valid {
+    background-color: rgba(19, 130, 69, 0.15);
+    border: 1px solid rgba(62, 207, 128, 0.5);
+    color: #3ecf80;
+}
+
+.tg-badge-incomplete {
+    background-color: rgba(231, 143, 65, 0.1);
+    border: 1px solid rgba(231, 143, 65, 0.4);
+    color: rgba(231, 143, 65, 0.9);
+}
+
+.tg-badge-invalid {
+    background-color: rgba(220, 60, 60, 0.1);
+    border: 1px solid rgba(220, 60, 60, 0.5);
+    color: rgba(255, 100, 100, 0.9);
+}
+
+.tg-badge-toomany {
+    background-color: rgba(220, 60, 60, 0.1);
+    border: 1px solid rgba(220, 60, 60, 0.5);
+    color: rgba(255, 100, 100, 0.9);
+}
+
+.tg-badge-icon {
+    flex-shrink: 0;
+    font-size: 1rem;
+}
+
+/* Contador de agujeros */
+.tg-hole-counter {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.tg-hole-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(231, 143, 65, 0.5);
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+}
+
+.tg-hole-dot.filled {
+    background-color: var(--cf-orange);
+    border-color: var(--cf-orange);
+}
+
+.tg-hole-count {
+    font-size: 0.8rem;
+    color: rgba(231, 143, 65, 0.7);
+}
+
+/* =========================================================
+   PREVIEW 4 ROTACIONES
+========================================================= */
+.tg-rotations-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.tg-rotations-row {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.tg-rotation-mini {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.tg-rotation-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: rgba(231, 143, 65, 0.7);
+}
+
+/* Mini grilla (preview) */
+.tg-mini-grid {
+    display: grid;
+    gap: 3px;
+}
+
+.tg-mini-grid.tg-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.tg-mini-grid.tg-grid-6 {
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.tg-mini-cell {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+}
+
+.mini-hole {
+    background-color: rgba(62, 207, 128, 0.55);
+    border: 1px dashed rgba(62, 207, 128, 0.8);
+}
+
+.mini-solid {
+    background-color: rgba(231, 143, 65, 0.12);
+    border: 1px solid rgba(231, 143, 65, 0.18);
+}
+
+/* =========================================================
+   HISTORIA FLOTANTE
+========================================================= */
+.history-floating {
+    position: absolute;
+    right: 1.4rem;
+    bottom: -2rem;
+    width: min(360px, 55%);
+    background-color: rgba(6, 4, 14, 0.92);
+    border-radius: 1.4rem 1.4rem 0 1.4rem;
+    padding: 1rem 1.1rem 1.2rem;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    border: 1px solid rgba(231, 143, 65, 0.45);
+    z-index: 5;
+}
+
+.history-floating h3 {
+    margin-bottom: 0.45rem;
+}
+
+.history-floating p {
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+}
+
+/* =========================================================
+   BANDA ANIMACIÓN PASO A PASO
+========================================================= */
+.band-anim .band-anim-inner {
+    background-color: rgba(6, 4, 14, 0.98);
+    border-radius: 1.8rem;
+    padding: 1.6rem 1.4rem 2rem;
+    box-shadow: 0 0 10px 15px rgba(6, 4, 14, 0.9);
+    animation: fadeUp 0.5s ease-out forwards;
+}
+
+.band-anim .band-anim-inner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(circle at bottom right, rgba(231, 143, 65, 0.18), transparent 65%);
+}
+
+.anim-header {
+    margin-bottom: 1.2rem;
+}
+
+.anim-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.anim-grid-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.anim-step-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(231, 143, 65, 0.8);
+}
+
+.anim-controls {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+}
+
+.anim-btn {
+    border: 1px solid rgba(231, 143, 65, 0.5);
+    background-color: transparent;
+    color: var(--cf-text);
+    border-radius: 999px;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+}
+
+.anim-btn:hover:not(:disabled) {
+    background-color: rgba(231, 143, 65, 0.12);
+    transform: translateY(-1px);
+}
+
+.anim-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.anim-btn-play {
+    background-color: var(--cf-orange);
+    color: #06040e;
+    border-color: var(--cf-orange);
+    padding: 0.35rem 1.1rem;
+}
+
+.anim-btn-play:hover:not(:disabled) {
+    background-color: #d97b30;
+    box-shadow: 0 0 0.5rem 0.1rem rgba(231, 143, 65, 0.5);
+}
+
+.anim-step-desc {
+    font-size: 0.88rem;
+    text-align: center;
+    max-width: 420px;
+    color: rgba(249, 244, 244, 0.8);
+}
+
+/* =========================================================
+   BANDA INFERIOR – PIZARRA MATEMÁTICA + JUEGO
+========================================================= */
+.band-bottom .band-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+    gap: 1.7rem;
+    align-items: start;
+}
+
+.card-free {
+    border-radius: 1.8rem;
+    padding: 1.4rem 1.3rem 1.6rem;
+    background-color: rgba(6, 4, 14, 0.95);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9);
+}
+
+.band-bottom .math-card,
+.band-bottom .game-card {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.7s ease-out forwards;
+}
+
+.band-bottom .math-card {
+    animation-delay: 0.2s;
+}
+
+.band-bottom .game-card {
+    animation-delay: 0.3s;
+}
+
+.game-card {
+    position: relative;
+}
+
+/* =========================================================
+   PIZARRA MATEMÁTICA
+========================================================= */
+.math-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.math-header-text {
+    flex: 1;
+}
+
+.math-help-button {
+    border: 1px solid var(--cf-orange);
+    background-color: transparent;
+    color: var(--cf-text);
+    border-radius: 999px;
+    padding: 0.25rem 0.8rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease, color 0.15s ease;
+}
+
+.math-help-button:hover {
+    background-color: var(--cf-orange);
+    color: #06040e;
+    transform: translateY(-1px);
+    box-shadow: 0 0 0.4rem 0.1rem rgba(231, 143, 65, 0.5);
+}
+
+.math-list {
+    margin: 0.4rem 0 0.9rem;
+    padding-left: 1.2rem;
+    font-size: 0.9rem;
+}
+
+.math-list li {
+    margin-bottom: 0.25rem;
+}
+
+.math-explanation {
+    margin-top: 0.2rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.math-mascot {
+    display: block;
+    margin: 0.8rem auto 0;
+    max-width: 160px;
+    pointer-events: none;
+    margin-bottom: 1rem;
+}
+
+/* =========================================================
+   JUEGO — toggle cifrar / descifrar
+========================================================= */
+.hill-mode-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0.8rem 0 0.6rem;
+}
+
+.toggle-btn {
+    flex: 1;
+    border: 1px solid rgba(231, 143, 65, 0.5);
+    background-color: transparent;
+    color: var(--cf-text);
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.toggle-btn.active {
+    background-color: var(--cf-orange);
+    color: #06040e;
+    border-color: var(--cf-orange);
+    box-shadow: 0 0 0.4rem 0.1rem rgba(231, 143, 65, 0.45);
+}
+
+.toggle-btn:not(.active):hover {
+    background-color: rgba(231, 143, 65, 0.1);
+}
+
+/* =========================================================
+   CONTROLES DE EJEMPLO
+========================================================= */
+.example-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 0.6rem;
+    margin-bottom: 0.9rem;
+}
+
+.example-controls label {
+    flex: 1 1 220px;
+    font-size: 0.9rem;
+}
+
+.example-controls .form-control {
+    width: 100%;
+    margin-top: 0.3rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(231, 143, 65, 0.5);
+    color: var(--cf-text);
+    padding: 0.3rem 0.6rem;
+}
+
+.example-controls .form-control:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(231, 142, 65, 0.6);
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(231, 142, 65, 0.75);
+}
+
+.example-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.example-results>div {
+    flex: 1 1 200px;
+    padding: 0.6rem 0.7rem;
+    border-radius: 0.9rem;
+    background-color: rgb(6, 4, 14);
+    box-shadow: 0 0 0.5rem 0.1rem rgba(231, 142, 65, 0.1);
+}
+
+.example-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(231, 143, 65, 0.85);
+}
+
+.example-results p,
+.example-results span {
+    margin: 0.12rem 0 0;
+    font-family: "Fira Code", ui-monospace, monospace;
+}
+
+.game-tip {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: rgba(249, 244, 244, 0.85);
+}
+
+/* =========================================================
+   BANNER / WARNING EN JUEGO
+========================================================= */
+.tg-game-warning {
+    margin: 0.5rem 0 0.8rem;
+    padding: 0.55rem 0.85rem;
+    border-radius: 0.9rem;
+    background-color: rgba(220, 60, 60, 0.1);
+    border: 1px solid rgba(220, 60, 60, 0.4);
+    color: rgba(255, 100, 100, 0.9);
+    font-size: 0.85rem;
+}
+
+.tg-success-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 0.8rem;
+    padding: 0.55rem 0.85rem;
+    border-radius: 0.9rem;
+    background-color: rgba(19, 130, 69, 0.12);
+    border: 1px solid rgba(62, 207, 128, 0.4);
+    color: #3ecf80;
+    font-size: 0.85rem;
+}
+
+.tg-success-gif {
+    max-width: 42px;
+    pointer-events: none;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(6, 4, 14, 0.5) !important;
+    backdrop-filter: blur(0.5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+    overflow: auto;
+    animation: backdropFade 0.2s ease-out;
+}
+
+.modal-content {
+    max-width: 75%;
+    max-height: 75vh;
+    background-color: rgb(6, 4, 14) !important;
+    border-radius: 2rem !important;
+    border: 1px solid rgba(231, 143, 65, 0.6);
+    padding: 1.4rem 1.6rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    animation: modalPop 0.25s ease-out;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: rgba(231, 143, 65, 0.4);
+    border-radius: 999px;
+}
+
+.modal-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(231, 143, 65, 0.4) transparent;
+}
+
+.modal-header-with-fox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+}
+
+.modal-mascot {
+    max-width: 15vh;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.close-button {
+    margin-top: 0.9rem;
+    border: none;
+    background-color: var(--cf-orange);
+    color: #06040e;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+}
+
+.close-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 0.4rem 0.1rem rgba(231, 143, 65, 0.5);
+}
+
+/* =========================================================
+   ANIMACIONES GENERALES
+========================================================= */
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes backdropFade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalPop {
+    0% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.97);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+/* Tableta grande: historia flotante pasa a estática */
+@media (max-width: 1199px) {
+    .history-floating {
+        position: static;
+        width: 100%;
+        margin-top: 1.3rem;
+        border-radius: 1.4rem;
+    }
+}
+
+/* Tableta */
+@media (max-width: 992px) {
+    .tg-hero {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .hero-visual {
+        order: 1;
+    }
+
+    .tg-lab-grid-row {
+        grid-template-columns: 1fr;
+    }
+
+    .tg-rotations-row {
+        grid-template-columns: repeat(2, auto);
+    }
+
+    .band-bottom .band-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .math-card {
+        margin-top: 0.4rem;
+    }
+}
+
+/* Móvil */
+@media (max-width: 576px) {
+    .tg-page {
+        padding: 2.4rem 0 3rem;
+    }
+
+    .hero-copy h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-visual {
+        min-height: 180px;
+    }
+
+    .band-lab .band-lab-inner {
+        padding-inline: 1.1rem;
+    }
+
+    .modal-content {
+        max-width: 90%;
+        max-height: 80vh;
+    }
+
+    .tg-cell {
+        width: 42px;
+        height: 42px;
+        font-size: 0.75rem;
+    }
+
+    .tg-rotations-row {
+        grid-template-columns: repeat(2, auto);
+        gap: 0.6rem;
+    }
+
+    .math-help-button {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.65rem;
+    }
+
+    .hill-mode-toggle {
+        flex-direction: column;
+    }
+
+    .anim-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

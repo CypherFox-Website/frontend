@@ -10,6 +10,7 @@ import Caesar from "../Methods/Lecciones/Caesar";
 import Vigenere from "../Methods/Lecciones/Vigenere";
 import Hill from "../Methods/Lecciones/Hill";
 import Homophonic from "../Methods/Lecciones/Homophonic";
+import TurningGrille from "../Methods/Lecciones/TurningGrille";
 
 import DecryptedText from "../../components/text/DecryptedText";
 import TextType from "../../components/text/TextType";
@@ -27,7 +28,8 @@ const lessonsMap = {
     vigenere: Vigenere,
     playfair: Playfair,
     hill: Hill,
-    homophonic: Homophonic
+    homophonic: Homophonic,
+    "turning-grille": TurningGrille,
 };
 
 const HYPERSPEED_OPTIONS = {

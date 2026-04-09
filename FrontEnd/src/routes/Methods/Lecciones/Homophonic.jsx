@@ -295,7 +295,7 @@ function Homophonic() {
                                 textColors={["var(--cf-text)"]}
                             />
                             <button className="math-help-button" onClick={() => setShowHistoryHelp(true)}>
-                                Leer más →
+                                Leer más
                             </button>
                         </aside>
                     </div>
@@ -449,7 +449,7 @@ function Homophonic() {
                             </div>
 
                             <button className="homo-reencrypt-btn" onClick={handleReEncrypt}>
-                                🔀 Reencriptar (nueva aleatoriedad)
+                                Reencriptar (nueva aleatoriedad)
                             </button>
 
                             <TextType
@@ -488,7 +488,7 @@ function Homophonic() {
                             en un cifrado de sustitución simple contando frecuencias.
                         </p>
 
-                        <h4 style={{ marginTop: "1rem" }}>🔐 Origen y primeros usos</h4>
+                        <h4 style={{ marginTop: "1rem" }}>Origen y primeros usos</h4>
                         <p>
                             El cifrado homofonico como concepto formal apareció al menos desde el siglo XIV.
                             Una de las implementaciones documentadas más antiguas se atribuye al duque{" "}
@@ -497,7 +497,7 @@ function Homophonic() {
                             símbolos en el criptograma pareciera lo más uniforme posible.
                         </p>
 
-                        <h4 style={{ marginTop: "1rem" }}>🏰 Usos históricos notables</h4>
+                        <h4 style={{ marginTop: "1rem" }}>Usos históricos notables</h4>
                         <p>
                             Durante los siglos XVI al XVIII, las cortes europeas utilizaron variantes
                             homofónicas en su correspondencia diplomática. Los cifrados de la{" "}
@@ -507,7 +507,7 @@ function Homophonic() {
                             hasta 1893, más de 200 años después.
                         </p>
 
-                        <h4 style={{ marginTop: "1rem" }}>🔓 ¿Cómo se rompe?</h4>
+                        <h4 style={{ marginTop: "1rem" }}>¿Cómo se rompe?</h4>
                         <p>
                             Aunque el cifrado homofonico resiste el análisis de frecuencias de primer orden,
                             ataques de <strong>bigramas y trigramas</strong> siguen siendo efectivos con
@@ -516,7 +516,7 @@ function Homophonic() {
                             se reutiliza en múltiples mensajes.
                         </p>
 
-                        <h4 style={{ marginTop: "1rem" }}>🌐 Legado moderno</h4>
+                        <h4 style={{ marginTop: "1rem" }}>Legado moderno</h4>
                         <p>
                             El principio homofonico —esconder patrones a través de la aleatoriedad— está en
                             la base de cifrados modernos como <strong>AES</strong> con modos de operación
@@ -615,7 +615,7 @@ function Homophonic() {
                             de sustitución simple. El análisis de frecuencias de primer orden queda inutilizado.
                         </p>
 
-                        <h4 style={{ marginTop: "1rem" }}>⚠️ Limitaciones</h4>
+                        <h4 style={{ marginTop: "1rem" }}>Limitaciones</h4>
                         <ul className="math-list">
                             <li>
                                 <strong>Bigramas y trigramas:</strong> patrones de pares o trios de letras
