@@ -269,18 +269,11 @@ random.seed(2153)
         href: '/metodos/turning-grille',
         icono: 'fa-solid fa-square-check'
     },
-    'hayhanen': {
-        nombre: 'Hayhanen',
-        descripcion_corta: 'Sistema de cifrado que usa un tablero de ajedrez.',
-        descripcion: 'Cifrado asociado a comunicaciones de espías, donde letras se sustituyen por secuencias numéricas. Los números se camuflan como datos cotidianos. Su fuerza radica en pasar desapercibido más que en la complejidad matemática.',
-        href: '/metodos/hayhanen',
-        icono: 'fa-solid fa-shuffle'
-    },
-    'des-3des': {
-        nombre: 'DES/3DES',
+    'des': {
+        nombre: 'DES',
         descripcion_corta: 'Estándar de Encriptación de Datos.',
         descripcion: 'Cifrado simétrico de bloque que opera sobre 64 bits con claves efectivas de 56 bits. Fue estándar durante décadas, pero hoy se considera vulnerable frente a ataques de fuerza bruta. Variantes como 2DES y 3DES aplican múltiples rondas para ampliar la seguridad y la vida útil.',
-        href: '/metodos/des-3des',
+        href: '/metodos/des',
         icono: 'fa-solid fa-cubes'
     },
     'aes': {

@@ -1,0 +1,915 @@
+/* =========================================================
+   routes/Methods/Lecciones/DES.css
+   CypherFox – Cifrado DES
+   Sigue la misma arquitectura visual de Caesar.css, Playfair.css y Vigenere.css
+   ========================================================= */
+
+/* =========================================================
+   PÁGINA DES
+   ========================================================= */
+.des-page {
+    padding: 3rem 0 0;
+}
+
+.text-encrypted {
+    color: var(--cf-green) !important;
+}
+
+.des-shell {
+    position: relative;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.des-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 3rem;
+    background-color: rgba(6, 4, 14, 0.95);
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: 0 0 10px 15px rgba(6, 4, 14, 0.9);
+}
+
+.hero-copy-tittle {
+    font-size: 2.6rem;
+    line-height: 1.15;
+}
+
+.hero-copy-tittle.text-encrypted {
+    color: var(--cf-green);
+}
+
+.hero-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background-color: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(231, 143, 65, 0.7);
+    margin-bottom: 0.65rem;
+}
+
+.hero-copy p {
+    font-size: 0.95rem;
+    margin-top: 0.6rem;
+}
+
+/* Hero visual */
+.hero-visual {
+    position: relative;
+    min-height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-mascot {
+    position: absolute;
+    right: 55%;
+    bottom: 10px;
+    max-width: 17.5vh;
+    pointer-events: none;
+    z-index: 1;
+    animation: mascotFloat 4s ease-in-out infinite;
+}
+
+.hero-circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.hero-circle-main {
+    width: 185px;
+    height: 185px;
+    background: radial-gradient(circle at 25% 20%, #e78f41, #06040e);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: heroPulse 3s ease-in-out infinite;
+}
+
+.hero-circle-main::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border-radius: 50%;
+    border: 1px dashed rgba(6, 4, 14, 0.7);
+}
+
+.hero-circle-inner {
+    text-align: center;
+    font-size: 2.8rem;
+    font-family: "Fira Code", ui-monospace, monospace;
+}
+
+.hero-circle-small {
+    width: 70px;
+    height: 70px;
+    border: 2px solid rgba(231, 143, 65, 0.7);
+}
+
+.hero-circle-1 {
+    right: 0;
+    top: 10%;
+    animation: heroOrbit1 14s linear infinite;
+}
+
+.hero-circle-2 {
+    left: 5%;
+    bottom: 3%;
+    border-color: rgba(19, 130, 69, 0.8);
+    animation: heroOrbit2 18s linear infinite;
+}
+
+/* =========================================================
+   ANIMACIONES HERO
+   ========================================================= */
+@keyframes heroPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    }
+
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    }
+}
+
+@keyframes heroOrbit1 {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(6px, 4px) rotate(10deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+@keyframes heroOrbit2 {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(4px, 6px) rotate(8deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+@keyframes mascotFloat {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(6px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* =========================================================
+   FRANJAS GENERALES
+   ========================================================= */
+.des-band {
+    margin-bottom: 3rem;
+}
+
+/* =========================================================
+   BANDA 1: Laboratorio binario
+   ========================================================= */
+.band-binary .band-binary-inner {
+    position: relative;
+    background-color: rgba(6, 4, 14, 0.98);
+    border-radius: 1.8rem;
+    padding: 1.6rem 1.4rem 2.6rem;
+    box-shadow: 0 0 10px 15px rgba(6, 4, 14, 0.9);
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.7s ease-out forwards;
+    animation-delay: 0.1s;
+}
+
+.band-binary .band-binary-inner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(circle at top left,
+            rgba(19, 130, 69, 0.4),
+            rgba(19, 130, 69, 0) 70%);
+    z-index: 0;
+}
+
+.band-lab-inner>* {
+    position: relative;
+    z-index: 1;
+}
+
+.lab-core {
+    position: relative;
+    z-index: 3;
+}
+
+.lab-header-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 0.9rem;
+}
+
+.lab-subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-top: 0.25rem;
+}
+
+/* =========================================================
+   TRACE AREA (paso a paso DES)
+   ========================================================= */
+.trace-area {
+    margin-top: 1.4rem;
+    max-height: 520px;
+    overflow-y: auto;
+    padding-right: 0.4rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(231, 143, 65, 0.35) transparent;
+}
+
+.trace-area::-webkit-scrollbar {
+    width: 5px;
+}
+
+.trace-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.trace-area::-webkit-scrollbar-thumb {
+    background-color: rgba(231, 143, 65, 0.35);
+    border-radius: 999px;
+}
+
+.trace-area h3 {
+    margin-bottom: 0.6rem;
+}
+
+.trace-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.trace-item {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(231, 143, 65, 0.15);
+    border-radius: 0.8rem;
+    padding: 0.6rem 0.8rem;
+}
+
+.trace-item strong {
+    color: var(--cf-orange);
+}
+
+.trace-item pre {
+    margin: 0.2rem 0 0;
+    font-family: "Fira Code", ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: var(--cf-text);
+    background: transparent;
+    border: none;
+    padding: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.trace-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.4rem;
+}
+
+.trace-grid small {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(249, 244, 244, 0.55);
+}
+
+.mono {
+    font-family: "Fira Code", ui-monospace, monospace;
+}
+
+/* =========================================================
+   BANDA 2: Explicación + Cifra un bloque
+   ========================================================= */
+.band-alpha .band-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+    gap: 1.7rem;
+    align-items: start;
+}
+
+.band-grid {
+    height: max-content;
+}
+
+.example-params {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0.6rem 0 1rem;
+    font-family: "Fira Code", ui-monospace, monospace;
+    font-size: 0.85rem;
+}
+
+.example-params>div {
+    padding: 0.4rem 0.7rem;
+    border-radius: 0.6rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(231, 143, 65, 0.15);
+}
+
+/* =========================================================
+   CONTROLES Y RESULTADOS
+   ========================================================= */
+.example-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 0.6rem;
+    margin-bottom: 0.9rem;
+}
+
+.run-button {
+    border: none;
+    background-color: var(--cf-orange);
+    color: var(--cf-bg);
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+}
+
+.run-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 0.4rem 0.1rem rgba(231, 143, 65, 0.5);
+}
+
+.run-button.alt {
+    background-color: transparent;
+    border: 1px solid var(--cf-orange);
+    color: var(--cf-text);
+}
+
+.run-button.alt:hover {
+    background-color: var(--cf-orange);
+    color: #06040e;
+}
+
+.example-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+}
+
+.example-results>div {
+    flex: 1 1 200px;
+    padding: 0.6rem 0.7rem;
+    border-radius: 0.9rem;
+    background-color: rgb(6, 4, 14);
+    box-shadow: 0 0 0.5rem 0.1rem rgba(231, 142, 65, 0.1);
+}
+
+.example-results .mono {
+    margin: 0.2rem 0 0;
+    font-size: 0.9rem;
+    color: var(--cf-green);
+    word-break: break-all;
+}
+
+.game-tip {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+    color: rgba(249, 244, 244, 0.85);
+}
+
+/* =========================================================
+   PIZARRA MATEMÁTICA
+   ========================================================= */
+.history-floating {
+    position: absolute;
+    right: 1.4rem;
+    width: min(360px, 55%);
+    background-color: rgba(6, 4, 14, 0.92);
+    border-radius: 1.4rem 1.4rem 0 1.4rem;
+    padding: 1rem 1.1rem 1.2rem;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    border: 1px solid rgba(231, 143, 65, 0.45);
+    z-index: 5;
+}
+
+.history-floating h3 {
+    margin-bottom: 0.45rem;
+}
+
+.history-floating p {
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+}
+
+.band-alpha .math-card,
+.band-alpha .game-card {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.7s ease-out forwards;
+}
+
+.band-alpha .math-card {
+    animation-delay: 0.2s;
+}
+
+.band-alpha .game-card {
+    animation-delay: 0.3s;
+}
+
+.game-card {
+    position: relative;
+}
+
+.math-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.math-header-text {
+    flex: 1;
+}
+
+.math-help-button {
+    border: 1px solid var(--cf-orange);
+    background-color: transparent;
+    color: var(--cf-text);
+    border-radius: 999px;
+    padding: 0.25rem 0.8rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease, color 0.15s ease;
+}
+
+.math-help-button:hover {
+    background-color: var(--cf-orange);
+    color: #06040e;
+    transform: translateY(-1px);
+    box-shadow: 0 0 0.4rem 0.1rem rgba(231, 143, 65, 0.5);
+}
+
+.math-mascot {
+    display: block;
+    margin: 0.8rem auto 0;
+    max-width: 160px;
+    pointer-events: none;
+    margin-bottom: 1rem;
+}
+
+.math-mascot img {
+    max-width: 100%;
+}
+
+/* =========================================================
+   MODAL (backdrop, contenido, scrollbar, botón)
+   ========================================================= */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(6, 4, 14, 0.5) !important;
+    backdrop-filter: blur(0.5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+    overflow: auto;
+    animation: backdropFade 0.2s ease-out;
+}
+
+.modal-content {
+    max-width: 75%;
+    max-height: 75vh;
+    background-color: rgb(6, 4, 14) !important;
+    border-radius: 2rem !important;
+    border: 1px solid rgba(231, 143, 65, 0.6);
+    padding: 1.4rem 1.6rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    animation: modalPop 0.25s ease-out;
+}
+
+/* Scrollbar discreto en el modal */
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: rgba(231, 143, 65, 0.4);
+    border-radius: 999px;
+}
+
+.modal-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(231, 143, 65, 0.4) transparent;
+}
+
+.modal-header-with-fox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+}
+
+.modal-mascot {
+    max-width: 15vh;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.close-button {
+    display: block;
+    margin: 1.4rem auto 0;
+    border: 1px solid var(--cf-orange);
+    background: transparent;
+    color: var(--cf-text);
+    padding: 0.35rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.close-button:hover {
+    background-color: var(--cf-orange);
+    color: #06040e;
+}
+
+/* =========================================================
+   MODOS TABLE + CARDS
+   ========================================================= */
+.modes-table-wrapper {
+    overflow-x: auto;
+    margin-bottom: 1.2rem;
+}
+
+.modes-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+}
+
+.modes-table th {
+    text-align: left;
+    padding: 0.45rem 0.5rem;
+    border-bottom: 1px solid rgba(231, 143, 65, 0.25);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.modes-table td {
+    padding: 0.45rem 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mode-row {
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.mode-row:hover {
+    background-color: rgba(231, 143, 65, 0.08);
+}
+
+.mode-row--active {
+    background-color: rgba(231, 143, 65, 0.12);
+}
+
+.mode-badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.mode-badge.ecb {
+    background-color: rgba(231, 143, 65, 0.2);
+    color: #e78f41;
+}
+
+.mode-badge.cbc {
+    background-color: rgba(19, 130, 69, 0.2);
+    color: #13c245;
+}
+
+.mode-badge.cfb {
+    background-color: rgba(100, 100, 255, 0.2);
+    color: #8888ff;
+}
+
+.mode-badge.ofb {
+    background-color: rgba(200, 60, 200, 0.2);
+    color: #d070d0;
+}
+
+.mode-badge.ctr {
+    background-color: rgba(60, 200, 200, 0.2);
+    color: #50d0d0;
+}
+
+.prop-yes {
+    color: var(--cf-green);
+}
+
+.prop-no {
+    color: rgba(249, 244, 244, 0.4);
+}
+
+/* Mode detail panel */
+.mode-detail-panel {
+    margin-top: 1rem;
+}
+
+.mode-detail-placeholder {
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0.6;
+    padding: 1.6rem 0;
+}
+
+.mode-card {
+    border: 1px solid rgba(231, 143, 65, 0.15);
+    border-radius: 1rem;
+    overflow: hidden;
+    animation: fadeUp 0.35s ease-out;
+}
+
+.mode-card-header {
+    padding: 0.6rem 0.9rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.ecb-header {
+    background-color: rgba(231, 143, 65, 0.12);
+}
+
+.cbc-header {
+    background-color: rgba(19, 130, 69, 0.12);
+}
+
+.cfb-header {
+    background-color: rgba(100, 100, 255, 0.12);
+}
+
+.ofb-header {
+    background-color: rgba(200, 60, 200, 0.12);
+}
+
+.ctr-header {
+    background-color: rgba(60, 200, 200, 0.12);
+}
+
+.mode-card-body {
+    padding: 0.8rem 0.9rem;
+    font-size: 0.88rem;
+}
+
+.pseudo-code {
+    background-color: rgba(0, 0, 0, 0.35);
+    border-radius: 0.6rem;
+    padding: 0.6rem 0.7rem;
+    margin: 0.5rem 0;
+    font-family: "Fira Code", ui-monospace, monospace;
+    font-size: 0.78rem;
+    overflow-x: auto;
+}
+
+.pseudo-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(249, 244, 244, 0.5);
+    margin-bottom: 0.2rem;
+}
+
+.mode-example {
+    margin-top: 0.7rem;
+}
+
+.example-label {
+    font-weight: 600;
+    font-size: 0.82rem;
+    margin-bottom: 0.3rem;
+}
+
+.example-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-family: "Fira Code", ui-monospace, monospace;
+    font-size: 0.78rem;
+}
+
+.example-row>span {
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.4rem;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.mode-note {
+    margin-top: 0.6rem;
+    font-size: 0.82rem;
+    opacity: 0.8;
+    font-style: italic;
+}
+
+/* =========================================================
+   ANIMACIONES GENERALES
+   ========================================================= */
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes backdropFade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalPop {
+    0% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.97);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+/* ── Tablets ── */
+@media (max-width: 960px) {
+    .des-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-visual {
+        min-height: 180px;
+    }
+
+    .band-alpha .band-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Móviles grandes ── */
+@media (max-width: 700px) {
+    .des-page {
+        padding: 1.5rem 0 0;
+    }
+
+    .des-hero {
+        padding: 1.2rem;
+        border-radius: 1.2rem;
+    }
+
+    .hero-copy-tittle {
+        font-size: 1.8rem;
+    }
+
+    .hero-circle-main {
+        width: 130px;
+        height: 130px;
+    }
+
+    .hero-circle-inner {
+        font-size: 2rem;
+    }
+
+    .hero-mascot {
+        max-width: 12vh;
+    }
+
+    .band-binary .band-binary-inner {
+        padding: 1rem;
+        border-radius: 1.2rem;
+    }
+
+    .card-free {
+        padding: 1rem;
+        border-radius: 1.2rem;
+    }
+
+    .modal-content {
+        padding: 1.2rem 1rem;
+        border-radius: 1rem;
+    }
+
+    .trace-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ── Móviles pequeños ── */
+@media (max-width: 480px) {
+    .hero-copy-tittle {
+        font-size: 1.45rem;
+    }
+
+    .hero-circle-main {
+        width: 100px;
+        height: 100px;
+    }
+
+    .hero-circle-inner {
+        font-size: 1.5rem;
+    }
+
+    .hero-circle-small {
+        width: 45px;
+        height: 45px;
+    }
+
+    .example-controls label {
+        flex: 1 1 100%;
+    }
+
+    .trace-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modes-table {
+        font-size: 0.72rem;
+    }
+}
+
+@media (max-width: 1199px) {
+    .history-floating {
+        position: static;
+        width: 100%;
+        margin-top: 1.3rem;
+        border-radius: 1.4rem;
+    }
+}

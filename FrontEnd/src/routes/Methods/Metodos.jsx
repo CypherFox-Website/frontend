@@ -11,6 +11,7 @@ import Vigenere from "../Methods/Lecciones/Vigenere";
 import Hill from "../Methods/Lecciones/Hill";
 import Homophonic from "../Methods/Lecciones/Homophonic";
 import TurningGrille from "../Methods/Lecciones/TurningGrille";
+import DES from "../Methods/Lecciones/DES";
 
 import DecryptedText from "../../components/text/DecryptedText";
 import TextType from "../../components/text/TextType";
@@ -30,6 +31,7 @@ const lessonsMap = {
     hill: Hill,
     homophonic: Homophonic,
     "turning-grille": TurningGrille,
+    des: DES,
 };
 
 const HYPERSPEED_OPTIONS = {
