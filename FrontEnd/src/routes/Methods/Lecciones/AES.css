@@ -1,0 +1,908 @@
+.aes-page {
+  padding: 3rem 0 0;
+}
+
+.aes-shell {
+  position: relative;
+}
+
+.aes-page .hero-copy-tittle {
+  font-size: 2.6rem;
+  line-height: 1.15;
+}
+
+.aes-page .text-encrypted {
+  color: var(--cf-green) !important;
+}
+
+.aes-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 3rem;
+  background-color: rgba(6, 4, 14, 0.95);
+  padding: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 0 10px 15px rgba(6, 4, 14, 0.9);
+}
+
+.aes-page .hero-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(231, 143, 65, 0.7);
+  margin-bottom: 0.65rem;
+}
+
+.aes-page .hero-visual {
+  position: relative;
+  min-height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aes-page .hero-mascot {
+  position: absolute;
+  right: 55%;
+  bottom: 10px;
+  max-width: 17.5vh;
+  pointer-events: none;
+  z-index: 1;
+  animation: aesMascotFloat 4s ease-in-out infinite;
+}
+
+.aes-page .hero-circle {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.aes-page .hero-circle-main {
+  width: 185px;
+  height: 185px;
+  background: radial-gradient(circle at 25% 20%, #e78f41, #06040e);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: aesHeroPulse 3s ease-in-out infinite;
+}
+
+.aes-page .hero-circle-main::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: 50%;
+  border: 1px dashed rgba(6, 4, 14, 0.7);
+}
+
+.aes-page .hero-circle-inner {
+  text-align: center;
+}
+
+.aes-page .k-label {
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aes-page .k-value {
+  font-size: 2.4rem;
+  font-family: "Fira Code", ui-monospace, monospace;
+}
+
+.aes-page .hero-circle-small {
+  width: 70px;
+  height: 70px;
+  border: 2px solid rgba(231, 143, 65, 0.7);
+}
+
+.aes-page .hero-circle-1 {
+  right: 0;
+  top: 10%;
+  animation: aesHeroOrbit1 14s linear infinite;
+}
+
+.aes-page .hero-circle-2 {
+  left: 5%;
+  bottom: 3%;
+  border-color: rgba(19, 130, 69, 0.8);
+  animation: aesHeroOrbit2 18s linear infinite;
+}
+
+.aes-band {
+  margin-bottom: 3rem;
+}
+
+.aes-page .band-lab-inner {
+  position: relative;
+  background-color: rgba(6, 4, 14, 0.98);
+  border-radius: 1.8rem;
+  padding: 1.6rem 1.4rem 2.6rem;
+  box-shadow: 0 0 10px 15px rgba(6, 4, 14, 0.9);
+  opacity: 0;
+  transform: translateY(12px);
+  animation: aesFadeUp 0.7s ease-out forwards;
+  animation-delay: 0.1s;
+}
+
+.aes-page .band-lab-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at top left, rgba(19, 130, 69, 0.28), rgba(19, 130, 69, 0) 70%);
+  z-index: 0;
+}
+
+.aes-page .band-lab-inner > :not(.history-floating) {
+  position: relative;
+  z-index: 1;
+}
+
+.aes-page .lab-core {
+  position: relative;
+  z-index: 3;
+}
+
+.aes-page .lab-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 0.9rem;
+}
+
+.aes-page .lab-subtitle {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-top: 0.25rem;
+}
+
+.aes-page .tg-direction-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: flex-end;
+}
+
+.aes-page .slider-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(231, 143, 65, 0.75);
+}
+
+.aes-page .tg-toggle-group,
+.aes-page .hill-mode-toggle {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.aes-page .toggle-btn {
+  flex: 1;
+  border: 1px solid rgba(231, 143, 65, 0.5);
+  background-color: transparent;
+  color: var(--cf-text);
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.aes-page .toggle-btn.active {
+  background-color: var(--cf-orange);
+  color: #06040e;
+  border-color: var(--cf-orange);
+  box-shadow: 0 0 0.4rem 0.1rem rgba(231, 143, 65, 0.45);
+}
+
+.aes-page .toggle-btn:not(.active):hover {
+  background-color: rgba(231, 143, 65, 0.1);
+}
+
+.aes-page .aes-lab-grid-row {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.95fr) minmax(0, 1.1fr);
+  gap: 2rem;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+
+.aes-page .aes-builder-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.aes-page .aes-control-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.aes-page .tg-grid-caption {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(231, 143, 65, 0.7);
+  margin-bottom: 0.2rem;
+}
+
+.aes-page .form-control {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(231, 143, 65, 0.5);
+  color: var(--cf-text);
+  padding: 0.45rem 0.7rem;
+  font-family: "PT Sans", system-ui, sans-serif;
+}
+
+.aes-page .form-control:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(231, 142, 65, 0.3);
+  background-color: rgba(0, 0, 0, 0.1);
+  border-color: rgba(231, 142, 65, 0.75);
+}
+
+.aes-page .tg-validation-badge {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.9rem;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  max-width: 320px;
+  text-align: left;
+}
+
+.aes-page .tg-badge-valid {
+  background-color: rgba(19, 130, 69, 0.15);
+  border: 1px solid rgba(62, 207, 128, 0.5);
+  color: #3ecf80;
+}
+
+.aes-page .tg-badge-incomplete {
+  background-color: rgba(231, 143, 65, 0.1);
+  border: 1px solid rgba(231, 143, 65, 0.4);
+  color: rgba(231, 143, 65, 0.95);
+}
+
+.aes-page .tg-badge-invalid,
+.aes-page .tg-badge-toomany {
+  background-color: rgba(220, 60, 60, 0.1);
+  border: 1px solid rgba(220, 60, 60, 0.5);
+  color: rgba(255, 100, 100, 0.9);
+}
+
+.aes-page .tg-badge-icon {
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.aes-page .tg-hole-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.aes-page .tg-hole-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(231, 143, 65, 0.5);
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+}
+
+.aes-page .tg-hole-dot.filled {
+  background-color: var(--cf-orange);
+  border-color: var(--cf-orange);
+}
+
+.aes-page .tg-hole-count {
+  font-size: 0.8rem;
+  color: rgba(231, 143, 65, 0.7);
+}
+
+.aes-page .tg-rotations-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 10rem;
+}
+
+.aes-page .tg-rotations-row {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.aes-page .tg-rotation-mini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.aes-page .tg-rotation-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba(231, 143, 65, 0.7);
+}
+
+.aes-page .aes-mini-grid,
+.aes-page .aes-grid {
+  display: grid;
+  gap: 4px;
+}
+
+.aes-page .aes-mini-grid.aes-grid-4,
+.aes-page .aes-grid.aes-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.aes-page .aes-mini-cell {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.56rem;
+  font-family: "Fira Code", ui-monospace, monospace;
+  background-color: rgba(231, 143, 65, 0.12);
+  border: 1px solid rgba(231, 143, 65, 0.18);
+  color: var(--cf-text);
+}
+
+.aes-page .history-floating {
+  position: absolute;
+  right: 1.4rem;
+  bottom: -2rem;
+  width: min(360px, 55%);
+  background-color: rgba(6, 4, 14, 0.92);
+  border-radius: 1.4rem 1.4rem 0 1.4rem;
+  padding: 1rem 1.1rem 1.2rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(231, 143, 65, 0.45);
+  z-index: 5;
+}
+
+.aes-page .history-floating h3 {
+  margin-bottom: 0.45rem;
+}
+
+.aes-page .history-floating p {
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+}
+
+.aes-page .math-help-button {
+  border: 1px solid var(--cf-orange);
+  background-color: transparent;
+  color: var(--cf-text);
+  border-radius: 999px;
+  padding: 0.25rem 0.8rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease, color 0.15s ease;
+}
+
+.aes-page .math-help-button:hover {
+  background-color: var(--cf-orange);
+  color: #06040e;
+  transform: translateY(-1px);
+  box-shadow: 0 0 0.4rem 0.1rem rgba(231, 143, 65, 0.5);
+}
+
+.aes-page .band-anim-inner {
+  position: relative;
+  background-color: rgba(6, 4, 14, 0.98);
+  border-radius: 1.8rem;
+  padding: 1.6rem 1.4rem 2rem;
+  box-shadow: 0 0 10px 15px rgba(6, 4, 14, 0.9);
+  animation: aesFadeUp 0.5s ease-out forwards;
+}
+
+.aes-page .band-anim-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle at bottom right, rgba(231, 143, 65, 0.18), transparent 65%);
+}
+
+.aes-page .anim-header {
+  margin-bottom: 1.2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.aes-page .anim-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.aes-page .anim-grid-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.aes-page .anim-step-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(231, 143, 65, 0.8);
+}
+
+.aes-page .aes-grid-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.aes-page .aes-grid {
+  gap: 6px;
+}
+
+.aes-page .aes-cell {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-family: "Fira Code", ui-monospace, monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: background-color 0.18s ease, transform 0.14s ease, box-shadow 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.aes-page .aes-cell-active {
+  background-color: rgba(231, 143, 65, 0.25);
+  border: 2px solid var(--cf-orange);
+  color: var(--cf-orange);
+  transform: scale(1.05);
+  box-shadow: 0 0 0.7rem 0.2rem rgba(231, 143, 65, 0.35);
+  position: relative;
+}
+
+.aes-page .anim-controls {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.aes-page .anim-btn {
+  border: 1px solid rgba(231, 143, 65, 0.5);
+  background-color: transparent;
+  color: var(--cf-text);
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+}
+
+.aes-page .anim-btn:hover:not(:disabled) {
+  background-color: rgba(231, 143, 65, 0.12);
+  transform: translateY(-1px);
+}
+
+.aes-page .anim-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.aes-page .anim-btn-play {
+  background-color: var(--cf-orange);
+  color: #06040e;
+  border-color: var(--cf-orange);
+  padding: 0.35rem 1.1rem;
+}
+
+.aes-page .anim-btn-play:hover:not(:disabled) {
+  background-color: #d97b30;
+  box-shadow: 0 0 0.5rem 0.1rem rgba(231, 143, 65, 0.5);
+}
+
+.aes-page .anim-step-desc {
+  font-size: 0.88rem;
+  text-align: center;
+  max-width: 460px;
+  color: rgba(249, 244, 244, 0.82);
+}
+
+.aes-page .band-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+  gap: 1.7rem;
+  align-items: start;
+}
+
+.aes-page .card-free {
+  border-radius: 1.8rem;
+  padding: 1.4rem 1.3rem 1.6rem;
+  background-color: rgba(6, 4, 14, 0.95);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.9);
+}
+
+.aes-page .math-card,
+.aes-page .game-card {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: aesFadeUp 0.7s ease-out forwards;
+}
+
+.aes-page .math-card {
+  animation-delay: 0.2s;
+}
+
+.aes-page .game-card {
+  animation-delay: 0.3s;
+  position: relative;
+}
+
+.aes-page .math-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.aes-page .math-header-text {
+  flex: 1;
+}
+
+.aes-page .math-list {
+  margin: 0.4rem 0 0.9rem;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.aes-page .math-list li {
+  margin-bottom: 0.25rem;
+}
+
+.aes-page .math-explanation {
+  margin-top: 0.2rem;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.aes-page .math-mascot {
+  display: block;
+  margin: 0.8rem auto 1rem;
+  max-width: 160px;
+  pointer-events: none;
+}
+
+.aes-page .example-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.aes-page .example-controls label {
+  flex: 1 1 220px;
+  font-size: 0.9rem;
+}
+
+.aes-page .example-results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.aes-page .example-results > div {
+  flex: 1 1 200px;
+  padding: 0.6rem 0.7rem;
+  border-radius: 0.9rem;
+  background-color: rgb(6, 4, 14);
+  box-shadow: 0 0 0.5rem 0.1rem rgba(231, 142, 65, 0.1);
+}
+
+.aes-page .example-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(231, 143, 65, 0.85);
+}
+
+.aes-page .example-results p,
+.aes-page .example-results span {
+  margin: 0.12rem 0 0;
+  font-family: "Fira Code", ui-monospace, monospace;
+}
+
+.aes-page .tg-game-warning {
+  margin: 0.5rem 0 0.8rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.9rem;
+  background-color: rgba(220, 60, 60, 0.1);
+  border: 1px solid rgba(220, 60, 60, 0.4);
+  color: rgba(255, 100, 100, 0.9);
+  font-size: 0.85rem;
+}
+
+.aes-page .tg-success-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.8rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.9rem;
+  background-color: rgba(19, 130, 69, 0.12);
+  border: 1px solid rgba(62, 207, 128, 0.4);
+  color: #3ecf80;
+  font-size: 0.85rem;
+}
+
+.aes-page .tg-success-gif {
+  max-width: 42px;
+  pointer-events: none;
+}
+
+.aes-page .modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(6, 4, 14, 0.5) !important;
+  backdrop-filter: blur(0.5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  overflow: auto;
+  animation: aesBackdropFade 0.2s ease-out;
+}
+
+.aes-page .modal-content {
+  max-width: 75%;
+  max-height: 75vh;
+  background-color: rgb(6, 4, 14) !important;
+  border-radius: 2rem !important;
+  border: 1px solid rgba(231, 143, 65, 0.6);
+  padding: 1.4rem 1.6rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  animation: aesModalPop 0.25s ease-out;
+}
+
+.aes-page .modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.aes-page .modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.aes-page .modal-content::-webkit-scrollbar-thumb {
+  background-color: rgba(231, 143, 65, 0.4);
+  border-radius: 999px;
+}
+
+.aes-page .modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(231, 143, 65, 0.4) transparent;
+}
+
+.aes-page .modal-header-with-fox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.aes-page .modal-mascot {
+  max-width: 15vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.aes-page .close-button {
+  margin-top: 0.9rem;
+  border: none;
+  background-color: var(--cf-orange);
+  color: #06040e;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+}
+
+.aes-page .close-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0.4rem 0.1rem rgba(231, 143, 65, 0.5);
+}
+
+@keyframes aesHeroPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
+  }
+}
+
+@keyframes aesHeroOrbit1 {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(6px, 4px) rotate(10deg);
+  }
+}
+
+@keyframes aesHeroOrbit2 {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(4px, 6px) rotate(8deg);
+  }
+}
+
+@keyframes aesMascotFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@keyframes aesFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aesBackdropFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes aesModalPop {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 1199px) {
+  .aes-page .history-floating {
+    position: static;
+    width: 100%;
+    margin-top: 1.3rem;
+    border-radius: 1.4rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .aes-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aes-page .hero-visual {
+    order: 1;
+  }
+
+  .aes-page .aes-lab-grid-row {
+    grid-template-columns: 1fr;
+  }
+
+  .aes-page .tg-rotations-row {
+    grid-template-columns: repeat(2, auto);
+  }
+
+  .aes-page .band-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .aes-page .math-card {
+    margin-top: 0.4rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .aes-page {
+    padding: 2.4rem 0 3rem;
+  }
+
+  .aes-page .hero-copy h1 {
+    font-size: 2.2rem;
+  }
+
+  .aes-page .hero-visual {
+    min-height: 180px;
+  }
+
+  .aes-page .band-lab-inner {
+    padding-inline: 1.1rem;
+  }
+
+  .aes-page .modal-content {
+    max-width: 90%;
+    max-height: 80vh;
+  }
+
+  .aes-page .aes-cell {
+    width: 44px;
+    height: 44px;
+    font-size: 0.72rem;
+  }
+
+  .aes-page .aes-mini-cell {
+    width: 20px;
+    height: 20px;
+    font-size: 0.5rem;
+  }
+
+  .aes-page .tg-rotations-row {
+    grid-template-columns: repeat(2, auto);
+    gap: 0.6rem;
+  }
+
+  .aes-page .math-help-button {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.65rem;
+  }
+
+  .aes-page .hill-mode-toggle,
+  .aes-page .tg-toggle-group {
+    flex-direction: column;
+  }
+
+  .aes-page .anim-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

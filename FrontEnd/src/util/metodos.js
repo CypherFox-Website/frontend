@@ -264,24 +264,182 @@ random.seed(2153)
     },
     'turning-grille': {
         nombre: 'Turning Grille',
+        clave: 'turning-grille',
         descripcion_corta: 'Cifrado de transposición que emplea una rejilla.',
-        descripcion: 'Cifrado por transposición que emplea una rejilla perforada colocada sobre una matriz. El mensaje se escribe en los huecos visibles, se gira la rejilla en posiciones predefinidas y se continúa llenando. El texto cifrado se obtiene leyendo la matriz en un orden específico.',
+        descripcion: 'Cifrado por transposición que emplea una rejilla perforada colocada sobre una matriz. El mensaje se escribe en los huecos visibles, se gira la rejilla en posiciones predefinidas y se continúa llenando. El texto cifrado se obtiene leyendo la matriz por filas.',
         href: '/metodos/turning-grille',
-        icono: 'fa-solid fa-square-check'
+        icono: 'fa-solid fa-square-check',
+        config: `grilla = [(0, 0), (2, 1), (2, 3), (3, 2)] \n`,
+        lab_cifrado: {
+            descripcion: "Dado el tamaño de la retícula, el sentido de giro, la lista de agujeros y un mensaje, cifra el texto escribiendo letra por letra en los agujeros visibles durante 4 rotaciones. El resultado final debe leerse por filas y devolverse agrupado por el tamaño de la retícula.",
+            parametros: [
+                ["reticula", "int"],
+                ["sentido", "bool"],
+                ["agujeros", "list[tuple]"],
+                ["mensaje", "str"],
+            ],
+            salida: "str",
+            ejemplos: [
+                { parametros: [4, true, "grilla", "JIMA TTAC KSAT DAWN"], resultados: "JKTD SAAT WIAM CNAT" },
+                { parametros: [4, true, "grilla", "HELLO"], resultados: "HXOX XXXX XEXL XXLX" },
+                { parametros: [4, true, "grilla", "ATTACKATDAWN"], resultados: "ADCX AXWK XTAT TXAN" },
+                { parametros: [4, true, "grilla", "TURN"], resultados: "TXXX XXXX XUXR XXNX" },
+                { parametros: [4, true, "grilla", "GRID"], resultados: "GXXX XXXX XRXI XXDX" },
+            ]
+        },
+        lab_descifrado: {
+            descripcion: "Dado el tamaño de la retícula, el sentido de giro, la lista de agujeros y un texto cifrado leído por filas, recupera el mensaje original extrayendo las letras visibles en los agujeros a lo largo de las 4 rotaciones. Devuelve el resultado agrupado por el tamaño de la retícula.",
+            parametros: [
+                ["reticula", "int"],
+                ["sentido", "bool"],
+                ["agujeros", "list[tuple]"],
+                ["clave", "str"],
+            ],
+            salida: "str",
+            ejemplos: [
+                { parametros: [4, true, "grilla", "JKTD SAAT WIAM CNAT"], resultados: "JIMA TTAC KSAT DAWN" },
+                { parametros: [4, true, "grilla", "HXOX XXXX XEXL XXLX"], resultados: "HELL OXXX XXXX XXXX" },
+                { parametros: [4, true, "grilla", "ADCX AXWK XTAT TXAN"], resultados: "ATTA CKAT DAWN XXXX" },
+                { parametros: [4, true, "grilla", "TXXX XXXX XUXR XXNX"], resultados: "TURN XXXX XXXX XXXX" },
+                { parametros: [4, true, "grilla", "GXXX XXXX XRXI XXDX"], resultados: "GRID XXXX XXXX XXXX" },
+            ]
+        },
     },
     'des': {
         nombre: 'DES',
+        clave: 'des',
         descripcion_corta: 'Estándar de Encriptación de Datos.',
-        descripcion: 'Cifrado simétrico de bloque que opera sobre 64 bits con claves efectivas de 56 bits. Fue estándar durante décadas, pero hoy se considera vulnerable frente a ataques de fuerza bruta. Variantes como 2DES y 3DES aplican múltiples rondas para ampliar la seguridad y la vida útil.',
+        descripcion: 'Cifrado simétrico de bloque que opera sobre bloques de 64 bits y usa una clave efectiva de 56 bits (más bits de paridad). Aplica una permutación inicial, 16 rondas de Feistel y una permutación final. Aunque fue un estándar histórico muy importante, hoy se considera inseguro frente a fuerza bruta.',
         href: '/metodos/des',
-        icono: 'fa-solid fa-cubes'
+        icono: 'fa-solid fa-cubes',
+        lab_cifrado: {
+            descripcion: "Dado un bloque de texto plano en hexadecimal y una clave hexadecimal, cifra el bloque usando DES. Tanto el mensaje como la clave deben representarse con 16 caracteres hexadecimales.",
+            parametros: [
+                ["mensaje", "hex"],
+                ["clave", "hex"],
+            ],
+            salida: "hex",
+            ejemplos: [
+                {
+                    parametros: ["0123456789ABCDEF", "133457799BBCDFF1"],
+                    resultados: "85E813540F0AB405"
+                },
+                {
+                    parametros: ["8000000000000000", "0101010101010101"],
+                    resultados: "95F8A5E5DD31D900"
+                },
+                {
+                    parametros: ["4000000000000000", "0101010101010101"],
+                    resultados: "DD7F121CA5015619"
+                },
+                {
+                    parametros: ["2000000000000000", "0101010101010101"],
+                    resultados: "2E8653104F3834EA"
+                },
+                {
+                    parametros: ["1000000000000000", "0101010101010101"],
+                    resultados: "4BD388FF6CD81D4F"
+                }
+            ]
+        },
+        lab_descifrado: {
+            descripcion: "Dado un bloque cifrado en hexadecimal y la misma clave hexadecimal, recupera el bloque original usando DES. Tanto el cifrado como la clave deben representarse con 16 caracteres hexadecimales.",
+            parametros: [
+                ["cifrado", "hex"],
+                ["clave", "hex"],
+            ],
+            salida: "hex",
+            ejemplos: [
+                {
+                    parametros: ["85E813540F0AB405", "133457799BBCDFF1"],
+                    resultados: "0123456789ABCDEF"
+                },
+                {
+                    parametros: ["95F8A5E5DD31D900", "0101010101010101"],
+                    resultados: "8000000000000000"
+                },
+                {
+                    parametros: ["DD7F121CA5015619", "0101010101010101"],
+                    resultados: "4000000000000000"
+                },
+                {
+                    parametros: ["2E8653104F3834EA", "0101010101010101"],
+                    resultados: "2000000000000000"
+                },
+                {
+                    parametros: ["4BD388FF6CD81D4F", "0101010101010101"],
+                    resultados: "1000000000000000"
+                }
+            ]
+        }
     },
     'aes': {
         nombre: 'AES',
+        clave: 'aes',
         descripcion_corta: 'Estándar de Encriptación Avanzada.',
         descripcion: 'Estándar moderno de cifrado simétrico usado en HTTPS, VPNs y cifrado de discos. Opera sobre bloques de 128 bits con claves de 128, 192 o 256 bits, aplicando rondas de sustitución, permutación y mezcla de bytes. Ofrece alta seguridad y buen rendimiento en hardware y software.',
         href: '/metodos/aes',
-        icono: 'fa-solid fa-shield-halved'
+        icono: 'fa-solid fa-shield-halved',
+        lab_cifrado: {
+            descripcion: "Dado un bloque de texto plano en hexadecimal y una clave hexadecimal, cifra el bloque usando AES. El bloque debe representarse con 32 caracteres hexadecimales (128 bits). La clave puede tener 32, 48 o 64 caracteres hexadecimales, correspondientes a AES-128, AES-192 y AES-256 respectivamente.",
+            parametros: [
+                ["mensaje", "hex"],
+                ["clave", "hex"],
+            ],
+            salida: "hex",
+            ejemplos: [
+                {
+                    parametros: ["414553206573206D757920666163696C", "2B7E151628AED2A6ABF7158809CF4F3C"],
+                    resultados: "E448E574A374D90CC33C22AF9B8EAB7F"
+                },
+                {
+                    parametros: ["00112233445566778899AABBCCDDEEFF", "000102030405060708090A0B0C0D0E0F"],
+                    resultados: "69C4E0D86A7B0430D8CDB78070B4C55A"
+                },
+                {
+                    parametros: ["00112233445566778899AABBCCDDEEFF", "000102030405060708090A0B0C0D0E0F1011121314151617"],
+                    resultados: "DDA97CA4864CDFE06EAF70A0EC0D7191"
+                },
+                {
+                    parametros: ["00112233445566778899AABBCCDDEEFF", "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F"],
+                    resultados: "8EA2B7CA516745BFEAFC49904B496089"
+                },
+                {
+                    parametros: ["6BC1BEE22E409F96E93D7E117393172A", "2B7E151628AED2A6ABF7158809CF4F3C"],
+                    resultados: "3AD77BB40D7A3660A89ECAF32466EF97"
+                }
+            ]
+        },
+        lab_descifrado: {
+            descripcion: "Dado un bloque cifrado en hexadecimal y la misma clave hexadecimal, recupera el bloque original usando AES. El bloque cifrado debe representarse con 32 caracteres hexadecimales (128 bits). La clave puede tener 32, 48 o 64 caracteres hexadecimales, correspondientes a AES-128, AES-192 y AES-256 respectivamente.",
+            parametros: [
+                ["cifrado", "hex"],
+                ["clave", "hex"],
+            ],
+            salida: "hex",
+            ejemplos: [
+                {
+                    parametros: ["E448E574A374D90CC33C22AF9B8EAB7F", "2B7E151628AED2A6ABF7158809CF4F3C"],
+                    resultados: "414553206573206D757920666163696C"
+                },
+                {
+                    parametros: ["69C4E0D86A7B0430D8CDB78070B4C55A", "000102030405060708090A0B0C0D0E0F"],
+                    resultados: "00112233445566778899AABBCCDDEEFF"
+                },
+                {
+                    parametros: ["DDA97CA4864CDFE06EAF70A0EC0D7191", "000102030405060708090A0B0C0D0E0F1011121314151617"],
+                    resultados: "00112233445566778899AABBCCDDEEFF"
+                },
+                {
+                    parametros: ["8EA2B7CA516745BFEAFC49904B496089", "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F"],
+                    resultados: "00112233445566778899AABBCCDDEEFF"
+                },
+                {
+                    parametros: ["3AD77BB40D7A3660A89ECAF32466EF97", "2B7E151628AED2A6ABF7158809CF4F3C"],
+                    resultados: "6BC1BEE22E409F96E93D7E117393172A"
+                }
+            ]
+        }
     },
     'rsa': {
         nombre: 'RSA',

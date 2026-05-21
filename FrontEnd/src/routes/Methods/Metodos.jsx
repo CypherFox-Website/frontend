@@ -12,6 +12,7 @@ import Hill from "../Methods/Lecciones/Hill";
 import Homophonic from "../Methods/Lecciones/Homophonic";
 import TurningGrille from "../Methods/Lecciones/TurningGrille";
 import DES from "../Methods/Lecciones/DES";
+import AES from "../Methods/Lecciones/AES";
 
 import DecryptedText from "../../components/text/DecryptedText";
 import TextType from "../../components/text/TextType";
@@ -32,6 +33,7 @@ const lessonsMap = {
     homophonic: Homophonic,
     "turning-grille": TurningGrille,
     des: DES,
+    aes: AES,
 };
 
 const HYPERSPEED_OPTIONS = {

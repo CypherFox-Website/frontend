@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import gsap from "gsap";
-
 import "./Lab.css";
 import FaultyTerminal from "../../components/bg/FaultyTerminal.jsx";
 import { metodos } from "../../util/metodos.js";
@@ -10,9 +9,7 @@ import { CodeBlock, ExampleBlock } from "../../components/cards/CodeBlock.jsx";
 import LabEditor from "../../components/cards/LabEditor.jsx";
 import TextType from "../../components/text/TextType.jsx";
 import DecryptedText from "../../components/text/DecryptedText.jsx";
-
-import { api } from "../../util/api.js"
-
+import { api } from "../../util/api.js";
 import Welcome from "../../assets/welcome.gif";
 import Waiting from "../../assets/waiting.gif";
 import Help from "../../assets/help.gif";
@@ -51,10 +48,20 @@ export default function Lab() {
     const configBlock = LabData.config
         ? `${LabData.config}\n`
         : `# USA EL ALFABETO INGLES EN MAYUSCULAS\n\n`;
-    
-    const [userCode, setUserCode] = useState(
-        `${configBlock}${encryptCode}\n\n${decryptCode}`
-    );
+
+    const defaultCode = `${configBlock}${encryptCode}\n\n${decryptCode}`;
+    const storageKey = `cf_lab_code_${metodo}`;
+
+    const [userCode, setUserCode] = useState(() => {
+        const savedCode = localStorage.getItem(storageKey);
+        return savedCode ?? defaultCode;
+    });
+
+    useEffect(() => {
+        const savedCode = localStorage.getItem(storageKey);
+        setUserCode(savedCode ?? defaultCode);
+    }, [storageKey, defaultCode]);
+
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [waitingOpen, setWaitingOpen] = useState(false);
     const [resultOpen, setResultOpen] = useState(false);
@@ -65,7 +72,7 @@ export default function Lab() {
     const panelsRef = useRef([]);
     const editorRef = useRef(null);
 
-    // Animación inicial al montar (header, paneles, editor)
+    // Animación inicial al montar
     useEffect(() => {
         const ctx = gsap.context(() => {
             if (headerRef.current) {
@@ -126,7 +133,6 @@ export default function Lab() {
         );
 
         elements.forEach(el => {
-            // Inicialmente un poco abajo / apagado para la animación de scroll
             gsap.set(el, { y: 18, opacity: 0 });
             observer.observe(el);
         });
@@ -138,10 +144,12 @@ export default function Lab() {
         setConfirmOpen(false);
         setWaitingOpen(true);
 
+        localStorage.setItem(storageKey, userCode);
+
         try {
             const result = await api.getScore(userCode, metodo);
-
             const passed = result.score >= 3;
+
             const message = passed
                 ? "¡Has aprobado el laboratorio! Buen trabajo, puedes seguir con el siguiente módulo."
                 : "Has perdido la nota de este intento. Revisa tu código y vuelve a intentarlo.";
@@ -151,11 +159,10 @@ export default function Lab() {
                 passed,
                 score: result.score,
                 message,
-                encrypt: result.encrypt,  // { passed, total, results }
-                decrypt: result.decrypt,  // { passed, total, results }
+                encrypt: result.encrypt,
+                decrypt: result.decrypt,
             });
             setResultOpen(true);
-
         } catch (error) {
             setWaitingOpen(false);
             setResultData({
@@ -179,6 +186,11 @@ export default function Lab() {
             return;
         }
         setConfirmOpen(true);
+    };
+
+    const handleResetCode = () => {
+        localStorage.removeItem(storageKey);
+        setUserCode(defaultCode);
     };
 
     return (
@@ -240,7 +252,6 @@ export default function Lab() {
 
                 {/* FILA DE PANELES */}
                 <section className="cf-lab-panels row justify-content-center">
-                    {/* CIFRADO */}
                     <article
                         ref={el => (panelsRef.current[0] = el)}
                         className="cf-lab-panel cf-lab-panel--encrypt col-11 col-md-10 col-lg-5"
@@ -283,7 +294,6 @@ export default function Lab() {
                         )}
                     </article>
 
-                    {/* DESCIFRADO */}
                     <article
                         ref={el => (panelsRef.current[1] = el)}
                         className="cf-lab-panel cf-lab-panel--decrypt col-11 col-md-10 col-lg-5"
@@ -333,21 +343,31 @@ export default function Lab() {
                         <label className="cf-lab-input-label mb-2" htmlFor="lab-code-input">
                             Ingrese / edite el código del laboratorio
                         </label>
+
                         <div ref={editorRef}>
                             <LabEditor
-                                initialCode={userCode}
+                                value={userCode}
                                 language="python"
                                 onChange={value => {
                                     setUserCode(value);
                                 }}
                             />
                         </div>
+
                         <button
                             className="cf-btn cf-btn-primary mt-3"
                             type="button"
                             onClick={handleClickSend}
                         >
                             Enviar y Calificar Código
+                        </button>
+
+                        <button
+                            className="cf-btn cf-btn-secondary mt-3 ms-2"
+                            type="button"
+                            onClick={handleResetCode}
+                        >
+                            Restablecer código
                         </button>
                     </div>
                 </section>
@@ -421,7 +441,6 @@ export default function Lab() {
                             Resultado: {resultData.score} / 5
                         </p>
 
-                        {/* Desglose por cifrado/descifrado */}
                         {resultData.encrypt && resultData.decrypt && (
                             <div className="cf-modal-breakdown">
                                 <p>Cifrado: {resultData.encrypt.passed}/{resultData.encrypt.total} casos correctos</p>

@@ -340,6 +340,177 @@ const missions_homophonic = [
     }
 ];
 
+const missions_turning_grille = [
+    {
+        id: 1,
+        title: "Misión 1 · ¿Cuántos agujeros necesita una grilla 4×4?",
+        description:
+            "En una Turning Grille válida de tamaño 4×4, cada agujero genera 4 posiciones distintas al rotar. ¿Cuántos agujeros debe tener la grilla original?",
+        answer: "4",
+        hint:
+            "Usa la condición |H| = n²/4. Si n = 4, entonces 4²/4 = 16/4."
+    },
+    {
+        id: 2,
+        title: "Misión 2 · Primera rotación horaria",
+        description:
+            "En una matriz 4×4, si un agujero está en la posición (0,0) y giras la rejilla 90° en sentido horario, ¿a qué posición se mueve? Responde en formato (fila,columna).",
+        answer: "(0,3)",
+        hint:
+            "Aplica la fórmula de la lección para rotación horaria: R(r,c) = (c, n−1−r)."
+    },
+    {
+        id: 3,
+        title: "Misión 3 · ¿Sustitución o transposición?",
+        description:
+            "En el Turning Grille, las letras cambian de identidad o solo cambian de posición. ¿Este método es de SUSTITUCION o TRANSPOSICION?",
+        answer: "TRANSPOSICION",
+        hint:
+            "Piensa en qué ocurre con las letras del mensaje: ¿se reemplazan por otras o simplemente se reordenan en la matriz?"
+    },
+    {
+        id: 4,
+        title: "Misión 4 · ¿Qué hace inválida una grilla?",
+        description:
+            "Si dos agujeros, al rotar la rejilla, terminan cubriendo la misma celda, ¿la grilla es válida? Responde SI o NO.",
+        answer: "NO",
+        hint:
+            "Una grilla válida debe cubrir cada celda exactamente una vez. Si hay solapamiento, una letra sobrescribe a otra."
+    },
+    {
+        id: 5,
+        title: "Misión 5 · Cobertura total",
+        description:
+            "Una Turning Grille válida de 4×4 debe cubrir toda la matriz después de sus 4 rotaciones. ¿Cuántas celdas distintas debe cubrir en total?",
+        answer: "16",
+        hint:
+            "Una matriz 4×4 tiene 16 celdas. La unión de H, R(H), R²(H) y R³(H) debe cubrirlas todas."
+    },
+    {
+        id: 6,
+        title: "Misión 6 · ¿Por qué se rellena con X?",
+        description:
+            "Si el mensaje es más corto que el número total de celdas de la matriz, el algoritmo lo completa con una letra de relleno. Según la implementación de la lección, ¿qué letra se usa?",
+        answer: "X",
+        hint:
+            "Revisa la lógica del cifrado: el mensaje se completa con padEnd(totalCells, ...)."
+    },
+];
+
+const missions_des = [
+    {
+        id: 1,
+        title: "Misión 1 · ¿De cuántos bits es un bloque DES?",
+        description:
+            "En la lección se indica que DES trabaja sobre bloques de tamaño fijo. ¿Cuántos bits tiene cada bloque de entrada en DES?",
+        answer: "64",
+        hint:
+            "Mira la explicación del laboratorio y del modal: DES cifra bloques de n = 64 bits."
+    },
+    {
+        id: 2,
+        title: "Misión 2 · ¿Cuántas rondas tiene DES?",
+        description:
+            "Después de la permutación inicial, DES aplica una estructura de Feistel repetida varias veces. ¿Cuántas rondas ejecuta el algoritmo antes de la permutación final?",
+        answer: "16",
+        hint:
+            "En el resumen matemático aparece: IP → 16 rondas Feistel → IP⁻¹."
+    },
+    {
+        id: 3,
+        title: "Misión 3 · Tamaño de la subclave",
+        description:
+            "En cada ronda se genera una subclave kᵢ a partir del key schedule. ¿Cuántos bits tiene cada subclave de DES?",
+        answer: "48",
+        hint:
+            "La expansión E lleva R de 32 a 48 bits para poder hacer XOR con la subclave."
+    },
+    {
+        id: 4,
+        title: "Misión 4 · Regla de Feistel",
+        description:
+            "En una ronda de DES, el nuevo bloque izquierdo se obtiene copiando una de las mitades anteriores. Si estás en la ronda i, ¿qué valor toma L_i? Responde exactamente como aparece en la fórmula.",
+        answer: "R_{i-1}",
+        hint:
+            "La fórmula mostrada es: L_i = R_{i-1}, R_i = L_{i-1} ⊕ f(R_{i-1}, k_i)."
+    },
+    {
+        id: 5,
+        title: "Misión 5 · ¿Qué hace la expansión E?",
+        description:
+            "Dentro de la función f, la mitad derecha R pasa primero por una expansión antes del XOR con la subclave. ¿De cuántos bits a cuántos bits transforma E a R?",
+        answer: "32 A 48",
+        hint:
+            "La función f comienza expandiendo R para que tenga el mismo tamaño que la subclave."
+    },
+    {
+        id: 6,
+        title: "Misión 6 · Resultado del ejemplo clásico",
+        description:
+            "En la lección se usa el mensaje 0123456789ABCDEF y la clave 133457799BBCDFF1. ¿Cuál es el texto cifrado final que produce DES para ese ejemplo?",
+        answer: "85E813540F0AB405",
+        hint:
+            "Está escrito explícitamente en la sección “Resultado numérico (ejemplo)”."
+    }
+];
+
+const missions_aes = [
+    {
+        id: 1,
+        title: "Misión 1 · ¿De cuántos bits es un bloque AES?",
+        description:
+            "En la lección se explica que AES siempre trabaja con bloques de tamaño fijo, sin importar la variante de clave. ¿Cuántos bits tiene cada bloque de entrada en AES?",
+        answer: "128",
+        hint:
+            "En la sección de parámetros se aclara que AES define un único block length de 128 bits."
+    },
+    {
+        id: 2,
+        title: "Misión 2 · Tamaños de clave permitidos",
+        description:
+            "AES puede usar distintas longitudes de clave según el nivel de seguridad requerido. ¿Cuáles son los tres tamaños de clave aceptados por el estándar?",
+        answer: "128, 192 Y 256",
+        hint:
+            "En la introducción y en la tabla de parámetros aparecen las tres variantes del algoritmo."
+    },
+    {
+        id: 3,
+        title: "Misión 3 · ¿Cómo se llama la unidad básica de procesamiento?",
+        description:
+            "AES organiza los datos en una estructura interna antes de aplicar sus transformaciones. ¿Cómo se llama el arreglo de 4×4 bytes usado para procesar el bloque?",
+        answer: "STATE ARRAY",
+        hint:
+            "La lección dice literalmente que la unidad básica de procesamiento es un arreglo 4×4 llamado state array."
+    },
+    {
+        id: 4,
+        title: "Misión 4 · Número de rondas en AES-256",
+        description:
+            "El número de rondas en AES depende del tamaño de la clave. Si trabajas con AES-256, ¿cuántas rondas ejecuta el algoritmo?",
+        answer: "14",
+        hint:
+            "En la tabla de parámetros se muestran las rondas de AES-128, AES-192 y AES-256."
+    },
+    {
+        id: 5,
+        title: "Misión 5 · Transformación ausente en la ronda final",
+        description:
+            "Durante el cifrado, las rondas intermedias usan SubBytes, ShiftRows, MixColumns y AddRoundKey. Sin embargo, en la ronda final una de esas transformaciones se omite. ¿Cuál es?",
+        answer: "MIXCOLUMNS",
+        hint:
+            "La ronda final solo incluye SubBytes, ShiftRows y AddRoundKey."
+    },
+    {
+        id: 6,
+        title: "Misión 6 · Resultado del ejemplo de cifrado",
+        description:
+            "En la lección se cifra el mensaje hexadecimal 41 45 53 20 65 73 20 6d 75 79 20 66 61 63 69 6c con la clave 2b 7e 15 16 28 ae d2 a6 ab f7 15 88 09 cf 4f 3c. ¿Cuál es el texto cifrado final obtenido?",
+        answer: "E448E574A374D90CC33C22AF9B8EAB7F",
+        hint:
+            "Está escrito explícitamente en la sección “Cipher Example”, justo después del desarrollo de las rondas."
+    }
+];
+
 export const methodMissionsConfig = {
     "one-time-pad": {
         missions: missions_one_time_pad,
@@ -371,5 +542,23 @@ export const methodMissionsConfig = {
         title: "Misiones · Cifrado Homofonico",
         description:
             "Pon a prueba tu comprensión del cifrado homofonico: desde contar homófonos y descifrar símbolos hasta entender por qué la aleatoriedad derrota el análisis de frecuencias. Demuestra que dominas el primer cifrado que venció a Al-Kindi."
+    },
+    "turning-grille": {
+        missions: missions_turning_grille,
+        title: "Misiones · Turning Grille",
+        description:
+            "Pon a prueba tu comprensión de la Rejilla Girante: desde validar agujeros y aplicar rotaciones hasta entender por qué este método es un cifrado por transposición. Demuestra que puedes construir una grilla válida y seguir sus 4 giros sin perder ninguna letra."
+    },
+    "des": {
+        missions: missions_des,
+        title: "Misiones · DES",
+        description:
+            "Pon a prueba tu comprensión del Data Encryption Standard con estas misiones. Desde bloques de 64 bits y subclaves de ronda hasta la estructura de Feistel, las permutaciones y los modos de operación, cada desafío te acercará al funcionamiento interno de uno de los cifrados por bloques más influyentes de la historia."
+    },
+    "aes": {
+        missions: missions_aes,
+        title: "Misiones · AES",
+        description:
+            "Pon a prueba tu comprensión del Advanced Encryption Standard con estas misiones. Desde bloques de 128 bits y claves de distinto tamaño hasta el state array, las rondas, las transformaciones internas y el ejemplo clásico de cifrado, cada desafío te acercará al funcionamiento de uno de los cifrados por bloques más importantes de la criptografía moderna."
     },
 };
