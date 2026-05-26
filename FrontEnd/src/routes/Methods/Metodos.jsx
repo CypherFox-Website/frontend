@@ -13,6 +13,8 @@ import Homophonic from "../Methods/Lecciones/Homophonic";
 import TurningGrille from "../Methods/Lecciones/TurningGrille";
 import DES from "../Methods/Lecciones/DES";
 import AES from "../Methods/Lecciones/AES";
+import RSA from "../Methods/Lecciones/RSA";
+import Gamal from "../Methods/Lecciones/Gamal";
 
 import DecryptedText from "../../components/text/DecryptedText";
 import TextType from "../../components/text/TextType";
@@ -34,6 +36,8 @@ const lessonsMap = {
     "turning-grille": TurningGrille,
     des: DES,
     aes: AES,
+    rsa: RSA,
+    gamal: Gamal,
 };
 
 const HYPERSPEED_OPTIONS = {
@@ -279,10 +283,12 @@ export default function Metodos() {
                 )}
 
                 {/* LINK AL LAB */}
-                <Link to={`/lab/${metodo}`} className="cf-lesson-link-lab">
-                    <i className="fa-solid fa-bolt" aria-hidden="true"></i>
-                    <span>Es momento de practicar con código</span>
-                </Link>
+                {metodo.lab_cifrado || metodo.lab_descifrado ? (
+                    <Link to={`/lab/${metodo}`} className="cf-lesson-link-lab">
+                        <i className="fa-solid fa-bolt" aria-hidden="true"></i>
+                        <span>Es momento de practicar con código</span>
+                    </Link>
+                ) : null}
             </div>
         </div>
     );

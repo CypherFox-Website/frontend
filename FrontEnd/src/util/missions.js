@@ -511,6 +511,138 @@ const missions_aes = [
     }
 ];
 
+const missions_rsa = [
+    {
+        id: 1,
+        title: "Misión 1 · ¿Qué se publica en RSA?",
+        description:
+            "En RSA se genera un par de llaves. ¿Cuál de los siguientes pares se publica como clave pública?",
+        answer: "(e, n)",
+        hint:
+            "En la sección de Key Generation se indica explícitamente qué se publica y qué se mantiene secreto."
+    },
+    {
+        id: 2,
+        title: "Misión 2 · Cálculo del módulo n",
+        description:
+            "En RSA el módulo se construye a partir de dos primos p y q. ¿Cuál es la fórmula correcta para n?",
+        answer: "n = p*q",
+        hint:
+            "En la receta de generación de llaves aparece justo después de elegir p y q."
+    },
+    {
+        id: 3,
+        title: "Misión 3 · ¿Qué algoritmo se usa para hallar d?",
+        description:
+            "Para encontrar la clave privada d, se utiliza un algoritmo clásico de teoría de números. ¿Cuál?",
+        answer: "EEA",
+        hint:
+            "En la lección aparece como EEA(ϕ, e): Extended Euclidean Algorithm."
+    },
+    {
+        id: 4,
+        title: "Misión 4 · Fórmula de cifrado",
+        description:
+            "Según la lección, el cifrado RSA se hace aplicando una potencia modular. ¿Cuál es la forma correcta?",
+        answer: "c = PowerMod(m, e, n)",
+        hint:
+            "En la sección (b) Encryption: c_i = PowerMod(m_i, e, n)."
+    },
+    {
+        id: 5,
+        title: "Misión 5 · Fórmula de descifrado",
+        description:
+            "En la lección, el servidor descifra usando la clave privada d. ¿Cuál es la forma correcta?",
+        answer: "m = PowerMod(c, d, n)",
+        hint:
+            "En la sección (c) Decryption: m_i = PowerMod(c_i, d, n)."
+    },
+    {
+        id: 6,
+        title: "Misión 6 · Resultado del ejemplo: el valor de d",
+        description:
+            "En el ejemplo con p = 47, q = 71 y e = 79, la lección calcula d con EEA(3220, 79). ¿Cuál es d?",
+        answer: "1019",
+        hint:
+            "Está mostrado en la tabla del EEA y luego se declara la private key."
+    },
+    {
+        id: 7,
+        title: "Misión 7 · Resultado del ejemplo: cifrado de m = 688",
+        description:
+            "En el ejemplo, se toma el bloque m = 688 y se cifra con (e, n) = (79, 3337). ¿Cuál es el ciphertext correspondiente?",
+        answer: "1570",
+        hint:
+            "En la lista de resultados del cifrado aparece como el primer valor del vector c."
+    }
+];
+
+const missions_gamal = [
+    {
+        id: 1,
+        title: "Misión 1 · Resultado del ejemplo: valor de β",
+        description:
+            "En el ejemplo con p = 2579, α = 2 y a = 765, ¿cuál es β?",
+        answer: "949",
+        hint:
+            "En el ejemplo (a) Key Generation: Public key = (2579, 2, 949)."
+    },
+    {
+        id: 2,
+        title: "Misión 2 · Resultado del ejemplo: valor de γ",
+        description:
+            "En el ejemplo con k = 853, ¿cuál es γ = PowerMod(2, 853, 2579)?",
+        answer: "435",
+        hint:
+            "En el ejemplo (b) Encryption: c = (γ, δ) = (435, 2396)."
+    },
+    {
+        id: 3,
+        title: "Misión 3 · Resultado del ejemplo: valor de δ′",
+        description:
+            "En el ejemplo, se calcula δ′ = PowerMod(949, 853, 2579). ¿Cuál es δ′?",
+        answer: "2424",
+        hint:
+            "En la tabla del ejemplo aparece como δ′."
+    },
+    {
+        id: 4,
+        title: "Misión 4 · Resultado del ejemplo: valor de δ",
+        description:
+            "En el ejemplo, δ = (1299 × 2424) mod 2579. ¿Cuál es δ?",
+        answer: "2396",
+        hint:
+            "En el ejemplo (b) Encryption: δ = 2396."
+    },
+    {
+        id: 5,
+        title: "Misión 5 · Resultado del ejemplo: valor de p′",
+        description:
+            "En el ejemplo, p′ = 2579 − 1 − 765. ¿Cuál es p′?",
+        answer: "1813",
+        hint:
+            "En el ejemplo (c) Decryption: p′ = 1813."
+    },
+    {
+        id: 6,
+        title: "Misión 6 · Resultado del ejemplo: valor de m′",
+        description:
+            "En el ejemplo, m′ = PowerMod(435, 1813, 2579). ¿Cuál es m′?",
+        answer: "1980",
+        hint:
+            "En la tabla del ejemplo aparece como m′."
+    },
+    {
+        id: 7,
+        title: "Misión 7 · Resultado del ejemplo: mensaje recuperado",
+        description:
+            "En el ejemplo, m = (2396 × 1980) mod 2579. ¿Cuál es el mensaje recuperado?",
+        answer: "1299",
+        hint:
+            "En el ejemplo (c) Decryption el resultado final vuelve a ser 1299."
+    }
+];
+
 export const methodMissionsConfig = {
     "one-time-pad": {
         missions: missions_one_time_pad,
@@ -560,5 +692,17 @@ export const methodMissionsConfig = {
         title: "Misiones · AES",
         description:
             "Pon a prueba tu comprensión del Advanced Encryption Standard con estas misiones. Desde bloques de 128 bits y claves de distinto tamaño hasta el state array, las rondas, las transformaciones internas y el ejemplo clásico de cifrado, cada desafío te acercará al funcionamiento de uno de los cifrados por bloques más importantes de la criptografía moderna."
+    },
+    "rsa": {
+        missions: missions_rsa,
+        title: "Misiones · RSA",
+        description:
+            "Pon a prueba tu comprensión del RSA con estas misiones. Desde la generación de llaves (p, q, n, ϕ, e, d) hasta las fórmulas de cifrado y descifrado con PowerMod, cada desafío refuerza el corazón matemático del criptosistema de clave pública."
+    },
+    "gamal": {
+        missions: missions_gamal,
+        title: "Misiones · Gamal",
+        description:
+            "Pon a prueba tu comprensión de ElGamal con estas misiones. Desde la generación de llaves (p, α, a, β) hasta el cifrado probabilístico con (γ, δ) y el descifrado con p′, cada desafío refuerza cómo el logaritmo discreto sustenta este criptosistema de clave pública."
     },
 };

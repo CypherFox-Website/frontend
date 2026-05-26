@@ -72,11 +72,13 @@ export const Methods_Full = ({ labs_usuario = {} }) => {
                     <i className="fa-solid fa-graduation-cap"></i>
                     Ver explicación
                 </Link>
-
-                <Link to={`/lab/${metodo.href.slice(9)}`} className="cf-method-card-full-link cf-method-card-full-link-lab">
-                    <i className="fa-solid fa-bolt"></i>
-                    Practicar
-                </Link>
+                
+                {metodo.lab_cifrado || metodo.lab_descifrado ? (
+                    <Link to={`/lab/${metodo.href.slice(9)}`} className="cf-method-card-full-link cf-method-card-full-link-lab">
+                        <i className="fa-solid fa-bolt"></i>
+                        Practicar
+                    </Link>
+                ) : null}
             </div>
         </div>
     ));
