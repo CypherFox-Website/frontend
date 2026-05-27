@@ -1,13 +1,16 @@
-import { formatCodeForEval } from './formatCode.js';
-import { supabase } from './auth.js';
+import { formatCodeForEval } from "./formatCode.js";
+import { supabase } from "./auth.js";
+import { encryptPayload } from "./crypto.js";
 
-const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:4000/api';
+const BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:4000/api";
 
 async function authHeaders() {
-  const { data: { session } } = await supabase.auth.getSession();
-  if (!session) return { 'Content-Type': 'application/json' };
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  if (!session) return { "Content-Type": "application/json" };
   return {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     Authorization: `Bearer ${session.access_token}`,
   };
 }
@@ -20,16 +23,21 @@ async function get(path) {
 }
 
 export const api = {
-  getScore: async (rawCode = '', method = '') => {
-    const headers = await authHeaders();
+  getScore: async (rawCode = "", method = "") => {
+    const dataToEncrypt = {
+      code: formatCodeForEval(rawCode),
+    };
+
+    const encryptedBody = await encryptPayload(dataToEncrypt);
+
     const res = await fetch(`${BASE_URL}/evaluate?method=${method}`, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({ code: formatCodeForEval(rawCode) }),
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(encryptedBody),
     });
     if (!res.ok) throw new Error(`API error: ${res.status}`);
     return res.json();
   },
 
-  getMe: async () => get('/auth/me'),
+  getMe: async () => get("/auth/me"),
 };
