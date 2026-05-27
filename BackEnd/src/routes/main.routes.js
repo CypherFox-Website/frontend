@@ -23,10 +23,7 @@ mainRouter.get("/", (_req, res) => {
         path: "/api/evaluate",
       },
       auth: {
-        login: "GET /api/auth/login?provider=google|github",
-        callback: "GET /api/auth/callback?code=...",
-        me: "GET /api/auth/me  (requiere Bearer token)",
-        logout: "POST /api/auth/logout  (requiere Bearer token)",
+        me: "GET /api/auth/me  (requiere Bearer token — solo @unal.edu.co)",
       },
     },
   });
