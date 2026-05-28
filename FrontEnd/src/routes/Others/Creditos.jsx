@@ -52,6 +52,21 @@ const Creditos = () => {
       author: 'Gregorio M. Ordóñez',
       cover:
         'https://m.media-amazon.com/images/I/81IgyKC6JgL.jpg'
+    },
+    {
+      title: 'Introduction to Modern Cryptography',
+      author: 'Jonathan Katz, Yehuda Lindell',
+      cover: 'https://m.media-amazon.com/images/I/71LZ2jJUu7L._AC_UF1000,1000_QL80_.jpg'
+    },
+    {
+      title: 'Understanding Cryptography: A Textbook for Students and Practitioners',
+      author: 'Christof Paar, Jan Pelzl',
+      cover: 'https://m.media-amazon.com/images/I/61hks+Gh+YL._AC_UF1000,1000_QL80_.jpg'
+    },
+    {
+      title: 'Introducción a la criptografía y a la seguridad de la información',
+      author: 'Yoan Pinzón',
+      cover: 'https://media.licdn.com/dms/image/v2/D4D12AQHDSHdeTkOP7A/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1660857820877?e=2147483647&v=beta&t=lbPXWwmBjZ5mXNCgcu7rbsbSeUl2h9ObDN1rIpAFw7s'
     }
   ];
 
