@@ -1,3 +1,4 @@
+// src/context/AuthContext.js
 import { createContext, useContext, useEffect, useState } from 'react';
 import { supabase, onAuthStateChange } from '../util/auth';
 
@@ -21,7 +22,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const isLoading = session === undefined;
-  const user = session?.user ?? null;
+  const user = session?.user?.email?.endsWith('@unal.edu.co') ? session.user : null;
   const isAuthenticated = !!user;
 
   return (

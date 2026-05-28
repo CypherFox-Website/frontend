@@ -23,6 +23,7 @@ import Happy from "../../assets/happy.gif";
 import Sad from "../../assets/sad.gif";
 
 import { methodMissionsConfig } from "../../util/missions";
+import { metodos } from "../../util/metodos";
 
 import "./Metodos.css";
 
@@ -81,6 +82,7 @@ export default function Metodos() {
     const LessonComponent = lessonsMap[metodo];
 
     const missionsConfig = methodMissionsConfig[metodo];
+    const metodoLab = metodos[metodo];
 
     // Estado compartido para las misiones (vale para cualquier método)
     const [activeMission, setActiveMission] = useState(
@@ -283,7 +285,7 @@ export default function Metodos() {
                 )}
 
                 {/* LINK AL LAB */}
-                {metodo.lab_cifrado || metodo.lab_descifrado ? (
+                {metodoLab && (metodoLab.lab_cifrado || metodoLab.lab_descifrado) ? (
                     <Link to={`/lab/${metodo}`} className="cf-lesson-link-lab">
                         <i className="fa-solid fa-bolt" aria-hidden="true"></i>
                         <span>Es momento de practicar con código</span>

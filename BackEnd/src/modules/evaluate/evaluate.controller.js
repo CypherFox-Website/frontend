@@ -29,9 +29,9 @@ export const evaluateController = {
     // Desencriptar el código enviado desde el frontend
     const decryptedData = decryptPayload(payload, iv);
     const { code } = decryptedData;
-    console.log("=================");
-    console.log("Info desencriptada:", code);
-    console.log("=================");
+    // console.log("=================");
+    // console.log("Info desencriptada:", code);
+    // console.log("=================");
 
     if (!code) {
       const error = new Error(
@@ -41,8 +41,10 @@ export const evaluateController = {
       throw error;
     }
 
-    const result = await evaluateService.evaluate_code({ code, method });
+    const authHeader = req.headers.authorization;
+    const token = authHeader?.startsWith("Bearer ") ? authHeader.split(" ")[1] : null;
+
+    const result = await evaluateService.evaluate_code({ code, method, userId: req.user?.id, token });
     res.status(200).json(result);
   }),
 };
-

@@ -1,11 +1,12 @@
 // src/components/others/Navbar.jsx
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { GoArrowUpRight } from 'react-icons/go';
 import './Navbar.css';
 import { items, buttons } from '../../util/index.js';
 import logo from '../../assets/logo.svg';
+import { supabase } from '../../util/auth';
 
 const CardNav = ({
   logo: logoProp = logo,
@@ -267,11 +268,33 @@ const CardNav = ({
 };
 
 export const Navbar = () => {
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    // Obtener sesión inicial al cargar el componente
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Suscribirse a cambios (Login, Logout, Token refresh)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  // Lógica de filtrado:
+  // Si hay sesión, usamos el botón de 'Perfil' (index 1) y mostramos todos los items.
+  // Si no hay, usamos 'Iniciar Sesión' (index 0) y ocultamos el item de 'Mi Perfil'.
+  const activeButtons = session ? [buttons[1]] : [buttons[0]];
+  const activeItems = session ? items : items.filter(item => item.label !== 'Mi Perfil');
+
   return (
     <CardNav
       logo={logo}
-      items={items}
-      buttons={buttons}
+      items={activeItems}
+      buttons={activeButtons}
     />
   );
 };

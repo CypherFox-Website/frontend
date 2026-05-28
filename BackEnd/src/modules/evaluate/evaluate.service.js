@@ -1,6 +1,7 @@
 // BackEnd\src\modules\evaluate\evaluate.service.js
 import { loadPyodide } from "pyodide";
-import { TEST_CASES } from "./evaluate.test_cases.js";
+import { supabase, supabaseFromToken } from "../../config/supabase.js";
+import { getTestCases } from "./evaluate.test_cases.js";
 
 // Pyodide se carga UNA sola vez al iniciar el servidor
 let pyodide = null;
@@ -47,6 +48,28 @@ const buildFunctionCall = (method, tipo, caso) => {
                 ? `hill_encrypt(mensaje="${caso.mensaje}", clave="${caso.clave}")`
                 : `hill_decrypt(cifrado="${caso.cifrado}", clave="${caso.clave}")`;
 
+        case "homophonic":
+            // clave suele ser la variable 'alfabeto' definida en el config
+            return tipo === "encrypt"
+                ? `homophonic_encrypt(mensaje="${caso.mensaje}", clave=${caso.clave})`
+                : `homophonic_decrypt(cifrado=${JSON.stringify(caso.cifrado)}, clave=${caso.clave})`;
+
+        case "turning-grille":
+            const pySentido = caso.sentido ? "True" : "False";
+            return tipo === "encrypt"
+                ? `turning_grille_encrypt(reticula=${caso.reticula}, sentido=${pySentido}, agujeros=${caso.agujeros}, mensaje="${caso.mensaje}")`
+                : `turning_grille_decrypt(reticula=${caso.reticula}, sentido=${pySentido}, agujeros=${caso.agujeros}, clave="${caso.clave}")`;
+
+        case "des":
+            return tipo === "encrypt"
+                ? `des_encrypt(mensaje="${caso.mensaje}", clave="${caso.clave}")`
+                : `des_decrypt(cifrado="${caso.cifrado}", clave="${caso.clave}")`;
+
+        case "aes":
+            return tipo === "encrypt"
+                ? `aes_encrypt(mensaje="${caso.mensaje}", clave="${caso.clave}")`
+                : `aes_decrypt(cifrado="${caso.cifrado}", clave="${caso.clave}")`;
+
         default:
             throw new Error(`Método desconocido: ${method}`);
     }
@@ -55,10 +78,18 @@ const buildFunctionCall = (method, tipo, caso) => {
 // Corre los casos de prueba para un tipo (encrypt o decrypt)
 const runCases = async (cases, method, tipo) => {
     const results = [];
-    for (const caso of cases) {
+    for (const caso of (cases || [])) {
         try {
-            const got = await pyodide.runPythonAsync(buildFunctionCall(method, tipo, caso));
-            const passed = got === caso.esperado;
+            let got = await pyodide.runPythonAsync(buildFunctionCall(method, tipo, caso));
+
+            // Convertir PyProxy a JS si el resultado es una lista o dict (ej: Homophonic)
+            if (got && typeof got.toJs === 'function') {
+                got = got.toJs();
+            }
+
+            // Comparación profunda usando JSON stringify para manejar arrays/objetos
+            const passed = JSON.stringify(got) === JSON.stringify(caso.esperado);
+
             results.push({
                 passed,
                 feedback: passed ? "Correcto ✓" : `Incorrecto con los parámetros dados`,
@@ -74,10 +105,10 @@ const runCases = async (cases, method, tipo) => {
 };
 
 export const evaluateService = {
-    async evaluate_code({ code = "", method = "" }) {
+    async evaluate_code({ code = "", method = "", userId = null, token = null }) {
         if (!pyodide) throw new Error("Pyodide aún no está listo, intenta de nuevo.");
 
-        const cases = TEST_CASES[method];
+        const cases = await getTestCases(method);
 
         if (!cases) {
             const error = new Error(`Método de cifrado no soportado: ${method}`);
@@ -106,6 +137,27 @@ export const evaluateService = {
         const allResults = [...encryptResults, ...decryptResults];
         const passed = allResults.filter((r) => r.passed).length;
         const score = Math.round((passed / allResults.length) * 5);
+
+        // HU-04: Si el usuario está autenticado, guardamos la submission
+        if (userId && token) {
+            const userClient = supabaseFromToken(token);
+            const { error: dbError } = await userClient
+                .from("submissions")
+                .insert({
+                    user_id: userId,
+                    algoritmo: method,
+                    raw_score: score,
+                    passed_cases: passed,
+                    total_cases: allResults.length
+                });
+
+            if (dbError) {
+                console.error("Error al guardar la entrega:", dbError.message);
+                // No lanzamos error aquí para que el usuario al menos vea su puntaje
+                // aunque no se haya guardado.
+            }
+        }
+
         return {
             method,
             score,

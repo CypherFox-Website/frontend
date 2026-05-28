@@ -1,5 +1,6 @@
 // BackEnd/src/modules/auth/auth.service.js
-import { supabase } from "../../config/supabase.js";
+import { supabase, supabaseFromToken } from "../../config/supabase.js";
+import { buildNotasFromSubmissions } from "../../utils/profileGrades.js";
 
 const ALLOWED_DOMAIN = "@unal.edu.co";
 
@@ -28,6 +29,40 @@ export const authService = {
       throw err;
     }
 
-    return data.user;
+    // HU-03: Obtenemos los datos del perfil y sus entregas (submissions)
+    // Usamos supabaseFromToken para que la consulta actúe en nombre del usuario (útil si tienes RLS activo)
+    const userClient = supabaseFromToken(token);
+    const { data: profileData, error: dbError } = await userClient
+      .from("profiles")
+      .select("id, nombre, correo, rol, submissions(algoritmo, raw_score)")
+      .eq("id", data.user.id)
+      .single();
+
+    if (dbError) {
+      console.error("Error DB Profiles:", dbError.message, dbError.code);
+      const err = new Error(dbError.code === 'PGRST116' ? "Perfil no encontrado." : "Error de base de datos.");
+      err.status = dbError.code === 'PGRST116' ? 404 : 500;
+      throw err;
+    }
+
+    if (!profileData) {
+      const err = new Error("No se encontró un perfil de usuario en la base de datos.");
+      err.status = 404;
+      throw err;
+    }
+
+    // Separamos la info del perfil de la lista de submissions
+    const { submissions, ...profile } = profileData;
+
+    // Procesamos las notas usando tu utilidad para quedarnos solo con la mejor por algoritmo
+    const bestNotasMap = buildNotasFromSubmissions(submissions);
+
+    // Convertimos el objeto de mejores notas al formato de array que espera el FrontEnd
+    profile.notas = Object.values(bestNotasMap).map(item => ({
+      metodo: item.algoritmo,
+      nota: item.nota
+    }));
+
+    return profile;
   },
 };

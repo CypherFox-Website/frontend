@@ -1,0 +1,200 @@
+/* src/pages/AuthCallback.css */
+
+.cf-authcb-page {
+    position: relative;
+    min-height: 100vh;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #06040E;
+}
+
+.cf-authcb-orb-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.95;
+}
+
+.cf-authcb-card {
+    position: relative;
+    z-index: 1;
+    width: min(92%, 620px);
+    padding: 2.2rem 2rem;
+    border-radius: 1.4rem;
+    background: rgba(11, 9, 19, 0.88);
+    border: 1px solid rgba(249, 244, 244, 0.08);
+    box-shadow:
+        0 18px 60px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    color: #F9F4F4;
+}
+
+.cf-authcb-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    font-family: 'Source Code Pro', system-ui, monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+}
+
+.cf-authcb-badge--loading {
+    background: rgba(231, 143, 65, 0.12);
+    color: #E78F41;
+    border-color: rgba(231, 143, 65, 0.35);
+}
+
+.cf-authcb-badge--success {
+    background: rgba(19, 130, 69, 0.14);
+    color: #7ef0ad;
+    border-color: rgba(19, 130, 69, 0.4);
+}
+
+.cf-authcb-badge--error {
+    background: rgba(255, 84, 84, 0.12);
+    color: #ff8b8b;
+    border-color: rgba(255, 84, 84, 0.35);
+}
+
+.cf-authcb-title {
+    margin: 0 0 1rem;
+}
+
+.cf-authcb-title-text {
+    font-family: 'Montserrat Alternates', system-ui, sans-serif;
+    font-size: 2rem;
+    line-height: 1.15;
+    color: #F9F4F4;
+}
+
+.cf-authcb-title-text--encrypted {
+    color: var(--cf-green) !important;
+}
+
+.cf-authcb-message {
+    max-width: 520px;
+    margin: 0 auto 1.5rem;
+    font-family: 'PT Sans', system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #d7d1d1;
+}
+
+.cf-authcb-loader-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.cf-authcb-loader {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 4px solid rgba(249, 244, 244, 0.12);
+    border-top-color: #E78F41;
+    animation: cf-authcb-spin 0.9s linear infinite;
+    box-shadow: 0 0 24px rgba(231, 143, 65, 0.18);
+}
+
+.cf-authcb-loader-text {
+    font-family: 'PT Sans', system-ui, sans-serif;
+    font-size: 0.95rem;
+    color: #bdb4b4;
+}
+
+@keyframes cf-authcb-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.cf-authcb-actions {
+    margin-top: 1.35rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.cf-authcb-redirect {
+    margin: 0;
+    font-family: 'PT Sans', system-ui, sans-serif;
+    font-size: 0.95rem;
+    color: #cfc7c7;
+}
+
+.cf-authcb-btn {
+    padding: 0.72rem 1.35rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: 'Montserrat Alternates', system-ui, sans-serif;
+    font-size: 0.92rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        background-color 0.18s ease,
+        color 0.18s ease,
+        transform 0.12s ease,
+        box-shadow 0.18s ease;
+}
+
+.cf-authcb-btn:hover {
+    transform: translateY(-1px);
+}
+
+.cf-authcb-btn-primary {
+    background-color: #E78F41;
+    color: #06040E;
+    box-shadow: 0 10px 30px rgba(231, 143, 65, 0.28);
+}
+
+.cf-authcb-btn-primary:hover {
+    background-color: #f09a4c;
+}
+
+.cf-authcb-btn-secondary {
+    background-color: rgba(6, 4, 14, 0.45);
+    color: #F9F4F4;
+    border: 1px solid #138245;
+}
+
+.cf-authcb-btn-secondary:hover {
+    background-color: rgba(19, 130, 69, 0.2);
+}
+
+@media (max-width: 768px) {
+    .cf-authcb-page {
+        padding: 1.25rem;
+    }
+
+    .cf-authcb-card {
+        padding: 1.6rem 1.2rem;
+        border-radius: 1.1rem;
+    }
+
+    .cf-authcb-title-text {
+        font-size: 1.55rem;
+    }
+
+    .cf-authcb-message {
+        font-size: 0.95rem;
+    }
+
+    .cf-authcb-btn {
+        width: 100%;
+    }
+}

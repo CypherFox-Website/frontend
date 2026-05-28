@@ -1,0 +1,454 @@
+.cf-profile {
+    min-height: 78vh;
+    padding: 3rem 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top, #15102b 0, #06040f 50%, #06040e 100%);
+    color: var(--cf-text, #f9f4f4);
+}
+
+.cf-profile-shell {
+    width: min(1100px, 100%);
+    display: grid;
+    grid-template-columns: 1.05fr 1.4fr;
+    gap: 1.5rem;
+}
+
+.cf-profile-panel,
+.cf-profile-main {
+    border: 1px solid rgba(249, 244, 244, 0.12);
+    background: linear-gradient(180deg, rgba(14, 12, 28, 0.88), rgba(8, 7, 18, 0.94));
+    backdrop-filter: blur(10px);
+    border-radius: 28px;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.35);
+    align-items: center;
+}
+
+.cf-profile-panel,
+.cf-profile-hero,
+.cf-profile-stat,
+.cf-profile-note-row,
+.cf-profile-actions {
+    will-change: transform, opacity, filter;
+}
+
+.cf-profile-panel {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateY(26px) scale(0.98);
+    filter: blur(10px);
+    transition: opacity 0.65s ease, transform 0.65s ease, filter 0.65s ease;
+}
+
+.cf-profile.is-ready .cf-profile-panel {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+.cf-profile-avatar-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.25rem;
+}
+
+.cf-profile-avatar {
+    width: 124px;
+    height: 124px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #06040e;
+    background: radial-gradient(circle at 30% 30%, #95ffaf, #e78f41 72%);
+    box-shadow: 0 0 22px rgba(231, 143, 65, 0.55), 0 0 30px rgba(19, 130, 69, 0.35);
+    font-family: 'Montserrat Alternates', system-ui, sans-serif;
+}
+
+.cf-profile-badge {
+    margin: 0 auto;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(19, 130, 69, 0.14);
+    border: 1px solid rgba(19, 130, 69, 0.35);
+    color: var(--cf-green, #138245);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.74rem;
+    font-family: 'Fira Code', monospace;
+}
+
+.cf-profile-name {
+    margin: 0;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 1.15;
+    color: var(--cf-orange, #e78f41);
+    font-family: 'WDXL Lubrifont SC', 'Montserrat Alternates', system-ui, sans-serif;
+}
+
+.cf-profile-email,
+.cf-profile-role {
+    margin: 0;
+    text-align: center;
+    color: var(--cf-text, #f9f4f4);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.95rem;
+}
+
+.cf-profile-role strong {
+    color: var(--cf-green, #138245);
+    text-transform: uppercase;
+}
+
+.cf-profile-mini-card {
+    border-radius: 20px;
+    border: 1px solid rgba(249, 244, 244, 0.1);
+    background: rgba(249, 244, 244, 0.03);
+    padding: 1rem;
+}
+
+.cf-profile-mini-title {
+    margin: 0 0 0.35rem 0;
+    color: var(--cf-orange, #e78f41);
+    font-size: 0.95rem;
+    font-family: 'Montserrat Alternates', system-ui, sans-serif;
+}
+
+.cf-profile-mini-text {
+    margin: 0;
+    color: var(--cf-text, #f9f4f4);
+    line-height: 1.55;
+    font-size: 0.95rem;
+    font-family: 'PT Sans', system-ui, sans-serif;
+}
+
+.cf-profile-main {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.cf-profile-hero {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+}
+
+.cf-profile.is-ready .cf-profile-hero {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cf-profile-kicker {
+    display: inline-block;
+    margin-bottom: 0.65rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    color: var(--cf-green, #138245);
+    border: 1px solid rgba(19, 130, 69, 0.35);
+    background: rgba(19, 130, 69, 0.1);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.cf-profile-title {
+    margin: 0 0 0.75rem 0;
+    color: var(--cf-orange, #e78f41);
+    font-size: 2.25rem;
+    line-height: 1.1;
+    font-family: 'WDXL Lubrifont SC', 'Montserrat Alternates', system-ui, sans-serif;
+}
+
+.cf-profile-text {
+    margin: 0;
+    max-width: 60ch;
+    color: var(--cf-text, #f9f4f4);
+    font-size: 1rem;
+    line-height: 1.65;
+    font-family: 'Fira Code', monospace;
+}
+
+.cf-profile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+}
+
+.cf-profile-stat {
+    border-radius: 22px;
+    padding: 1rem;
+    border: 1px solid rgba(249, 244, 244, 0.1);
+    background: rgba(249, 244, 244, 0.03);
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.cf-profile.is-ready .cf-profile-stat:nth-child(1) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.14s;
+}
+
+.cf-profile.is-ready .cf-profile-stat:nth-child(2) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.24s;
+}
+
+.cf-profile.is-ready .cf-profile-stat:nth-child(3) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.34s;
+}
+
+.cf-profile-stat-label {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: rgba(249, 244, 244, 0.72);
+    font-size: 0.84rem;
+    font-family: 'Fira Code', monospace;
+}
+
+.cf-profile-stat-value {
+    margin: 0;
+    color: var(--cf-green, #138245);
+    font-size: 1.85rem;
+    font-weight: 700;
+    font-family: 'Montserrat Alternates', system-ui, sans-serif;
+}
+
+.cf-profile-notes {
+    border-radius: 24px;
+    border: 1px solid rgba(249, 244, 244, 0.1);
+    background: rgba(249, 244, 244, 0.03);
+    padding: 1.2rem;
+}
+
+.cf-profile-notes-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.95rem;
+}
+
+.cf-profile-notes-title {
+    margin: 0;
+    color: var(--cf-orange, #e78f41);
+    font-size: 1.15rem;
+    font-family: 'Montserrat Alternates', system-ui, sans-serif;
+}
+
+.cf-profile-notes-subtitle {
+    margin: 0;
+    color: rgba(249, 244, 244, 0.72);
+    font-size: 0.85rem;
+    font-family: 'Fira Code', monospace;
+}
+
+.cf-profile-notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.cf-profile-note-row {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr 0.9fr;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.95rem 1rem;
+    border-radius: 18px;
+    background: rgba(6, 4, 14, 0.5);
+    border: 1px solid rgba(249, 244, 244, 0.06);
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.45s ease, transform 0.45s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cf-profile.is-ready .cf-profile-note-row {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cf-profile-note-row:hover {
+    border-color: rgba(231, 143, 65, 0.25);
+    box-shadow: 0 0 0 1px rgba(231, 143, 65, 0.08), 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.cf-profile-note-method,
+.cf-profile-note-score,
+.cf-profile-note-status {
+    margin: 0;
+    font-family: 'PT Sans', system-ui, sans-serif;
+}
+
+.cf-profile-note-method {
+    color: var(--cf-text, #f9f4f4);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.cf-profile-note-score {
+    color: var(--cf-green, #138245);
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.cf-profile-note-status {
+    justify-self: end;
+    padding: 0.38rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.cf-profile-note-status.is-ok {
+    color: #101812;
+    background: linear-gradient(90deg, #8fffb3, #49d56f);
+}
+
+.cf-profile-note-status.is-error {
+    color: #231707;
+    background: linear-gradient(90deg, #ffd08f, #e78f41);
+}
+
+.cf-profile-note-status.is-pending {
+    color: #110b03;
+    background: linear-gradient(90deg, #fdf9f4, #807c7a);
+}
+
+.cf-profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease 0.38s, transform 0.55s ease 0.38s;
+}
+
+.cf-profile.is-ready .cf-profile-actions {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cf-profile-button {
+    min-width: 210px;
+    padding: 0.75rem 1.3rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'PT Sans', system-ui, sans-serif;
+}
+
+.cf-profile-button:hover {
+    transform: translateY(-1px);
+}
+
+.cf-profile-button-primary {
+    border: none;
+    color: #06040e;
+    background: var(--cf-orange, #e78f41);
+    box-shadow: 0 0 14px rgba(231, 143, 65, 0.55);
+}
+
+.cf-profile-button-secondary {
+    color: var(--cf-text, #f9f4f4);
+    border: 1px solid rgba(249, 244, 244, 0.28);
+    background: transparent;
+}
+
+.cf-profile-button:focus {
+    outline: 2px solid var(--cf-orange, #e78f41);
+    outline-offset: 3px;
+}
+
+.profile-actions {
+    margin-top: 12px;
+}
+
+.logout-btn {
+    background: #c62828;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.logout-btn:hover {
+    background: #a61f1f;
+}
+
+@media (max-width: 920px) {
+    .cf-profile-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .cf-profile-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 680px) {
+    .cf-profile {
+        padding: 2.2rem 1rem;
+    }
+
+    .cf-profile-panel,
+    .cf-profile-main {
+        padding: 1.2rem;
+        border-radius: 22px;
+    }
+
+    .cf-profile-name {
+        font-size: 1.65rem;
+    }
+
+    .cf-profile-title {
+        font-size: 1.75rem;
+    }
+
+    .cf-profile-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .cf-profile-note-row {
+        grid-template-columns: 1fr;
+        justify-items: start;
+    }
+
+    .cf-profile-note-score {
+        text-align: left;
+    }
+
+    .cf-profile-note-status {
+        justify-self: start;
+    }
+
+    .cf-profile-actions {
+        flex-direction: column;
+    }
+
+    .cf-profile-button {
+        width: 100%;
+    }
+}

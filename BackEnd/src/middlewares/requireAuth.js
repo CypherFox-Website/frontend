@@ -24,3 +24,25 @@ export const requireAuth = async (req, _res, next) => {
     next(error);
   }
 };
+
+/**
+ * Middleware opcional: Si hay token, identifica al usuario en req.user.
+ * Si no hay token, simplemente continúa como invitado (req.user será null).
+ */
+export const tryAuth = async (req, _res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      req.user = null;
+      return next();
+    }
+
+    const token = authHeader.split(" ")[1];
+    const user = await authService.getUserFromToken(token);
+    req.user = user;
+    next();
+  } catch (error) {
+    // Si el token es inválido (expirado, etc.), fallamos por seguridad
+    next(error);
+  }
+};

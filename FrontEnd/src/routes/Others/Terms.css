@@ -1,0 +1,152 @@
+/* src/pages/Terms.css */
+
+.text-encrypted {
+    color: var(--cf-green);
+}
+
+.cf-terms-page {
+    position: relative;
+    min-height: 100vh;
+    padding: 6rem 2rem;
+    background-color: #06040E;
+    /* Fondo oscuro principal */
+    color: #F9F4F4;
+    overflow: hidden;
+}
+
+/* Orb de fondo para ambiente (más sutil que en el hero) */
+.cf-terms-orb-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    transform: scale(1.5) translate(-10%, -10%);
+}
+
+.cf-terms-container {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    /* Ancho óptimo para lectura */
+    margin: 0 auto;
+    background-color: hsla(252, 56%, 6%, 0.85);
+    /* Ligeramente más claro que el fondo */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(249, 244, 244, 0.05);
+    border-radius: 1.5rem;
+    padding: 3.5rem 4rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Encabezado */
+.cf-terms-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(231, 143, 65, 0.2);
+    /* Borde sutil naranja/dorado */
+}
+
+.cf-terms-title {
+    font-family: 'Source Code Pro', system-ui, monospace;
+    font-size: 2.2rem;
+    letter-spacing: 0.05em;
+    color: #E78F41;
+    /* Naranja CypherFox */
+    margin-bottom: 0.5rem;
+}
+
+.cf-terms-last-updated {
+    font-family: 'PT Sans', system-ui, sans-serif;
+    font-size: 0.9rem;
+    color: #8b8282;
+    font-style: italic;
+}
+
+/* Contenido y Secciones */
+.cf-terms-content {
+    font-family: 'PT Sans', system-ui, sans-serif;
+    line-height: 1.7;
+    color: #cfc7c7;
+    /* Texto principal algo suavizado para menor fatiga visual */
+    font-size: 1.05rem;
+}
+
+.cf-terms-section {
+    margin-bottom: 2.5rem;
+}
+
+.cf-terms-section:last-child {
+    margin-bottom: 0;
+}
+
+.cf-terms-section h2 {
+    font-family: 'Montserrat Alternates', system-ui, sans-serif;
+    font-size: 1.3rem;
+    color: #F9F4F4;
+    /* Títulos en blanco brillante */
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.cf-terms-section p {
+    margin-bottom: 1.2rem;
+}
+
+.cf-terms-section p:last-child {
+    margin-bottom: 0;
+}
+
+/* Listas */
+.cf-terms-section ul {
+    margin-top: -0.5rem;
+    margin-bottom: 1.2rem;
+    padding-left: 1.5rem;
+}
+
+.cf-terms-section li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.cf-terms-section li::marker {
+    color: #138245;
+    /* Puntos de lista en verde CypherFox */
+}
+
+/* Textos fuertes dentro del contenido */
+.cf-terms-section strong,
+.cf-terms-section b {
+    color: #E78F41;
+    /* Resaltar negritas en naranja */
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cf-terms-page {
+        padding: 5rem 1rem;
+    }
+
+    .cf-terms-container {
+        padding: 2rem 1.5rem;
+    }
+
+    .cf-terms-title {
+        font-size: 1.6rem;
+    }
+
+    .cf-terms-header {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .cf-terms-content {
+        font-size: 0.95rem;
+    }
+
+    .cf-terms-section h2 {
+        font-size: 1.15rem;
+    }
+}

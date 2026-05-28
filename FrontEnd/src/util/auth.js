@@ -8,72 +8,40 @@ export const supabase = createClient(
 
 const ALLOWED_DOMAIN = "@unal.edu.co";
 
-/**
- * Inicia sesión con Google.
- */
 export async function loginWithGoogle() {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
-    options: {
-      redirectTo: `${window.location.origin}/auth/callback`,
-    },
+    options: { redirectTo: `${window.location.origin}/auth/callback`},
   });
 
   if (error) throw new Error(error.message);
 }
 
-/**
- * Obtiene la sesión actual.
- */
 export async function getSession() {
   const { data, error } = await supabase.auth.getSession();
-
   if (error) throw new Error(error.message);
-
   return data.session ?? null;
 }
 
-/**
- * Obtiene el usuario autenticado.
- */
 export async function getUser() {
   const session = await getSession();
-
   if (!session) return null;
-
   const user = session.user;
-
-  if (!user.email?.endsWith(ALLOWED_DOMAIN)) {
-    return null;
-  }
-
+  if (!user.email?.endsWith(ALLOWED_DOMAIN)) return null;
   return user;
 }
 
-/**
- * Cierra sesión.
- */
 export async function logout() {
   const { error } = await supabase.auth.signOut();
-
   if (error) throw new Error(error.message);
 }
 
-/**
- * Escucha cambios de autenticación.
- */
 export function onAuthStateChange(callback) {
   return supabase.auth.onAuthStateChange(callback);
 }
 
-/**
- * Compatibilidad con código anterior.
- */
 export const onAuthChange = onAuthStateChange;
 
-/**
- * Retorna el access token actual.
- */
 export async function getAccessToken() {
   const session = await getSession();
   return session?.access_token ?? null;

@@ -10,13 +10,39 @@ import FloatingLines from '../../components/bg/FloatingLines';
 import DecryptedText from '../../components/text/DecryptedText';
 import TextType from '../../components/text/TextType';
 
+import { api } from '../../util/api';
+import { getSession } from '../../util/auth';
+
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ListaMetodos = () => {
-  const [labsUsuario, setLabsUsuario] = useState({ 'One-Time Pad': true, 'Playfair': true, 'Caesar': true, 'Vigenere': true, 'Hill': true, 'Homophonic': true, 'Turning Grille': true, 'DES': true, 'AES': true }); // Para pruebas
+  const [labsUsuario, setLabsUsuario] = useState({});
+
+  useEffect(() => {
+    const fetchUserProgress = async () => {
+      const session = await getSession();
+      
+      if (session) {
+        try {
+          const user = await api.getMe();
+          if (user && user.notas) {
+            const progressMap = {};
+            user.notas.forEach(item => {
+              progressMap[item.metodo] = item.nota >= 3;
+            });
+            setLabsUsuario(progressMap);
+          }
+        } catch (error) {
+          console.error("Error al cargar el progreso de los métodos:", error);
+        }
+      }
+    };
+
+    fetchUserProgress();
+  }, []);
 
   const metodoCards = Methods_Full({ labs_usuario: labsUsuario });
 

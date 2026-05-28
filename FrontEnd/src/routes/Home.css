@@ -1,4 +1,4 @@
-/* Sección hero con Orb de fondo */
+/* src/components/Hero.css */
 .cf-hero {
     position: relative;
     min-height: 80vh;
@@ -9,7 +9,6 @@
     overflow: hidden;
 }
 
-/* Capa del Orb: ocupa todo el hero */
 .cf-hero-orb-layer {
     position: absolute;
     inset: 0;
@@ -18,7 +17,6 @@
     transform: scale(1.1);
 }
 
-/* Contenido encima del Orb */
 .cf-hero-content {
     position: relative;
     z-index: 1;
@@ -28,7 +26,6 @@
     margin: 0 auto;
 }
 
-/* Logo + texto CypherFox */
 .cf-hero-logo {
     align-items: center;
     justify-content: center;
@@ -50,7 +47,6 @@
     color: var(--cf-green) !important;
 }
 
-/* Subtítulo */
 .cf-hero-subtitle {
     font-family: 'PT Sans', system-ui, sans-serif;
     background-color: hsla(252, 56%, 4%, 0.88);
@@ -64,7 +60,6 @@
     border-radius: 1rem;
 }
 
-/* Botones */
 .cf-hero-actions {
     display: flex;
     justify-content: center;
@@ -89,7 +84,6 @@
         box-shadow 0.18s ease;
 }
 
-/* Botón principal: naranja */
 .cf-hero-btn-primary {
     background-color: #E78F41;
     color: #06040E;
@@ -101,7 +95,6 @@
     transform: translateY(-1px);
 }
 
-/* Botón secundario: borde verde */
 .cf-hero-btn-secondary {
     background-color: hsla(252, 56%, 4%, 0.5);
     color: #F9F4F4;
@@ -117,7 +110,6 @@
 @media (max-width: 768px) {
     .cf-hero {
         padding: 6rem 1.5rem 3rem;
-        /* algo menos de padding lateral en móvil */
         min-height: 75vh;
     }
 
@@ -134,15 +126,12 @@
     }
 }
 
-/* --------- SECCIÓN MÉTODOS --------- */
-
 .cf-metodos {
     padding: 6rem 0;
     margin: 2rem 0;
     background-color: #0B0913;
 }
 
-/* Encabezado centrado y acotado */
 .cf-metodos-header {
     text-align: center;
     width: 75%;
@@ -164,7 +153,6 @@
     margin-top: 0.4rem;
 }
 
-/* Contenedor de la lista de métodos (centrado) */
 .cf-metodos-list {
     position: relative;
     margin-top: 1.5rem;
@@ -172,30 +160,23 @@
     flex-wrap: wrap;
     gap: 1.5rem;
     justify-content: center;
-    /* centra horizontalmente las cards */
     align-items: stretch;
-    /* TODAS las columnas misma altura de wrapper */
 }
 
-/* Wrapper de cada método dentro de la lista */
 .cf-metodos-slide-wrapper {
     flex: 0 0 260px;
     max-width: 280px;
     display: flex;
     align-items: stretch;
-    /* el contenido ocupa toda la altura */
 }
 
-/* La tarjeta se adapta al wrapper y llena la altura */
 .cf-metodos-slide-wrapper .cf-method-card {
     width: 100%;
     max-width: 100%;
     height: 100%;
-    /* misma altura que sus vecinas en la fila */
     display: flex;
 }
 
-/* Animación suave tipo balanceo en desktop */
 @keyframes cf-metodos-sway {
     0% {
         transform: translateX(0);
@@ -226,7 +207,6 @@
     animation-delay: 1.5s;
 }
 
-/* ---------- Móvil: lista vertical centrada, misma altura ---------- */
 @media (max-width: 768px) {
     .cf-metodos {
         padding: 3.5rem 0;
@@ -234,14 +214,11 @@
 
     .cf-metodos-list {
         flex-direction: column;
-        /* columna */
         flex-wrap: nowrap;
         gap: 0.9rem;
         width: 75%;
         margin: 0 auto;
-        /* centra el bloque en la página */
         align-items: stretch;
-        /* cada fila ocupa todo el ancho del 75% */
         justify-content: flex-start;
     }
 
@@ -250,199 +227,11 @@
         width: 100%;
         max-width: none;
         animation: none;
-        /* sin balanceo en móvil */
     }
 
     .cf-metodos-slide-wrapper .cf-method-card {
         width: 100%;
         max-width: 100%;
         height: 100%;
-    }
-}
-
-.cf-ranking {
-    padding: 4rem 8%;
-    background-color: #06040E;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.cf-ranking-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.cf-ranking-title {
-    font-family: 'Source Code Pro', system-ui, monospace;
-    letter-spacing: 0.12em;
-    font-size: 1.3rem;
-    text-transform: uppercase;
-    color: #F9F4F4;
-    margin-bottom: 0.75rem;
-}
-
-.cf-ranking-subtitle {
-    font-family: 'PT Sans', system-ui, sans-serif;
-    font-size: 0.9rem;
-    color: #cfc7c7;
-    margin-bottom: 1.5rem;
-}
-
-.cf-ranking-period {
-    font-family: 'Montserrat Alternates', system-ui, sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #E78F41;
-}
-
-.cf-ranking-period--encrypted {
-    color: var(--cf-green) !important;
-}
-
-/* Contenedor de la tabla */
-.cf-ranking-table-wrapper {
-    background: #05030b;
-    border-radius: 0.75rem;
-    border: 1px solid rgba(249, 244, 244, 0.06);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
-    padding: 1.5rem 1.75rem 1.2rem;
-    max-width: 40%;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-@media (max-width: 768px) {
-    .cf-ranking-table-wrapper {
-        max-width: 100%;
-    }
-}
-
-/* Pulso muy suave en el borde del wrapper */
-.cf-ranking-table-wrapper::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    border: 1px solid rgba(231, 143, 65, 0.35);
-    opacity: 0;
-    pointer-events: none;
-    animation: cf-ranking-border-pulse 4.5s ease-in-out infinite;
-}
-
-@keyframes cf-ranking-border-pulse {
-    0% {
-        opacity: 0;
-    }
-
-    35% {
-        opacity: 1;
-    }
-
-    70% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-/* Tabla */
-.cf-ranking-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'PT Sans', system-ui, sans-serif;
-    color: #F9F4F4;
-    font-size: 0.85rem;
-}
-
-.cf-ranking-table thead tr {
-    text-align: left;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #8b8282;
-}
-
-.cf-ranking-table th,
-.cf-ranking-table td {
-    padding: 0.55rem 0.4rem;
-}
-
-.cf-ranking-table tbody tr {
-    border-top: 1px solid rgba(249, 244, 244, 0.04);
-    transition: background-color 0.15s ease;
-}
-
-.cf-ranking-table tbody tr:hover {
-    background-color: rgba(249, 244, 244, 0.03);
-}
-
-.cf-ranking-row--top {
-    background: radial-gradient(circle at 0% 0%, rgba(231, 143, 65, 0.32), transparent 55%);
-}
-
-.cf-ranking-row--bot {
-    background: radial-gradient(circle at 0% 0%, rgba(19, 129, 68, 0.32), transparent 55%);
-}
-
-
-.cf-ranking-pos {
-    width: 4rem;
-    font-family: 'Source Code Pro', system-ui, monospace;
-    color: #d2c9c9;
-    text-align: right;
-}
-
-.cf-ranking-user {
-    color: #E78F41;
-    font-weight: 500;
-}
-
-.cf-ranking-points {
-    text-align: right;
-    font-weight: 600;
-}
-
-/* Link inferior */
-.cf-ranking-link {
-    display: block;
-    margin-top: 0.9rem;
-    text-align: center;
-    font-family: 'PT Sans', system-ui, sans-serif;
-    font-size: 0.85rem;
-    color: #E78F41;
-    text-decoration: none;
-    opacity: 0.9;
-    transition: opacity 0.15s ease, transform 0.1s ease;
-}
-
-.cf-ranking-link:hover {
-    opacity: 1;
-    transform: translateY(-1px);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .cf-ranking {
-        padding: 3.5rem 1.5rem;
-    }
-
-    .cf-ranking-table-wrapper {
-        padding: 1.25rem 1.1rem 1rem;
-    }
-
-    .cf-ranking-table th,
-    .cf-ranking-table td {
-        padding: 0.5rem 0.25rem;
-        font-size: 0.8rem;
-    }
-
-    .cf-ranking-title {
-        font-size: 1.1rem;
     }
 }

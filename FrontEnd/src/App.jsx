@@ -13,6 +13,13 @@ import Lab from './routes/Methods/Lab.jsx'
 
 import NotFoundPage from './routes/Others/NotFound.jsx';
 import Creditos from './routes/Others/Creditos.jsx';
+import Terms from './routes/Others/Terms.jsx';
+
+import Login from './routes/Auth/Login.jsx';
+import AuthCallback from './routes/Auth/AuthCallback.jsx';
+import Profile from './routes/Auth/Profile.jsx';
+
+import ProtectedRoute from './routes/Auth/ProtectedRoute.jsx';
 
 import './App.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -30,6 +37,16 @@ function App() {
           <Route path="/lab/:metodo" element={<Lab />} />
 
           <Route path="/creditos" element={<Creditos />} />
+          <Route path="/terminos" element={<Terms />} />
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
+
+          <Route path="/perfil" element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          } />
 
           <Route path="/404" element={<NotFoundPage />} />
           <Route path="*" element={<Navigate to="/404" replace />} />

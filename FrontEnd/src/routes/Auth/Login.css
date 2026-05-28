@@ -1,0 +1,361 @@
+/* src/routes/Others/Login.css */
+
+.cf-login-page {
+    padding: 3rem 0 3rem;
+}
+
+.cf-login-shell {
+    position: relative;
+    width: min(1120px, 92%);
+    margin: 0 auto;
+}
+
+/* =====================
+   HERO (igual a patrón caesar-hero)
+   ===================== */
+
+.cf-login-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 2.2rem;
+
+    background-color: rgba(6, 4, 14, 0.95);
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: 0 0 10px 15px rgba(6, 4, 14, 0.9);
+}
+
+.cf-login-copy {
+    position: relative;
+}
+
+.cf-login-lead {
+    font-size: 0.95rem;
+    margin-top: 0.6rem;
+    color: rgba(249, 244, 244, 0.92);
+}
+
+.cf-login-perks {
+    margin-top: 1rem;
+    display: grid;
+    gap: 0.6rem;
+}
+
+.cf-login-perk {
+    display: flex;
+    gap: 0.55rem;
+    align-items: flex-start;
+    font-size: 0.92rem;
+    color: rgba(249, 244, 244, 0.88);
+}
+
+.cf-login-perk-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin-top: 0.35rem;
+    background: radial-gradient(circle at 25% 20%, var(--cf-orange), var(--cf-bg));
+    box-shadow: 0 0 0 2px rgba(231, 143, 65, 0.2);
+    flex: 0 0 auto;
+}
+
+/* CTA */
+
+.cf-login-google {
+    border: none;
+    background-color: var(--cf-orange);
+    color: var(--cf-bg);
+    border-radius: 999px;
+    padding: 0.55rem 1.25rem;
+    font-size: 0.9rem;
+    font-family: 'Montserrat Alternates', system-ui, sans-serif;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    transition: background-color 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+}
+
+.cf-login-google:hover {
+    background-color: #f09a4c;
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 4px rgba(231, 143, 65, 0.25), 0 0 0.55rem 0.08rem rgba(231, 143, 65, 0.45);
+}
+
+.cf-login-google-mark {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(6, 4, 14, 0.55);
+    color: var(--cf-text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-family: 'Fira Code', ui-monospace, monospace;
+}
+
+.cf-login-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: rgba(249, 244, 244, 0.88);
+    text-decoration: none;
+}
+
+.cf-login-secondary:hover {
+    color: rgba(231, 143, 65, 0.95);
+}
+
+.cf-login-legal {
+    margin-top: 1rem;
+    font-size: 0.82rem;
+    color: rgba(249, 244, 244, 0.82);
+}
+
+.cf-login-legal-muted {
+    color: rgba(249, 244, 244, 0.65);
+}
+
+/* =====================
+   VISUAL (reusa hero-circle)
+   ===================== */
+
+.cf-login-visual {
+    position: relative;
+    /* Más alto para que el círculo, la mascota y la tarjeta flotante no se pisen */
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.hero-circle-main {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle at 25% 20%, var(--cf-orange), var(--cf-bg));
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: heroPulse 3s ease-in-out infinite;
+}
+
+.hero-circle-main::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border-radius: 50%;
+    border: 1px dashed rgba(6, 4, 14, 0.7);
+}
+
+.hero-circle-inner {
+    text-align: center;
+}
+
+.k-label {
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(6, 4, 14, 0.9);
+}
+
+.k-value {
+    font-size: 2.8rem;
+    font-family: 'Fira Code', ui-monospace, monospace;
+    color: rgba(6, 4, 14, 0.95);
+}
+
+.hero-circle-small {
+    width: 70px;
+    height: 70px;
+    border: 2px solid rgba(231, 143, 65, 0.7);
+}
+
+.hero-circle-1 {
+    right: 0;
+    top: 10%;
+    animation: heroOrbit1 14s linear infinite;
+}
+
+.hero-circle-2 {
+    left: 5%;
+    bottom: 3%;
+    border-color: rgba(19, 130, 69, 0.8);
+    animation: heroOrbit2 18s linear infinite;
+}
+
+/* Tarjeta flotante (tipo history-floating) */
+
+.cf-login-float {
+    position: absolute;
+    right: 1.2rem;
+    bottom: 2.5rem;
+    width: min(390px, 92%);
+    border: 1px solid rgba(231, 143, 65, 0.45);
+    border-radius: 1.4rem 1.4rem 0 1.4rem;
+    background-color: rgba(6, 4, 14, 0.92);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    z-index: 3;
+}
+
+.cf-login-float-row {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.cf-login-float-img {
+    width: 78px;
+    height: auto;
+    pointer-events: none;
+    flex: 0 0 auto;
+}
+
+.cf-login-float-title {
+    margin: 0;
+    font-size: 1.15rem;
+    line-height: 1.1;
+}
+
+.cf-login-float-text {
+    margin: 0.25rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.35;
+    color: rgba(249, 244, 244, 0.86);
+}
+
+.cf-login-float-em {
+    color: rgba(231, 143, 65, 0.95);
+}
+
+/* =====================
+   BAND inferior (band-lab-inner)
+   ===================== */
+
+.cf-login-band {
+    margin-top: 1.4rem;
+}
+
+.cf-login-band-title {
+    margin: 0;
+}
+
+.cf-login-band-grid {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+}
+
+.cf-login-band-card {
+    padding: 0.75rem 0.8rem;
+    border-radius: 0.9rem;
+    background-color: rgb(6, 4, 14);
+    box-shadow: 0 0 0.5rem 0.1rem rgba(231, 142, 65, 0.1);
+    border: 1px solid rgba(231, 143, 65, 0.25);
+}
+
+.cf-login-band-mono {
+    margin: 0.12rem 0 0;
+    font-family: 'Fira Code', ui-monospace, monospace;
+    color: rgba(249, 244, 244, 0.92);
+    font-size: 0.88rem;
+}
+
+.cf-login-legal-link {
+    color: var(--cf-orange);
+}
+
+/* =====================
+   Animations (copiadas del patrón)
+   ===================== */
+
+@keyframes heroPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85);
+    }
+
+    50% {
+        transform: scale(1.03);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
+    }
+}
+
+@keyframes heroOrbit1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(-6px, -4px) rotate(10deg);
+    }
+}
+
+@keyframes heroOrbit2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(4px, -6px) rotate(-8deg);
+    }
+}
+
+/* =====================
+   Responsive
+   ===================== */
+
+@media (max-width: 992px) {
+    .cf-login-hero {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .cf-login-visual {
+        order: -1;
+    }
+
+    .cf-login-float {
+        position: static;
+        width: 100%;
+        margin-top: 1.1rem;
+        border-radius: 1.4rem;
+    }
+
+    .cf-login-band-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .cf-login-page {
+        padding: 2.4rem 0 3rem;
+    }
+
+    .cf-login-hero {
+        padding: 1.4rem 1.2rem;
+    }
+
+    .hero-copy-tittle {
+        font-size: 2.2rem;
+    }
+
+    .cf-login-visual {
+        min-height: 200px;
+    }
+}

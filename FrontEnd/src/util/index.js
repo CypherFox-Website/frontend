@@ -5,7 +5,6 @@ export const items = [
         textColor: '#F9F4F4',
         links: [
             { label: 'Inicio', href: '/' },
-            { label: 'FAQ', href: '/faq' },
             { label: 'Créditos', href: '/creditos' },
             { label: 'Terminos y Condiciones', href: '/terminos' }
         ]
@@ -22,25 +21,24 @@ export const items = [
         ]
     },
     {
-        label: 'Ranking',
+        label: 'Mi Perfil',
         bgColor: '#13824522',
         textColor: '#F9F4F4',
         links: [
-            { label: 'Ranking Global', href: '/ranking/global' },
-            { label: 'Mis Puntajes', href: '/profile/mis-notas' }
+            { label: 'Mi Perfil', href: '/perfil' }
         ]
     }
 ];
 
 export const buttons = [
     {
-        label: 'Iniciar Sesión / Crear Cuenta',
-        href: '/log-in',
-        state: "uknown"
+        label: 'Iniciar Sesión',
+        href: '/login',
+        state: "unknown"
     },
     {
         label: 'Perfil',
-        href: '/profile',
+        href: '/perfil',
         state: "logged-in"
     }
 ];
