@@ -25,7 +25,8 @@ export const items = [
         bgColor: '#13824522',
         textColor: '#F9F4F4',
         links: [
-            { label: 'Mi Perfil', href: '/perfil' }
+            { label: 'Mi Perfil', href: '/perfil' },
+            { label: 'Iniciar Sesión', href: '/login' }
         ]
     }
 ];
@@ -33,12 +34,15 @@ export const items = [
 export const buttons = [
     {
         label: 'Iniciar Sesión',
-        href: '/login',
-        state: "unknown"
+        href: '/login'
     },
     {
         label: 'Perfil',
-        href: '/perfil',
-        state: "logged-in"
+        href: '/perfil'
+    },
+    {
+        label: 'Cerrar Sesión',
+        href: '/',
+        isLogout: true
     }
 ];

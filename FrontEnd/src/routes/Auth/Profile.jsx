@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { logout, supabase } from "../../util/auth";
 import { api } from "../../util/api";
+import Admin from "./Admin";
 
 import DecryptedText from "../../components/text/DecryptedText";
 import ScrambledText from "../../components/text/ScrambleText";
@@ -26,6 +27,7 @@ export default function Profile() {
     const [ready, setReady] = useState(false);
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [showTeacherPanel, setShowTeacherPanel] = useState(false);
 
     async function handleLogout() {
         try {
@@ -82,7 +84,7 @@ export default function Profile() {
                         <div className="cf-profile-avatar-wrap">
                             <div className="cf-profile-avatar" aria-hidden="true">
                                 <img 
-                                    src={Study} 
+                                    src={Welcome} 
                                     alt="Avatar" 
                                     style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
                                 />
@@ -104,6 +106,14 @@ export default function Profile() {
                         </div>
 
                         <div className="profile-actions">
+                            {profile.rol === 'teacher' && (
+                                <button 
+                                    className="teacher-panel-toggle-btn" 
+                                    onClick={() => setShowTeacherPanel(!showTeacherPanel)}
+                                >
+                                    {showTeacherPanel ? 'Ver mi Perfil' : 'Panel de Profesor'}
+                                </button>
+                            )}
                             <button className="logout-btn" onClick={handleLogout}>
                                 Cerrar sesión
                             </button>
@@ -111,49 +121,56 @@ export default function Profile() {
                     </aside>
 
                     <main className="cf-profile-main">
-                        <header className="cf-profile-hero">
-                            <span className="cf-profile-kicker">Panel personal</span>
-                            <h2 className="cf-profile-title">Tu progreso en criptografía interactiva</h2>
-                        </header>
+                        {showTeacherPanel ? (
+                            <Admin />
+                        ) : (
+                            <>
+                                <header className="cf-profile-hero">
+                                    <span className="cf-profile-kicker">Panel personal</span>
+                                    <h2 className="cf-profile-title">Tu progreso en criptografía interactiva</h2>
+                                </header>
 
-                        <section className="cf-profile-notes" aria-label="Resumen de notas">
-                            <div className="cf-profile-notes-head">
-                                <div>
-                                    <h3 className="cf-profile-notes-title">Resumen por método</h3>
-                                    <p className="cf-profile-notes-subtitle">Ten en cuenta que esta nota es provisional, puede tener cambios a la nota final debido a la fecha de entrega.</p>
+                                <section className="cf-profile-notes" aria-label="Resumen de notas">
+                                    <div className="cf-profile-notes-head">
+                                        <div>
+                                            <h3 className="cf-profile-notes-title">Resumen por método</h3>
+                                            <p className="cf-profile-notes-subtitle">Ten en cuenta que esta nota es provisional, puede tener cambios a la nota final debido a la fecha de entrega.</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="cf-profile-notes-list">
+                                        {profile.notas.map((item, index) => (
+                                            <article 
+                                                className="cf-profile-note-row" 
+                                                key={item.metodo}
+                                                style={{ transitionDelay: `${0.18 + index * 0.08}s` }}
+                                            >
+                                                <p className="cf-profile-note-method">{item.metodo}</p>
+                                                <p className="cf-profile-note-score">Nota: {item.nota.toFixed(1)}</p>
+                                                <span
+                                                    className={`cf-profile-note-status ${getStatus(item.nota) === 'Aprobado' ? 'is-ok' : getStatus(item.nota) === 'Reprobado' ? 'is-error' : 'is-pending'
+                                                        }`}
+                                                >
+                                                    {getStatus(item.nota)}
+                                                </span>
+                                            </article>
+                                        ))}
+                                    </div>
+                                </section>
+
+                                <div className="cf-profile-actions">
+                                    <a className="cf-profile-button cf-profile-button-primary" href="/metodos">
+                                        Explorar métodos
+                                    </a>
+                                    <a className="cf-profile-button cf-profile-button-secondary" href="/">
+                                        Volver al inicio
+                                    </a>
                                 </div>
-                            </div>
-
-                            <div className="cf-profile-notes-list">
-                                {profile.notas.map((item, index) => (
-                                    <article 
-                                        className="cf-profile-note-row" 
-                                        key={item.metodo}
-                                        style={{ transitionDelay: `${0.18 + index * 0.08}s` }}
-                                    >
-                                        <p className="cf-profile-note-method">{item.metodo}</p>
-                                        <p className="cf-profile-note-score">Nota: {item.nota.toFixed(1)}</p>
-                                        <span
-                                            className={`cf-profile-note-status ${getStatus(item.nota) === 'Aprobado' ? 'is-ok' : getStatus(item.nota) === 'Reprobado' ? 'is-error' : 'is-pending'
-                                                }`}
-                                        >
-                                            {getStatus(item.nota)}
-                                        </span>
-                                    </article>
-                                ))}
-                            </div>
-                        </section>
-
-                        <div className="cf-profile-actions">
-                            <a className="cf-profile-button cf-profile-button-primary" href="/metodos">
-                                Explorar métodos
-                            </a>
-                            <a className="cf-profile-button cf-profile-button-secondary" href="/">
-                                Volver al inicio
-                            </a>
-                        </div>
+                            </>
+                        )}
                     </main>
                 </div>
+
             </section>
         </>
     );

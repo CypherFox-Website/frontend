@@ -52,4 +52,24 @@ export const api = {
     const data = await get("/auth/me");
     return data.user;
   },
+
+  getGradesReport: async (studentEmails = [], formattedDeadlines = []) => {
+    const headers = await authHeaders();
+    const dataToEncrypt = { studentEmails, deadlines: formattedDeadlines };
+    const encryptedBody = await encryptPayload(dataToEncrypt);
+
+    const res = await fetch(`${BASE_URL}/admin/grades-report`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(encryptedBody),
+    });
+
+    if (!res.ok) {
+      const errorBody = await res.json().catch(() => ({}));
+      throw new Error(`Error ${res.status}: ${errorBody.message || res.statusText}`);
+    }
+
+    return res.blob();
+  }
+
 };

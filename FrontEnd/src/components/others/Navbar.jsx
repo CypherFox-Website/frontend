@@ -6,7 +6,7 @@ import { GoArrowUpRight } from 'react-icons/go';
 import './Navbar.css';
 import { items, buttons } from '../../util/index.js';
 import logo from '../../assets/logo.svg';
-import { supabase } from '../../util/auth';
+import { supabase, logout } from '../../util/auth';
 
 const CardNav = ({
   logo: logoProp = logo,
@@ -176,6 +176,18 @@ const CardNav = ({
     if (el) cardsRef.current[i] = el;
   };
 
+  const handleButtonClick = (e) => {
+    const btn = buttons && buttons[0];
+    if (btn?.isLogout) {
+      e.preventDefault();
+      logout().then(() => {
+        hardCloseMenu();
+      });
+    } else {
+      hardCloseMenu();
+    }
+  };
+
   return (
     <div className={`card-nav-container ${className}`}>
       <nav
@@ -211,7 +223,7 @@ const CardNav = ({
             className="card-nav-cta-button card-nav-cta-button--top"
             style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
             to={buttons && buttons[0]?.href}
-            onClick={hardCloseMenu}
+            onClick={handleButtonClick}
           >
             {buttons && buttons[0]?.label}
           </Link>
@@ -225,7 +237,7 @@ const CardNav = ({
               className="card-nav-cta-button card-nav-cta-button--full"
               style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
               to={buttons && buttons[0]?.href}
-              onClick={hardCloseMenu}
+              onClick={handleButtonClick}
             >
               {buttons && buttons[0]?.label}
             </Link>
@@ -287,7 +299,7 @@ export const Navbar = () => {
   // Lógica de filtrado:
   // Si hay sesión, usamos el botón de 'Perfil' (index 1) y mostramos todos los items.
   // Si no hay, usamos 'Iniciar Sesión' (index 0) y ocultamos el item de 'Mi Perfil'.
-  const activeButtons = session ? [buttons[1]] : [buttons[0]];
+  const activeButtons = session ? [buttons[2]] : [buttons[0]];
   const activeItems = session ? items : items.filter(item => item.label !== 'Mi Perfil');
 
   return (

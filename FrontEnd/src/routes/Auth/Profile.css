@@ -133,6 +133,8 @@
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
+    position: relative; /* Contexto para el modal absoluto */
+    overflow: hidden;   /* Mantiene el modal dentro de los bordes redondeados */
 }
 
 .cf-profile-hero {
@@ -382,6 +384,9 @@
 
 .profile-actions {
     margin-top: 12px;
+    display: flex;
+    flex-direction: column; /* Apila los botones verticalmente */
+    align-items: center;   /* Centra los botones horizontalmente */
 }
 
 .logout-btn {
@@ -396,6 +401,204 @@
 
 .logout-btn:hover {
     background: #a61f1f;
+}
+
+/* Panel de Profesor */
+.teacher-panel-toggle-btn {
+    background: transparent;
+    color: var(--cf-orange, #e78f41);
+    border: 1px solid var(--cf-orange, #e78f41);
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.teacher-panel-toggle-btn:hover {
+    background: rgba(231, 143, 65, 0.1);
+}
+
+/* Panel de Profesor (Integrado) */
+.cf-teacher-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: cf-fade-in 0.4s ease;
+    width: 100%;
+}
+
+@keyframes cf-fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.cf-teacher-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cf-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.cf-form-label {
+    color: var(--cf-orange, #e78f41);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.cf-teacher-textarea {
+    width: 100%;
+    min-height: 140px;
+    background: rgba(6, 4, 14, 0.5);
+    border: 1px solid rgba(249, 244, 244, 0.12);
+    border-radius: 12px;
+    color: white;
+    padding: 1rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    resize: vertical;
+    transition: border-color 0.2s;
+}
+
+.cf-teacher-textarea:focus {
+    outline: none;
+    border-color: var(--cf-orange, #e78f41);
+}
+
+.cf-deadlines-grid-wrap {
+    background: rgba(249, 244, 244, 0.03);
+    border: 1px solid rgba(249, 244, 244, 0.1);
+    border-radius: 20px;
+    padding: 1.2rem;
+}
+
+.cf-deadlines-title {
+    margin: 0 0 0.95rem 0;
+    color: var(--cf-orange, #e78f41);
+    font-size: 1.15rem;
+    font-family: 'Montserrat Alternates', system-ui, sans-serif;
+}
+
+.cf-deadlines-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0.8rem;
+}
+
+.cf-deadline-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(6, 4, 14, 0.4);
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(249, 244, 244, 0.05);
+}
+
+.cf-deadline-input {
+    background: #15102b;
+    border: 1px solid rgba(249, 244, 244, 0.2);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    color-scheme: dark;
+}
+
+/* Modales */
+.cf-modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(6, 4, 14, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* Máxima prioridad para evitar bloqueos visuales */
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.cf-modal {
+    background: linear-gradient(180deg, #15102b 0%, #06040f 100%);
+    border: 1px solid rgba(249, 244, 244, 0.15);
+    border-radius: 32px;
+    padding: 2.5rem;
+    width: min(480px, 100%);
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+}
+
+.cf-modal-illustration {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: rgba(249, 244, 244, 0.03);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cf-modal-illustration img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.cf-modal-title {
+    margin: 0 0 0.75rem 0;
+    color: var(--cf-orange, #e78f41);
+    font-size: 1.75rem;
+    font-family: 'WDXL Lubrifont SC', sans-serif;
+}
+
+.cf-modal-text {
+    margin: 0 0 2rem 0;
+    color: rgba(249, 244, 244, 0.8);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.cf-modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.cf-modal-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(231, 143, 65, 0.1);
+    border-top-color: var(--cf-orange, #e78f41);
+    border-radius: 50%;
+    margin: 1.5rem auto 0;
+    animation: cf-spin 0.8s linear infinite;
+}
+
+@keyframes cf-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Reutilizar estilos de botones del perfil */
+.cf-btn {
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'PT Sans', sans-serif;
+    transition: transform 0.2s;
 }
 
 @media (max-width: 920px) {

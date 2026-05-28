@@ -2,6 +2,7 @@
 import { Router } from "express";
 import evaluateRouter from "../modules/evaluate/evaluate.routes.js";
 import authRouter from "../modules/auth/auth.routes.js";
+import adminRouter from "../modules/admin/admin.routes.js";
 
 const mainRouter = Router();
 
@@ -25,6 +26,9 @@ mainRouter.get("/", (_req, res) => {
       auth: {
         me: "GET /api/auth/me  (requiere Bearer token — solo @unal.edu.co)",
       },
+      admin: {
+        gradesReport: "POST /api/admin/grades-report (requiere Bearer token)",
+      },
     },
   });
 });
@@ -46,5 +50,6 @@ mainRouter.use("/heartbeat", (_req, res) => {
 
 mainRouter.use("/evaluate", evaluateRouter);
 mainRouter.use("/auth", authRouter);
+mainRouter.use("/admin", adminRouter);
 
 export default mainRouter;

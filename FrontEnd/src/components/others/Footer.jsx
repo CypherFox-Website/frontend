@@ -1,16 +1,35 @@
 // src/components/Footer.jsx
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import logo from '../../assets/logo.svg';
 import { items } from '../../util/index.js';
+import { supabase, logout } from '../../util/auth';
 import './Footer.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
+    const [session, setSession] = useState(null);
+
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setSession(session);
+        });
+
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session);
+        });
+
+        return () => subscription.unsubscribe();
+    }, []);
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        logout();
+    };
 
 
     return (
@@ -34,16 +53,27 @@ const Footer = () => {
                         <div key={section.label} className="cf-footer-column">
                             <h4 className="cf-footer-column-title">{section.label}</h4>
                             <ul className="cf-footer-column-list">
-                                {section.links?.map((link) => (
-                                    <li key={link.label}>
-                                        <Link
-                                            to={link.href}
-                                            className="cf-footer-link"
-                                        >
-                                            {link.label}
-                                        </Link>
-                                    </li>
-                                ))}
+                                {section.links?.map((link) => {
+                                    // Si no hay sesión y es el link al perfil, lo ocultamos
+                                    if (!session && link.href === '/perfil') return null;
+
+                                    const isLoginLink = link.label === 'Iniciar Sesión';
+                                    const label = (isLoginLink && session) ? 'Cerrar Sesión' : link.label;
+                                    const href = (isLoginLink && session) ? '#' : link.href;
+                                    const onClick = (isLoginLink && session) ? handleLogout : undefined;
+
+                                    return (
+                                        <li key={link.label}>
+                                            <Link
+                                                to={href}
+                                                className="cf-footer-link"
+                                                onClick={onClick}
+                                            >
+                                                {label}
+                                            </Link>
+                                        </li>
+                                    );
+                                })}
                             </ul>
                         </div>
                     ))}
