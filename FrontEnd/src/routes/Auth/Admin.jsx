@@ -21,7 +21,7 @@ const evaluableAlgorithms = [
 ];
 
 const Admin = () => {
-    const [studentEmails, setStudentEmails] = useState("juizquierdob@unal.edu.co\nmjarah@unal.edu.co\nnijaramillog@unal.edu.co");
+    const [studentEmails, setStudentEmails] = useState("");
     const [deadlines, setDeadlines] = useState({});
     const today = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
 
