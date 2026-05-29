@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: CypherFox Backend API
-  description: API for evaluating cryptographic algorithm implementations in Python using Pyodide.
+  description: API para la evaluación de algoritmos criptográficos y gestión académica de la plataforma CypherFox.
   version: 1.0.0
 servers:
   - url: http://localhost:4000/api
@@ -9,11 +9,22 @@ servers:
   - url: https://cypherfox.onrender.com/api
     description: Servidor de Producción
 
+tags:
+  - name: General
+    description: Endpoints de estado del sistema y descubrimiento.
+  - name: Auth
+    description: Gestión de sesiones e identidad (integrado con Supabase).
+  - name: Admin
+    description: Herramientas de gestión para profesores (Listado de notas y perfiles).
+  - name: Evaluate
+    description: Motor de evaluación de algoritmos criptográficos.
+
 paths:
   /:
     get:
-      summary: API Discovery
-      description: Returns information about the service and available endpoints.
+      tags: [General]
+      summary: Descubrimiento de API
+      description: Retorna información básica sobre el servicio y los endpoints disponibles.
       responses:
         '200':
           description: Successful discovery
@@ -28,8 +39,9 @@ paths:
 
   /health:
     get:
-      summary: Health Check
-      description: Returns the status of the service and the current server timestamp.
+      tags: [General]
+      summary: Health Check (Estado de Salud)
+      description: Retorna el estado del servicio y el timestamp actual del servidor.
       responses:
         '200':
           description: Service is healthy
@@ -43,8 +55,9 @@ paths:
 
   /heartbeat:
     get:
+      tags: [General]
       summary: Heartbeat
-      description: Simple endpoint to verify the server is responding.
+      description: Endpoint simple para verificar que el servidor responde a las peticiones.
       responses:
         '200':
           description: Server is alive
@@ -57,50 +70,140 @@ paths:
                   timestamp: { type: string, format: date-time }
                   response: { type: string, example: "thump-thump" }
 
+  /auth/me:
+    get:
+      tags: [Auth]
+      summary: Obtener perfil actual
+      description: Retorna los datos del usuario autenticado (@unal.edu.co), incluyendo sus mejores notas consolidadas por algoritmo.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Perfil de usuario obtenido con éxito.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/Profile'
+
+  /admin/grades-report:
+    post:
+      tags: [Admin]
+      summary: Generar reporte de notas (Excel)
+      description: Genera un archivo .xlsx con las notas finales y promedios de una lista de estudiantes. Requiere rol de profesor. Soporta payloads cifrados.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/GradesReportRequest'
+                - type: object
+                  required: [payload, iv]
+                  properties:
+                    payload: { type: string, description: "Request cifrado en Base64" }
+                    iv: { type: string, description: "IV en Base64" }
+      responses:
+        '200':
+          description: Archivo Excel generado correctamente.
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: string
+                format: binary
+
   /evaluate:
     post:
-      summary: Evaluate Python Code
-      description: Executes Python code containing encryption/decryption functions and tests them against pre-defined test cases.
+      tags: [Evaluate]
+      summary: Evaluar código criptográfico
+      description: Procesa y valida implementaciones enviadas por estudiantes. La petición debe viajar cifrada.
+      security:
+        - bearerAuth: []
       parameters:
         - name: method
           in: query
           required: true
-          description: The cipher method to test.
+          description: El algoritmo a evaluar.
           schema:
             type: string
-            enum: [caesar, vigenere, one-time-pad, playfair, hill]
+            enum: [caesar, vigenere, one-time-pad, playfair, hill, homophonic, turning-grille, des, aes, rsa, gamal]
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
-              required: [code]
+              required: [payload]
               properties:
-                code:
+                payload:
                   type: string
-                  description: The Python code containing the implementation.
+                  description: JSON cifrado con AES-256-GCM que contiene el código fuente del estudiante.
       responses:
         '200':
-          description: Evaluation results
+          description: Resultados de la evaluación.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluationResult'
-        '400':
-          description: Missing parameters or execution error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
 
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
   schemas:
+    Profile:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        nombre: { type: string }
+        correo: { type: string }
+        rol: { type: string, enum: [student, teacher] }
+        notas:
+          type: array
+          items:
+            type: object
+            properties:
+              metodo: { type: string }
+              nota: { type: number }
+
+    GradesReportRequest:
+      type: object
+      required: [studentEmails, deadlines]
+      properties:
+        studentEmails:
+          type: array
+          items: { type: string, format: email }
+        deadlines:
+          type: array
+          items:
+            type: object
+            properties:
+              algoritmo: { type: string }
+              fecha: { type: string, format: date-time }
+
+    Submission:
+      type: object
+      properties:
+        id: { type: integer }
+        user_id: { type: string, format: uuid }
+        algoritmo: { type: string }
+        raw_score: { type: number, format: float }
+        passed_cases: { type: integer }
+        total_cases: { type: integer }
+        submitted_at: { type: string, format: date-time }
+
     EvaluationResult:
       type: object
       properties:
         method: { type: string }
-        score: { type: integer, description: "Score from 0 to 5" }
+        score: { type: number, description: "Nota final de 0.0 a 5.0" }
         passed: { type: integer }
         total: { type: integer }
         encrypt:
